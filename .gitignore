@@ -1,0 +1,21 @@
+# local tooling metadata (machine-specific paths)
+.atl/
+
+# build output
+dist/
+
+# dependencies
+node_modules/
+
+# generated types
+.astro/
+
+# environment variables
+.env
+.env.production
+
+# macOS
+.DS_Store
+
+# logs
+npm-debug.log*

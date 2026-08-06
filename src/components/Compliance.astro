@@ -1,0 +1,67 @@
+---
+const ledger = [
+  {
+    law: "Ley 20.584 · Art. 12",
+    title: "Custodia de 15 años",
+    body: "Soft delete en pacientes y archivo de custodia legal mensual cifrado que nunca se borra, separado de la rotación operativa.",
+  },
+  {
+    law: "Ley 20.584",
+    title: "Inalterabilidad de registros",
+    body: "Las correcciones a una consulta crean una versión nueva. El original nunca se sobrescribe.",
+  },
+  {
+    law: "Ley 19.628",
+    title: "Secreto profesional",
+    body: "Datos cifrados en tránsito y documentos clínicos cifrados en reposo con AES-256.",
+  },
+  {
+    law: "Ley 21.719",
+    title: "Consentimiento granular",
+    body: "Ledger append-only por finalidad (tratamiento, telemedicina) — otorgar o revocar queda escrito, no borrado.",
+  },
+  {
+    law: "Ley 21.719",
+    title: "Bitácora de accesos",
+    body: "Audit log inmutable de toda acción del sistema: usuario, recurso, IP, user-agent y timestamp.",
+  },
+  {
+    law: "Ley 20.584 · Art. 12",
+    title: "Recuperación de acceso",
+    body: "Si pierdes tu contraseña o tu dispositivo MFA, la ficha nunca queda huérfana: recuperación self-service en tres niveles.",
+  },
+];
+---
+
+<section id="cumplimiento" class="relative overflow-hidden border-t border-sage-200 bg-cream-100 px-6 py-28 sm:px-10 dark:border-slate-800 dark:bg-slate-950">
+  <div class="section-texture" aria-hidden="true"></div>
+  <div class="relative z-10 mx-auto max-w-3xl text-center">
+    <p class="font-sans text-xs font-medium uppercase tracking-[0.3em] text-sage-600 dark:text-sage-400">
+      Cumplimiento, no checkbox
+    </p>
+    <h2 class="mt-4 font-display text-4xl leading-tight tracking-tight text-slate-900 sm:text-5xl dark:text-cream-50">
+      Construido sobre la ley,<br />no alrededor de ella.
+    </h2>
+    <p class="mx-auto mt-6 max-w-xl text-balance font-sans text-base leading-relaxed text-slate-600 dark:text-slate-400">
+      Umbral se desarrolla para cumplir la Ley 20.584 (Derechos y Deberes de
+      los Pacientes), la Ley 19.628 (Protección de la Vida Privada) y la Ley
+      21.719 (Protección de Datos Personales) de Chile.
+    </p>
+  </div>
+
+  <dl class="relative z-10 mx-auto mt-16 max-w-3xl divide-y divide-sage-200 border-y border-sage-200 dark:divide-slate-800 dark:border-slate-800">
+    {
+      ledger.map((row) => (
+        <div class="flex flex-col gap-2 py-6 sm:flex-row sm:items-baseline sm:gap-8">
+          <dt class="shrink-0 font-mono text-xs uppercase tracking-wider text-sage-600 sm:w-40 dark:text-sage-400">
+            {row.law}
+          </dt>
+          <div>
+            <dd class="font-display text-lg text-slate-900 dark:text-cream-50">{row.title}</dd>
+            <dd class="mt-1 font-sans text-sm leading-relaxed text-slate-600 dark:text-slate-400">{row.body}</dd>
+          </div>
+        </div>
+      ))
+    }
+  </dl>
+</section>

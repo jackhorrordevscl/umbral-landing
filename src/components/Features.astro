@@ -1,0 +1,69 @@
+---
+const features = [
+  {
+    title: "MFA obligatorio",
+    body: "Se enrola forzosamente en el primer login exitoso. No es opcional ni depende de ningún rol — toda cuenta lo tiene.",
+    icon: "M12 2 4 5v6c0 5 3.4 8.7 8 9.9 4.6-1.2 8-4.9 8-9.9V5l-8-3Z",
+  },
+  {
+    title: "Consentimiento granular",
+    body: "Ledger append-only por finalidad (tratamiento, telemedicina). Otorgar o revocar nunca borra el historial.",
+    icon: "M9 12.5 11 14.5 15 9.5 M4 6h16v13a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V6Z",
+  },
+  {
+    title: "Registro versionado",
+    body: "Las correcciones a una consulta crean una nueva versión, sin alterar ni ocultar el original.",
+    icon: "M12 7v5l3 3 M12 21a9 9 0 1 1 8.6-6.2",
+  },
+  {
+    title: "Documentos cifrados",
+    body: "PDF e imágenes por paciente, hasta 10MB, cifrados en reposo con AES-256.",
+    icon: "M6 10V7a6 6 0 0 1 12 0v3 M5 10h14v10H5z",
+  },
+  {
+    title: "Auditoría inmutable",
+    body: "Toda acción queda registrada — usuario, IP, recurso, timestamp — en una tabla que nadie puede editar ni borrar.",
+    icon: "M8 4h8l4 4v12H4V4z M8 4v4H4 M9 13h6 M9 17h6",
+  },
+  {
+    title: "Exportación PDF",
+    body: "Ficha clínica completa bajo demanda, con referencia a la Ley 20.584 y custodia obligatoria de 15 años.",
+    icon: "M6 3h8l4 4v14H6V3z M14 3v4h4 M9 15v-4 M11 15v-2 M13 15v-5",
+  },
+];
+---
+
+<section id="funcionalidades" class="relative overflow-hidden border-t border-sage-200 bg-cream-200 px-6 py-28 sm:px-10 dark:border-slate-800 dark:bg-slate-900">
+  <div class="section-texture" aria-hidden="true"></div>
+  <div class="relative z-10 mx-auto max-w-3xl text-center">
+    <p class="font-sans text-xs font-medium uppercase tracking-[0.3em] text-sage-600 dark:text-sage-400">
+      Lo que queda del otro lado
+    </p>
+    <h2 class="mt-4 font-display text-4xl leading-tight tracking-tight text-slate-900 sm:text-5xl dark:text-cream-50">
+      Cada sesión, resguardada.
+    </h2>
+  </div>
+
+  <div class="relative z-10 mx-auto mt-16 grid max-w-5xl gap-6 sm:grid-cols-2 lg:grid-cols-3">
+    {
+      features.map((feature) => (
+        <div class="rounded-xl border border-slate-100 bg-white p-7 shadow-sm dark:border-slate-700 dark:bg-slate-800 dark:shadow-none">
+          <svg
+            class="h-8 w-8 text-sage-600 dark:text-sage-400"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.6"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true"
+          >
+            <path d={feature.icon} />
+          </svg>
+          <h3 class="mt-4 font-display text-lg text-slate-900 dark:text-cream-50">{feature.title}</h3>
+          <p class="mt-2 font-sans text-sm leading-relaxed text-slate-600 dark:text-slate-400">{feature.body}</p>
+        </div>
+      ))
+    }
+  </div>
+</section>

@@ -1,0 +1,49 @@
+---
+---
+
+<button
+  id="theme-toggle"
+  type="button"
+  aria-label="Cambiar a modo oscuro"
+  class="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg border border-slate-200 text-slate-600 transition-colors hover:border-sage-400 hover:text-slate-900 dark:border-slate-700 dark:text-slate-400 dark:hover:border-sage-500 dark:hover:text-cream-100"
+>
+  <svg
+    class="h-4 w-4 dark:hidden"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="1.8"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    aria-hidden="true"
+  >
+    <path d="M12 3v1.5M12 19.5V21M4.9 4.9l1.1 1.1M18 18l1.1 1.1M3 12h1.5M19.5 12H21M4.9 19.1 6 18M18 6l1.1-1.1" />
+    <circle cx="12" cy="12" r="4.5" />
+  </svg>
+  <svg
+    class="hidden h-4 w-4 dark:block"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="1.8"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    aria-hidden="true"
+  >
+    <path d="M20 14.5A8.5 8.5 0 1 1 9.5 4a6.8 6.8 0 0 0 10.5 10.5Z" />
+  </svg>
+</button>
+
+<script is:inline>
+  const toggle = document.getElementById("theme-toggle");
+  const syncLabel = () => {
+    const isDark = document.documentElement.classList.contains("dark");
+    toggle.setAttribute("aria-label", isDark ? "Cambiar a modo claro" : "Cambiar a modo oscuro");
+  };
+  syncLabel();
+  toggle.addEventListener("click", () => {
+    const isDark = document.documentElement.classList.toggle("dark");
+    localStorage.setItem("umbral-theme", isDark ? "dark" : "light");
+    syncLabel();
+  });
+</script>

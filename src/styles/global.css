@@ -1,0 +1,161 @@
+@import "tailwindcss";
+
+/* class-based dark mode so the toggle can override the OS preference */
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* Real Umbral brand tokens — lifted from umbral-personal/frontend/tailwind.config.js */
+@theme {
+  --color-slate-950: #0a0f1e;
+  --color-slate-900: #0f172a;
+  --color-slate-800: #1e293b;
+  --color-slate-700: #334155;
+
+  --color-sage-50: #f2f7f4;
+  --color-sage-100: #e0ede6;
+  --color-sage-200: #c1dbc9;
+  --color-sage-300: #94c2a4;
+  --color-sage-400: #5fa37a;
+  --color-sage-500: #3d8560;
+  --color-sage-600: #2d6b4c;
+  --color-sage-700: #25573e;
+
+  --color-cream-50: #fdfcf8;
+  --color-cream-100: #faf8f0;
+  --color-cream-200: #f5f0e4;
+
+  --font-display: "DM Serif Display", ui-serif, Georgia, serif;
+  --font-sans: "DM Sans", ui-sans-serif, system-ui, sans-serif;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    font-family: var(--font-sans);
+    background-color: var(--color-cream-100);
+    color: var(--color-slate-900);
+    transition:
+      background-color 0.2s ease,
+      color 0.2s ease;
+  }
+
+  .dark body {
+    background-color: var(--color-slate-950);
+    color: var(--color-cream-100);
+  }
+
+  ::selection {
+    background-color: var(--color-sage-300);
+    color: var(--color-slate-900);
+  }
+
+  .dark ::selection {
+    background-color: var(--color-sage-700);
+    color: var(--color-cream-50);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-sage-500);
+    outline-offset: 3px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}
+
+@layer components {
+  /* the exact diagonal used behind the logo on the app's own login screen */
+  .brand-gradient {
+    background: linear-gradient(135deg, #0f172a 0%, #1a2e1a 50%, #0f2318 100%);
+  }
+
+  /* faint grid, masked to fade toward the section edges — fills the empty
+     side margins of centered sections without competing with content */
+  .section-texture {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    background-image:
+      linear-gradient(var(--color-sage-200) 1px, transparent 1px),
+      linear-gradient(90deg, var(--color-sage-200) 1px, transparent 1px);
+    background-size: 56px 56px;
+    background-position: center;
+    opacity: 0.5;
+    mask-image: radial-gradient(ellipse 65% 90% at center, black 30%, transparent 85%);
+  }
+
+  .dark .section-texture {
+    background-image:
+      linear-gradient(var(--color-slate-800) 1px, transparent 1px),
+      linear-gradient(90deg, var(--color-slate-800) 1px, transparent 1px);
+  }
+
+  /* section identity accent — vertical hairlines + one oversized, faint
+     display-face word — reserved for sections that should stand apart */
+  .section-decor::before,
+  .section-decor::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 1px;
+    z-index: 0;
+    background: linear-gradient(to bottom, transparent, var(--color-sage-200) 15%, var(--color-sage-200) 85%, transparent);
+  }
+
+  .section-decor::before {
+    left: 8%;
+  }
+
+  .section-decor::after {
+    right: 8%;
+  }
+
+  .dark .section-decor::before,
+  .dark .section-decor::after {
+    background: linear-gradient(to bottom, transparent, var(--color-slate-800) 15%, var(--color-slate-800) 85%, transparent);
+  }
+
+  .section-decor-blob {
+    position: absolute;
+    z-index: 0;
+    pointer-events: none;
+    border-radius: 9999px;
+    background: radial-gradient(circle, var(--color-sage-400) 0%, transparent 70%);
+    opacity: 0.12;
+  }
+
+  .section-decor-word {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: clamp(6rem, 14vw, 11rem);
+    line-height: 1;
+    color: var(--color-sage-500);
+    opacity: 0.08;
+    z-index: 0;
+    pointer-events: none;
+    user-select: none;
+    white-space: nowrap;
+  }
+
+  .dark .section-decor-word {
+    opacity: 0.06;
+  }
+}
