@@ -52,14 +52,12 @@ const ledger = [
   <dl class="relative z-10 mx-auto mt-16 max-w-3xl divide-y divide-sage-200 border-y border-sage-200 dark:divide-slate-800 dark:border-slate-800">
     {
       ledger.map((row) => (
-        <div class="flex flex-col gap-2 py-6 sm:flex-row sm:items-baseline sm:gap-8">
-          <dt class="shrink-0 font-mono text-xs uppercase tracking-wider text-sage-600 sm:w-40 dark:text-sage-400">
+        <div class="grid grid-cols-1 gap-x-8 gap-y-1 py-6 sm:grid-cols-[10rem_1fr] sm:items-baseline">
+          <dt class="shrink-0 font-mono text-xs uppercase tracking-wider text-sage-600 sm:row-span-2 dark:text-sage-400">
             {row.law}
           </dt>
-          <div>
-            <dd class="font-display text-lg text-slate-900 dark:text-cream-50">{row.title}</dd>
-            <dd class="mt-1 font-sans text-sm leading-relaxed text-slate-600 dark:text-slate-400">{row.body}</dd>
-          </div>
+          <dd class="font-display text-lg text-slate-900 dark:text-cream-50">{row.title}</dd>
+          <dd class="font-sans text-sm leading-relaxed text-slate-600 dark:text-slate-400">{row.body}</dd>
         </div>
       ))
     }

@@ -3,6 +3,48 @@
 /* class-based dark mode so the toggle can override the OS preference */
 @custom-variant dark (&:where(.dark, .dark *));
 
+/* self-hosted — avoids the render-blocking round-trip to fonts.googleapis.com
+   and only includes the weights actually used (400/500 sans, roman/italic serif) */
+@font-face {
+  font-family: "DM Sans";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("/fonts/dm-sans-400.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "DM Sans";
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("/fonts/dm-sans-500.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "DM Sans";
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: url("/fonts/dm-sans-400-italic.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "DM Serif Display";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("/fonts/dm-serif-display.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "DM Serif Display";
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: url("/fonts/dm-serif-display-italic.woff2") format("woff2");
+}
+
 /* Real Umbral brand tokens — lifted from umbral-personal/frontend/tailwind.config.js */
 @theme {
   --color-slate-950: #0a0f1e;
@@ -95,7 +137,7 @@
     background-size: 56px 56px;
     background-position: center;
     opacity: 0.5;
-    mask-image: radial-gradient(ellipse 65% 90% at center, black 30%, transparent 85%);
+    mask-image: radial-gradient(ellipse 90% 95% at center, black 35%, transparent 95%);
   }
 
   .dark .section-texture {

@@ -3,31 +3,119 @@ import ThemeToggle from "./ThemeToggle.astro";
 ---
 
 <header
-  class="sticky inset-x-0 top-0 z-20 flex items-center justify-between border-b border-sage-200 bg-cream-100/90 px-6 py-4 backdrop-blur sm:px-10 dark:border-slate-800 dark:bg-slate-950/90"
+  class="sticky inset-x-0 top-0 z-20 border-b border-sage-200 bg-cream-100/90 backdrop-blur dark:border-slate-800 dark:bg-slate-950/90"
 >
-  <a href="#top" class="flex items-center gap-2">
-    <span class="brand-gradient flex items-center rounded-lg px-3 py-1.5">
-      <img src="/logo.svg" alt="Umbral" class="h-6 w-auto" />
-    </span>
-  </a>
+  <div class="flex items-center justify-between px-6 py-4 sm:px-10">
+    <a href="#top" class="flex items-center gap-2">
+      <span class="brand-gradient flex items-center rounded-lg px-3 py-1.5">
+        <img src="/logo.svg" alt="Umbral" width="490" height="247" class="h-6 w-auto" />
+      </span>
+    </a>
 
-  <nav class="hidden items-center gap-8 font-sans text-sm text-slate-600 md:flex dark:text-slate-400">
-    <a href="#funcionalidades" class="transition-colors hover:text-slate-900 dark:hover:text-cream-100"
+    <nav class="hidden items-center gap-8 font-sans text-sm text-slate-600 md:flex dark:text-slate-400">
+      <a href="#funcionalidades" class="transition-colors hover:text-slate-900 dark:hover:text-cream-100"
+        >Funcionalidades</a
+      >
+      <a href="#cumplimiento" class="transition-colors hover:text-slate-900 dark:hover:text-cream-100"
+        >Cumplimiento legal</a
+      >
+      <a href="#acceso" class="transition-colors hover:text-slate-900 dark:hover:text-cream-100">Manual de uso</a>
+    </nav>
+
+    <div class="flex items-center gap-3">
+      <ThemeToggle />
+      <a
+        href="#acceso"
+        class="hidden rounded-lg bg-sage-600 px-4 py-2 font-sans text-sm font-medium text-white transition-colors duration-200 hover:bg-sage-700 sm:inline-block"
+      >
+        Solicitar acceso
+      </a>
+      <button
+        id="mobile-nav-toggle"
+        type="button"
+        aria-label="Abrir menú"
+        aria-expanded="false"
+        aria-controls="mobile-nav"
+        class="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg border border-slate-200 text-slate-600 transition-colors hover:border-sage-400 hover:text-slate-900 md:hidden dark:border-slate-700 dark:text-slate-400 dark:hover:border-sage-500 dark:hover:text-cream-100"
+      >
+        <svg
+          class="h-4 w-4"
+          id="mobile-nav-icon-open"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.8"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          aria-hidden="true"
+        >
+          <path d="M4 6h16M4 12h16M4 18h16" />
+        </svg>
+        <svg
+          class="hidden h-4 w-4"
+          id="mobile-nav-icon-close"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.8"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          aria-hidden="true"
+        >
+          <path d="M6 6l12 12M18 6 6 18" />
+        </svg>
+      </button>
+    </div>
+  </div>
+
+  <nav
+    id="mobile-nav"
+    class="hidden flex flex-col gap-1 border-t border-sage-200 bg-cream-100 px-6 py-4 font-sans text-sm text-slate-600 md:hidden dark:border-slate-800 dark:bg-slate-950 dark:text-slate-400"
+  >
+    <a href="#funcionalidades" class="rounded-lg px-2 py-2.5 transition-colors hover:bg-sage-50 hover:text-slate-900 dark:hover:bg-slate-900 dark:hover:text-cream-100"
       >Funcionalidades</a
     >
-    <a href="#cumplimiento" class="transition-colors hover:text-slate-900 dark:hover:text-cream-100"
+    <a href="#cumplimiento" class="rounded-lg px-2 py-2.5 transition-colors hover:bg-sage-50 hover:text-slate-900 dark:hover:bg-slate-900 dark:hover:text-cream-100"
       >Cumplimiento legal</a
     >
-    <a href="#acceso" class="transition-colors hover:text-slate-900 dark:hover:text-cream-100">Manual de uso</a>
-  </nav>
-
-  <div class="flex items-center gap-3">
-    <ThemeToggle />
+    <a href="#acceso" class="rounded-lg px-2 py-2.5 transition-colors hover:bg-sage-50 hover:text-slate-900 dark:hover:bg-slate-900 dark:hover:text-cream-100"
+      >Manual de uso</a
+    >
     <a
       href="#acceso"
-      class="rounded-lg bg-sage-600 px-4 py-2 font-sans text-sm font-medium text-white transition-colors duration-200 hover:bg-sage-700"
+      class="mt-2 rounded-lg bg-sage-600 px-4 py-2.5 text-center font-medium text-white transition-colors duration-200 hover:bg-sage-700"
     >
       Solicitar acceso
     </a>
-  </div>
+  </nav>
 </header>
+
+<script is:inline>
+  const navToggle = document.getElementById("mobile-nav-toggle");
+  const mobileNav = document.getElementById("mobile-nav");
+  const iconOpen = document.getElementById("mobile-nav-icon-open");
+  const iconClose = document.getElementById("mobile-nav-icon-close");
+
+  const closeMobileNav = () => {
+    mobileNav.classList.add("hidden");
+    iconOpen.classList.remove("hidden");
+    iconClose.classList.add("hidden");
+    navToggle.setAttribute("aria-expanded", "false");
+    navToggle.setAttribute("aria-label", "Abrir menú");
+  };
+
+  navToggle.addEventListener("click", () => {
+    const isOpen = !mobileNav.classList.contains("hidden");
+    if (isOpen) {
+      closeMobileNav();
+    } else {
+      mobileNav.classList.remove("hidden");
+      iconOpen.classList.add("hidden");
+      iconClose.classList.remove("hidden");
+      navToggle.setAttribute("aria-expanded", "true");
+      navToggle.setAttribute("aria-label", "Cerrar menú");
+    }
+  });
+
+  mobileNav.querySelectorAll("a").forEach((link) => link.addEventListener("click", closeMobileNav));
+</script>
