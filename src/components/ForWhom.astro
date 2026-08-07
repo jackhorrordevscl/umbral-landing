@@ -15,7 +15,7 @@ const points = [
 ];
 ---
 
-<section class="section-decor relative overflow-hidden border-t border-sage-200 bg-cream-100 px-6 py-28 sm:px-10 dark:border-slate-800 dark:bg-slate-950">
+<section class="section-decor relative overflow-hidden border-t border-sage-200 bg-cream-100 px-6 py-20 sm:px-10 dark:border-slate-800 dark:bg-slate-950">
   <div class="section-texture" aria-hidden="true"></div>
   <span class="section-decor-blob -left-24 -top-32 h-80 w-80" aria-hidden="true"></span>
   <span class="section-decor-blob -bottom-40 -right-32 h-96 w-96" aria-hidden="true"></span>
@@ -30,17 +30,17 @@ const points = [
       No es para una clínica.<br />Es para ti.
     </h2>
     <p class="mx-auto mt-6 max-w-xl text-balance font-sans text-base leading-relaxed text-slate-600 dark:text-slate-400">
-      Umbral nace como evolución de un sistema institucional multi-profesional
-      que se simplificó a un modelo de una sola cuenta por terapeuta —
-      psicólogo o psicóloga que atiende por su cuenta, sin equipo ni
-      estructura detrás.
+      Umbral está pensado desde cero para quien atiende solo: una cuenta,
+      una ficha, un límite claro entre lo tuyo y lo de nadie más —
+      psicólogo o psicóloga que atiende por su cuenta, sin roles ni
+      permisos que administrar.
     </p>
   </div>
 
   <div class="relative z-10 mx-auto mt-16 grid max-w-5xl gap-6 sm:grid-cols-3">
     {
       points.map((point) => (
-        <div class="rounded-xl border border-slate-100 bg-white p-8 shadow-sm dark:border-slate-800 dark:bg-slate-900 dark:shadow-none">
+        <div class="rounded-xl border border-slate-100 bg-white p-8 shadow-sm transition-all duration-200 hover:-translate-y-1 hover:border-sage-300 hover:shadow-md dark:border-slate-800 dark:bg-slate-900 dark:shadow-none dark:hover:border-sage-600 dark:hover:shadow-lg">
           <h3 class="font-display text-xl text-slate-900 dark:text-cream-50">{point.label}</h3>
           <p class="mt-3 font-sans text-sm leading-relaxed text-slate-600 dark:text-slate-400">{point.body}</p>
         </div>
