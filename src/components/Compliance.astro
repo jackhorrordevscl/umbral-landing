@@ -53,11 +53,11 @@ const ledger = [
     {
       ledger.map((row) => (
         <div class="grid grid-cols-1 gap-x-8 gap-y-1 py-6 sm:grid-cols-[10rem_1fr] sm:items-baseline">
-          <dt class="shrink-0 font-mono text-sm uppercase tracking-wider text-sage-600 sm:row-span-2 dark:text-sage-400">
+          <dt class="shrink-0 font-mono text-base uppercase tracking-wider text-sage-600 sm:row-span-2 dark:text-sage-400">
             {row.law}
           </dt>
-          <dd class="font-display text-lg text-slate-900 dark:text-cream-50">{row.title}</dd>
-          <dd class="font-sans text-sm leading-relaxed text-slate-600 dark:text-slate-400">{row.body}</dd>
+          <dd class="font-display text-xl text-slate-900 dark:text-cream-50">{row.title}</dd>
+          <dd class="font-sans text-base leading-relaxed text-slate-600 dark:text-slate-400">{row.body}</dd>
         </div>
       ))
     }
