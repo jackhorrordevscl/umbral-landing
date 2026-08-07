@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://umbral.cl/sitemap-index.xml
