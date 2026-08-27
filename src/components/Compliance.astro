@@ -3,32 +3,32 @@ const ledger = [
   {
     law: "Ley 20.584 · Art. 12",
     title: "Custodia de 15 años",
-    body: "Soft delete en pacientes y archivo de custodia legal mensual cifrado que nunca se borra, separado de la rotación operativa.",
+    body: "La ficha de un paciente nunca desaparece de golpe: se conserva cifrada y respaldada durante los 15 años que exige la ley, aparte de tu operación diaria.",
   },
   {
     law: "Ley 20.584",
-    title: "Inalterabilidad de registros",
-    body: "Las correcciones a una consulta crean una versión nueva. El original nunca se sobrescribe.",
+    title: "Nada se reescribe",
+    body: "Si corriges una consulta, se guarda como una versión nueva. El registro original queda intacto, nunca se sobrescribe.",
   },
   {
     law: "Ley 19.628",
     title: "Secreto profesional",
-    body: "Datos cifrados en tránsito y documentos clínicos cifrados en reposo con AES-256.",
+    body: "Tus datos viajan cifrados y los documentos clínicos quedan cifrados también dentro del sistema, no solo en el camino.",
   },
   {
     law: "Ley 21.719",
-    title: "Consentimiento granular",
-    body: "Ledger append-only por finalidad (tratamiento, telemedicina) — otorgar o revocar queda escrito, no borrado.",
+    title: "Consentimiento que no se borra",
+    body: "Cada consentimiento que un paciente otorga o revoca (para tratamiento, para telemedicina) queda anotado en un historial permanente — nunca se elimina.",
   },
   {
     law: "Ley 21.719",
-    title: "Bitácora de accesos",
-    body: "Audit log inmutable de toda acción del sistema: usuario, recurso, IP, user-agent y timestamp.",
+    title: "Registro de accesos",
+    body: "Quién entró, qué revisó y cuándo: todo acceso al sistema queda anotado en un registro que nadie puede modificar ni borrar después.",
   },
   {
     law: "Ley 20.584 · Art. 12",
-    title: "Recuperación de acceso",
-    body: "Si pierdes tu contraseña o tu dispositivo MFA, la ficha nunca queda huérfana: recuperación self-service en tres niveles.",
+    title: "Recuperación sin depender de soporte",
+    body: "Si olvidas tu contraseña o pierdes tu dispositivo de verificación, recuperas el acceso tú mismo con tus códigos de recuperación de un solo uso. Tu ficha nunca queda huérfana.",
   },
 ];
 ---
@@ -40,7 +40,7 @@ const ledger = [
   <div class="section-texture" aria-hidden="true"></div>
   <div class="relative z-10 mx-auto max-w-3xl text-center">
     <p class="font-sans text-xs font-medium uppercase tracking-[0.3em] text-sage-600 dark:text-sage-400">
-      Cumplimiento, no checkbox
+      No es un checkbox de marketing
     </p>
     <h2 class="mt-4 font-display text-4xl leading-tight tracking-tight text-slate-900 sm:text-5xl dark:text-cream-50">
       Construido sobre la ley,<br />no alrededor de ella.
@@ -48,8 +48,9 @@ const ledger = [
     <p
       class="mx-auto mt-6 max-w-xl text-balance font-sans text-base leading-relaxed text-slate-600 dark:text-slate-400"
     >
-      Umbral se desarrolla para cumplir la Ley 20.584 (Derechos y Deberes de los Pacientes), la Ley 19.628 (Protección
-      de la Vida Privada) y la Ley 21.719 (Protección de Datos Personales) de Chile.
+      Umbral se desarrolla para cumplir la Ley 20.584 (Derechos y Deberes de los Pacientes) y la Ley 19.628
+      (Protección de la Vida Privada), y para estar listo cuando entre en vigencia la Ley 21.719 de Protección de
+      Datos Personales, el 1 de diciembre de 2026.
     </p>
   </div>
 

@@ -1,48 +1,48 @@
 ---
 const features = [
   {
-    title: "MFA obligatorio",
-    body: "Se enrola forzosamente en el primer login exitoso. No es opcional ni depende de ningún rol — toda cuenta lo tiene.",
+    title: "Doble verificación al entrar",
+    body: "Además de tu contraseña, un código temporal en tu teléfono confirma que eres tú. Se activa solo en tu primer ingreso — nadie puede desactivarlo, ni tú.",
     icon: "M12 2 4 5v6c0 5 3.4 8.7 8 9.9 4.6-1.2 8-4.9 8-9.9V5l-8-3Z",
   },
   {
-    title: "Consentimiento granular",
-    body: "Ledger append-only por finalidad (tratamiento, telemedicina). Otorgar o revocar nunca borra el historial.",
+    title: "Consentimiento que queda escrito",
+    body: "Cada vez que un paciente autoriza o retira su consentimiento (para tratamiento, para telemedicina), Umbral lo anota y lo conserva. Ese historial nunca se borra, ni por error.",
     icon: "M9 12.5 11 14.5 15 9.5 M4 6h16v13a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V6Z",
   },
   {
-    title: "Registro versionado",
-    body: "Las correcciones a una consulta crean una nueva versión, sin alterar ni ocultar el original.",
+    title: "Nada se pierde al corregir",
+    body: "Si te equivocas o necesitas ajustar una consulta, se guarda como una versión nueva. La original queda intacta y disponible, nunca se sobrescribe.",
     icon: "M12 7v5l3 3 M12 21a9 9 0 1 1 8.6-6.2",
   },
   {
-    title: "Documentos cifrados",
-    body: "PDF e imágenes por paciente, hasta 10MB, cifrados en reposo con AES-256.",
+    title: "Documentos protegidos",
+    body: "Sube PDF e imágenes de cada paciente (hasta 10MB) y quedan cifrados: aunque alguien accediera al servidor, no podría leerlos sin la llave.",
     icon: "M6 10V7a6 6 0 0 1 12 0v3 M5 10h14v10H5z",
   },
   {
-    title: "Auditoría inmutable",
-    body: "Toda acción queda registrada — usuario, IP, recurso, timestamp — en una tabla que nadie puede editar ni borrar.",
+    title: "Registro de quién hizo qué",
+    body: "Cada acceso a Umbral queda anotado — quién entró, qué vio, cuándo — en un registro que ni tú ni nadie puede editar o borrar después.",
     icon: "M8 4h8l4 4v12H4V4z M8 4v4H4 M9 13h6 M9 17h6",
   },
   {
-    title: "Exportación PDF",
-    body: "Ficha clínica completa bajo demanda, con referencia a la Ley 20.584 y custodia obligatoria de 15 años.",
+    title: "Tu ficha, en PDF, cuando la necesites",
+    body: "Exporta la ficha clínica completa de un paciente cuando quieras. Guardamos la información el tiempo que exige la Ley 20.584: 15 años.",
     icon: "M6 3h8l4 4v14H6V3z M14 3v4h4 M9 15v-4 M11 15v-2 M13 15v-5",
   },
   {
-    title: "Sincronización con Google Calendar",
-    body: "Conecta tu cuenta y cada sesión se agenda sola en tu calendario — sincronización unidireccional, solo con iniciales del paciente y un link a Umbral, nunca datos clínicos.",
+    title: "Se agenda solo en tu Google Calendar",
+    body: "Conecta tu cuenta y cada sesión aparece sola en tu calendario, con las iniciales del paciente y un enlace a Umbral — nunca su nombre completo, RUT ni datos clínicos. Solo va de Umbral hacia tu calendario, nunca al revés.",
     icon: "M4 5h16v15H4z M4 9h16 M8 3v4 M16 3v4 M8 13h2 M8 17h2",
   },
   {
-    title: "Recordatorios automáticos",
-    body: "Aviso por correo y notificación in-app 24 y 2 horas antes de cada sesión, para que ninguna cita se te escape.",
+    title: "Recordatorios para que no se te escape ninguna cita",
+    body: "Aviso por correo y notificación dentro de Umbral, 24 y 2 horas antes de cada sesión.",
     icon: "M12 3a5 5 0 0 0-5 5v3l-2 3h14l-2-3V8a5 5 0 0 0-5-5Z M10 19a2 2 0 0 0 4 0",
   },
   {
-    title: "Notificaciones in-app",
-    body: "Un centro de notificaciones dentro de Umbral te mantiene al tanto de recordatorios y eventos de tu práctica, sin depender solo del correo.",
+    title: "Centro de notificaciones",
+    body: "Todos los avisos de tu práctica en un solo lugar dentro de Umbral, sin depender únicamente del correo.",
     icon: "M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18Z M12 8v4 M12 15.5h.01",
   },
 ];
@@ -55,10 +55,10 @@ const features = [
   <div class="section-texture" aria-hidden="true"></div>
   <div class="relative z-10 mx-auto max-w-3xl text-center">
     <p class="font-sans text-xs font-medium uppercase tracking-[0.3em] text-sage-600 dark:text-sage-400">
-      Lo que queda del otro lado
+      Todo lo que ya no tienes que resolver por tu cuenta
     </p>
     <h2 class="mt-4 font-display text-4xl leading-tight tracking-tight text-slate-900 sm:text-5xl dark:text-cream-50">
-      Cada sesión, resguardada.
+      Lo clínico, lo legal y lo administrativo, en un solo lugar.
     </h2>
   </div>
 
