@@ -51,5 +51,16 @@ const {
       Saltar al contenido
     </a>
     <slot />
+
+    <script>
+      // builds mailto hrefs at runtime so the plain address never sits in the HTML source
+      document.querySelectorAll("[data-mailto-user]").forEach((el) => {
+        const user = el.getAttribute("data-mailto-user");
+        const domain = el.getAttribute("data-mailto-domain");
+        if (!user || !domain) return;
+        el.setAttribute("href", `mailto:${user}@${domain}`);
+        if (!el.textContent?.trim()) el.textContent = `${user}@${domain}`;
+      });
+    </script>
   </body>
 </html>
