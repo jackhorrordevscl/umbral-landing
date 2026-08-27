@@ -9,7 +9,9 @@ const lastUpdated = "27 de agosto de 2026";
   title="Política de Privacidad — Integración con Google Calendar | Umbral"
   description="Cómo Umbral utiliza los datos a los que accede a través de la integración con Google Calendar: alcance del permiso solicitado, qué se sincroniza, almacenamiento y desconexión."
 >
-  <header class="border-b border-sage-200 bg-cream-100/90 px-6 py-4 backdrop-blur sm:px-10 dark:border-slate-800 dark:bg-slate-950/90">
+  <header
+    class="border-b border-sage-200 bg-cream-100/90 px-6 py-4 backdrop-blur sm:px-10 dark:border-slate-800 dark:bg-slate-950/90"
+  >
     <a href="/" class="flex items-center gap-2">
       <span class="brand-gradient flex items-center rounded-lg px-3 py-1.5">
         <img src="/logo.svg" alt="Umbral" width="490" height="247" class="h-6 w-auto" />
@@ -29,9 +31,13 @@ const lastUpdated = "27 de agosto de 2026";
     </p>
 
     <p class="mt-8 font-sans text-base leading-relaxed text-slate-700 dark:text-slate-300">
-      Esta política describe específicamente cómo Umbral utiliza los datos a los que accede a través de la
-      integración con Google Calendar. Para el tratamiento general de datos de pacientes, consultá la sección de
-      <a href="/#cumplimiento" class="text-sage-600 underline decoration-sage-400 underline-offset-4 hover:text-sage-700 dark:text-sage-400 dark:hover:text-sage-300">Cumplimiento Legal</a>
+      Esta política describe específicamente cómo Umbral utiliza los datos a los que accede a través de la integración
+      con Google Calendar. Para el tratamiento general de datos de pacientes, consultá la sección de
+      <a
+        href="/#cumplimiento"
+        class="text-sage-600 underline decoration-sage-400 underline-offset-4 hover:text-sage-700 dark:text-sage-400 dark:hover:text-sage-300"
+        >Cumplimiento Legal</a
+      >
       de este sitio.
     </p>
 
@@ -40,8 +46,10 @@ const lastUpdated = "27 de agosto de 2026";
         <h2 class="font-display text-2xl text-slate-900 dark:text-cream-50">1. Qué acceso solicitamos</h2>
         <p class="mt-3">
           Al conectar tu cuenta de Google, Umbral solicita únicamente el permiso
-          <code class="rounded bg-sage-100 px-1.5 py-0.5 font-mono text-sm text-sage-700 dark:bg-slate-900 dark:text-sage-400">https://www.googleapis.com/auth/calendar.events</code>,
-          que permite crear, actualizar y eliminar eventos en tu Google Calendar. Umbral no accede a tu correo
+          <code
+            class="rounded bg-sage-100 px-1.5 py-0.5 font-mono text-sm text-sage-700 dark:bg-slate-900 dark:text-sage-400"
+            >https://www.googleapis.com/auth/calendar.events</code
+          >, que permite crear, actualizar y eliminar eventos en tu Google Calendar. Umbral no accede a tu correo
           electrónico, contactos, otros calendarios ni ningún otro dato de tu cuenta de Google.
         </p>
       </section>
@@ -51,14 +59,16 @@ const lastUpdated = "27 de agosto de 2026";
         <p class="mt-3">Por cada sesión agendada en Umbral, se crea un evento en tu Google Calendar con:</p>
         <ul class="mt-3 list-disc space-y-1.5 pl-6 marker:text-sage-500">
           <li>
-            <strong class="font-medium text-slate-900 dark:text-cream-50">Título:</strong> "Sesión — " seguido de
-            iniciales o un código corto del paciente (nunca el nombre completo, RUT, ni el tipo de sesión clínica).
+            <strong class="font-medium text-slate-900 dark:text-cream-50">Título:</strong> "Sesión — " seguido de iniciales
+            o un código corto del paciente (nunca el nombre completo, RUT, ni el tipo de sesión clínica).
           </li>
           <li>
-            <strong class="font-medium text-slate-900 dark:text-cream-50">Descripción:</strong> un enlace directo a
-            la consulta dentro de Umbral.
+            <strong class="font-medium text-slate-900 dark:text-cream-50">Descripción:</strong> un enlace directo a la consulta
+            dentro de Umbral.
           </li>
-          <li><strong class="font-medium text-slate-900 dark:text-cream-50">Fecha, hora y duración</strong> de la sesión.</li>
+          <li>
+            <strong class="font-medium text-slate-900 dark:text-cream-50">Fecha, hora y duración</strong> de la sesión.
+          </li>
         </ul>
         <p class="mt-3">
           Ningún dato clínico, diagnóstico ni contenido sensible del paciente se envía a Google en ningún caso.
@@ -74,31 +84,35 @@ const lastUpdated = "27 de agosto de 2026";
       </section>
 
       <section>
-        <h2 class="font-display text-2xl text-slate-900 dark:text-cream-50">4. Almacenamiento y seguridad de las credenciales</h2>
+        <h2 class="font-display text-2xl text-slate-900 dark:text-cream-50">
+          4. Almacenamiento y seguridad de las credenciales
+        </h2>
         <p class="mt-3">
-          El token de acceso a tu cuenta de Google se almacena cifrado (AES-GCM) en la base de datos de Umbral.
-          Ningún token se almacena ni transmite en texto plano.
+          El token de acceso a tu cuenta de Google se almacena cifrado (AES-GCM) en la base de datos de Umbral. Ningún
+          token se almacena ni transmite en texto plano.
         </p>
       </section>
 
       <section>
         <h2 class="font-display text-2xl text-slate-900 dark:text-cream-50">5. Desconexión y eliminación de datos</h2>
-        <p class="mt-3">Podés desconectar tu Google Calendar en cualquier momento desde Ajustes de Umbral. Al hacerlo:</p>
+        <p class="mt-3">
+          Podés desconectar tu Google Calendar en cualquier momento desde Ajustes de Umbral. Al hacerlo:
+        </p>
         <ul class="mt-3 list-disc space-y-1.5 pl-6 marker:text-sage-500">
           <li>Umbral revoca el token de acceso directamente con Google.</li>
           <li>El token almacenado se elimina de forma inmediata de la base de datos de Umbral.</li>
         </ul>
         <p class="mt-3">
-          Los eventos ya creados en tu Google Calendar no se eliminan automáticamente al desconectar; podés
-          borrarlos manualmente desde Google Calendar si lo deseás.
+          Los eventos ya creados en tu Google Calendar no se eliminan automáticamente al desconectar; podés borrarlos
+          manualmente desde Google Calendar si lo deseás.
         </p>
       </section>
 
       <section>
         <h2 class="font-display text-2xl text-slate-900 dark:text-cream-50">6. Cumplimiento</h2>
         <p class="mt-3">
-          Este tratamiento de datos se rige por la Ley N° 19.628 sobre Protección de la Vida Privada y la Ley N°
-          21.719 (Chile). El uso que hace Umbral de la información obtenida de las APIs de Google cumple con la
+          Este tratamiento de datos se rige por la Ley N° 19.628 sobre Protección de la Vida Privada y la Ley N° 21.719
+          (Chile). El uso que hace Umbral de la información obtenida de las APIs de Google cumple con la
           <a
             href="https://developers.google.com/terms/api-services-user-data-policy"
             target="_blank"

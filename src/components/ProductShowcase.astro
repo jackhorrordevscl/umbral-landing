@@ -8,16 +8,31 @@ import subirArchivo from "../assets/screenshots/5-subir-archivo.png";
 import repositorio from "../assets/screenshots/6-repositorio-archivos.png";
 
 const screens = [
-  { src: dashboard, alt: "Dashboard de Umbral con pacientes activos, consultas registradas y consentimientos firmados", label: "Dashboard" },
+  {
+    src: dashboard,
+    alt: "Dashboard de Umbral con pacientes activos, consultas registradas y consentimientos firmados",
+    label: "Dashboard",
+  },
   { src: pacientes, alt: "Listado de pacientes con RUT, contacto y estado de consentimiento", label: "Pacientes" },
   { src: nuevaFicha, alt: "Formulario de nueva ficha de paciente", label: "Nueva ficha" },
-  { src: consultas, alt: "Registro de consultas con motivo, intervención y acuerdos por sesión", label: "Consultas y sesiones" },
+  {
+    src: consultas,
+    alt: "Registro de consultas con motivo, intervención y acuerdos por sesión",
+    label: "Consultas y sesiones",
+  },
   { src: subirArchivo, alt: "Modal para subir un archivo al repositorio personal", label: "Subir archivo" },
-  { src: repositorio, alt: "Repositorio de archivos con plantillas, formularios y protocolos", label: "Repositorio de archivos" },
+  {
+    src: repositorio,
+    alt: "Repositorio de archivos con plantillas, formularios y protocolos",
+    label: "Repositorio de archivos",
+  },
 ];
 ---
 
-<section id="capturas" class="relative overflow-hidden border-t border-sage-200 bg-cream-200 px-6 py-20 sm:px-10 dark:border-slate-800 dark:bg-slate-900">
+<section
+  id="capturas"
+  class="relative overflow-hidden border-t border-sage-200 bg-cream-200 px-6 py-20 sm:px-10 dark:border-slate-800 dark:bg-slate-900"
+>
   <div class="section-texture" aria-hidden="true"></div>
 
   <div class="relative z-10 mx-auto max-w-3xl text-center">
@@ -27,9 +42,10 @@ const screens = [
     <h2 class="mt-4 font-display text-4xl leading-tight tracking-tight text-slate-900 sm:text-5xl dark:text-cream-50">
       Sin humo. La app real.
     </h2>
-    <p class="mx-auto mt-6 max-w-xl text-balance font-sans text-base leading-relaxed text-slate-600 dark:text-slate-400">
-      Capturas del sistema en uso, con datos de demostración — así se ve el
-      día a día de llevar tus fichas en Umbral.
+    <p
+      class="mx-auto mt-6 max-w-xl text-balance font-sans text-base leading-relaxed text-slate-600 dark:text-slate-400"
+    >
+      Capturas del sistema en uso, con datos de demostración — así se ve el día a día de llevar tus fichas en Umbral.
     </p>
   </div>
 
@@ -48,7 +64,14 @@ const screens = [
                 <span class="h-2.5 w-2.5 rounded-full bg-slate-300 dark:bg-slate-600" />
                 <span class="h-2.5 w-2.5 rounded-full bg-slate-300 dark:bg-slate-600" />
               </div>
-              <Image src={screen.src} alt={screen.alt} widths={[672, 1024, 1344]} sizes="(min-width: 640px) 42rem, 85vw" loading="lazy" class="showcase-img w-full" />
+              <Image
+                src={screen.src}
+                alt={screen.alt}
+                widths={[672, 1024, 1344]}
+                sizes="(min-width: 640px) 42rem, 85vw"
+                loading="lazy"
+                class="showcase-img w-full"
+              />
             </div>
             <figcaption class="mt-3 text-center font-sans text-sm font-medium text-slate-600 dark:text-slate-400">
               {screen.label}
@@ -65,8 +88,17 @@ const screens = [
         aria-label="Captura anterior"
         class="flex h-9 w-9 items-center justify-center rounded-lg border border-slate-200 text-slate-600 transition-colors hover:border-sage-400 hover:text-slate-900 dark:border-slate-700 dark:text-slate-400 dark:hover:border-sage-500 dark:hover:text-cream-100"
       >
-        <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-          <path d="M15 18l-6-6 6-6" />
+        <svg
+          class="h-4 w-4"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          aria-hidden="true"
+        >
+          <path d="M15 18l-6-6 6-6"></path>
         </svg>
       </button>
       <button
@@ -75,8 +107,17 @@ const screens = [
         aria-label="Siguiente captura"
         class="flex h-9 w-9 items-center justify-center rounded-lg border border-slate-200 text-slate-600 transition-colors hover:border-sage-400 hover:text-slate-900 dark:border-slate-700 dark:text-slate-400 dark:hover:border-sage-500 dark:hover:text-cream-100"
       >
-        <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-          <path d="M9 18l6-6-6-6" />
+        <svg
+          class="h-4 w-4"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          aria-hidden="true"
+        >
+          <path d="M9 18l6-6-6-6"></path>
         </svg>
       </button>
     </div>
@@ -109,15 +150,18 @@ const screens = [
   // force them in once the carousel itself is visible.
   const section = track.closest("section");
   if (section && "IntersectionObserver" in window) {
-    const revealImages = new IntersectionObserver((entries) => {
-      for (const entry of entries) {
-        if (!entry.isIntersecting) continue;
-        track.querySelectorAll("img.showcase-img").forEach((img) => {
-          img.loading = "eager";
-        });
-        revealImages.disconnect();
-      }
-    }, { rootMargin: "200px" });
+    const revealImages = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (!entry.isIntersecting) continue;
+          track.querySelectorAll("img.showcase-img").forEach((img) => {
+            img.loading = "eager";
+          });
+          revealImages.disconnect();
+        }
+      },
+      { rootMargin: "200px" },
+    );
     revealImages.observe(section);
   }
 </script>

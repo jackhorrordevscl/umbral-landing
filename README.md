@@ -24,12 +24,20 @@ El sitio queda disponible en `http://localhost:4321`.
 
 ## Scripts
 
-| Comando | Qué hace |
-|---|---|
-| `npm run dev` | Servidor de desarrollo con hot reload |
-| `npm run build` | Build de producción en `dist/` |
-| `npm run preview` | Sirve el build de `dist/` localmente |
-| `npm run check` | Corre `astro check` (typecheck en modo strict) |
+| Comando                | Qué hace                                                         |
+| ---------------------- | ---------------------------------------------------------------- |
+| `npm run dev`          | Servidor de desarrollo con hot reload                            |
+| `npm run build`        | Build de producción en `dist/`                                   |
+| `npm run preview`      | Sirve el build de `dist/` localmente                             |
+| `npm run check`        | Corre `astro check` (typecheck en modo strict)                   |
+| `npm run lint`         | Corre ESLint sobre el proyecto                                   |
+| `npm run format`       | Formatea el proyecto con Prettier                                |
+| `npm run format:check` | Verifica formato sin escribir cambios (usado en CI)              |
+| `npm run test`         | Corre los smoke tests de Vitest — requiere `npm run build` antes |
+
+## CI
+
+Cada push/PR a `master` corre `format:check`, `lint`, `check`, `build` y `test` vía GitHub Actions (`.github/workflows/ci.yml`).
 
 ## Deploy
 
