@@ -1,0 +1,294 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Footer from "../components/Footer.astro";
+
+const lastUpdated = "27 de agosto de 2026";
+---
+
+<Layout
+  title="Política de Privacidad | Umbral"
+  description="Cómo Umbral trata los datos de terapeutas y pacientes: qué recopilamos, dónde se almacenan, cómo los protegemos, cuánto tiempo los conservamos y tus derechos."
+>
+  <header
+    class="border-b border-sage-200 bg-cream-100/90 px-6 py-4 backdrop-blur sm:px-10 dark:border-slate-800 dark:bg-slate-950/90"
+  >
+    <a href="/" class="flex items-center gap-2">
+      <span class="brand-gradient flex items-center rounded-lg px-3 py-1.5">
+        <img src="/logo.svg" alt="Umbral" width="490" height="247" class="h-6 w-auto" />
+      </span>
+    </a>
+  </header>
+
+  <main id="main-content" class="mx-auto max-w-3xl px-6 py-16 sm:px-10">
+    <p class="font-sans text-xs font-medium uppercase tracking-[0.3em] text-sage-600 dark:text-sage-400">
+      Política de privacidad
+    </p>
+    <h1 class="mt-4 font-display text-4xl leading-tight tracking-tight text-slate-900 sm:text-5xl dark:text-cream-50">
+      Cómo tratamos tus datos
+    </h1>
+    <p class="mt-4 font-sans text-sm text-slate-600 dark:text-slate-400">
+      Última actualización: {lastUpdated}
+    </p>
+
+    <p class="mt-8 font-sans text-base leading-relaxed text-slate-700 dark:text-slate-300">
+      Esta política aplica al uso de Umbral, el sistema de fichas clínicas para terapeutas que atienden por su cuenta.
+      Si usás la integración con Google Calendar, revisá también la
+      <a
+        href="/privacidad-google-calendar"
+        class="text-sage-600 underline decoration-sage-400 underline-offset-4 hover:text-sage-700 dark:text-sage-400 dark:hover:text-sage-300"
+        >política específica de esa integración</a
+      >.
+    </p>
+
+    <div class="mt-12 space-y-10 font-sans text-base leading-relaxed text-slate-700 dark:text-slate-300">
+      <section>
+        <h2 class="font-display text-2xl text-slate-900 dark:text-cream-50">0. Quién trata tus datos</h2>
+        <p class="mt-3">
+          Responsable del tratamiento: <strong class="font-medium text-slate-900 dark:text-cream-50"
+            >Ground Zero Devs</strong
+          >, nombre de fantasía de Juan José Martínez, RUT 17.661.989-9, con inicio de actividades de segunda categoría
+          bajo el rubro "Otros servicios informáticos". Contacto:
+          <a
+            href="#"
+            data-mailto-user="hola"
+            data-mailto-domain="umbral.cl"
+            class="text-sage-600 underline decoration-sage-400 underline-offset-4 hover:text-sage-700 dark:text-sage-400 dark:hover:text-sage-300"
+          ></a>.
+        </p>
+        <p class="mt-3">
+          Umbral actúa como <strong class="font-medium text-slate-900 dark:text-cream-50"
+            >encargado del tratamiento</strong
+          > de los datos de pacientes en nombre del terapeuta, quien es el
+          <strong class="font-medium text-slate-900 dark:text-cream-50">responsable</strong> de esos datos frente a sus pacientes
+          y frente a la ley (Ley 20.584).
+        </p>
+      </section>
+
+      <section>
+        <h2 class="font-display text-2xl text-slate-900 dark:text-cream-50">1. Qué datos recopilamos</h2>
+        <ul class="mt-3 list-disc space-y-1.5 pl-6 marker:text-sage-500">
+          <li>
+            <strong class="font-medium text-slate-900 dark:text-cream-50">Del terapeuta (titular de la cuenta):</strong>
+            nombre, correo, contraseña (nunca en texto plano — hash con argon2), estado de MFA.
+          </li>
+          <li>
+            <strong class="font-medium text-slate-900 dark:text-cream-50"
+              >De cada paciente, ingresados por el terapeuta:</strong
+            >
+            identificación (nombre, RUT, datos de contacto), contacto de emergencia, médico o psiquiatra tratante si corresponde,
+            y la ficha clínica propiamente tal (motivo de consulta, evolución de sesiones, documentos adjuntos) — todos clasificados
+            como
+            <strong class="font-medium text-slate-900 dark:text-cream-50">dato sensible</strong> conforme la Ley 19.628 (y
+            su régimen reforzado bajo la Ley 21.719 desde su entrada en vigencia).
+          </li>
+          <li>
+            <strong class="font-medium text-slate-900 dark:text-cream-50">Metadatos técnicos de uso:</strong>
+            bitácora de accesos (usuario, recurso, IP, user-agent, timestamp) para fines de auditoría y seguridad.
+          </li>
+        </ul>
+      </section>
+
+      <section>
+        <h2 class="font-display text-2xl text-slate-900 dark:text-cream-50">2. Para qué usamos tus datos</h2>
+        <p class="mt-3">
+          Exclusivamente para prestar el servicio: registrar y dar continuidad a la atención clínica del terapeuta con
+          sus pacientes, generar reportes clínicos, y — si el terapeuta lo activa — sincronizar horarios de sesión con
+          su Google Calendar personal. No usamos los datos de pacientes con fines publicitarios ni los vendemos ni
+          compartimos con terceros ajenos a la prestación del servicio.
+        </p>
+      </section>
+
+      <section>
+        <h2 class="font-display text-2xl text-slate-900 dark:text-cream-50">3. Consentimiento</h2>
+        <p class="mt-3">
+          El tratamiento de datos de cada paciente requiere el consentimiento informado del paciente, otorgado al
+          terapeuta (fuera de la plataforma, como parte de su proceso clínico habitual). Dentro de Umbral, cada
+          finalidad de tratamiento (atención presencial, telemedicina) queda registrada en un ledger de consentimiento
+          append-only: otorgar o revocar consentimiento queda escrito, nunca borrado.
+        </p>
+      </section>
+
+      <section>
+        <h2 class="font-display text-2xl text-slate-900 dark:text-cream-50">4. Dónde se almacenan tus datos</h2>
+        <p class="mt-3">
+          Los datos operativos (ficha clínica, consultas, documentos, auditoría) se almacenan en infraestructura de
+          Supabase, hospedada en São Paulo, Brasil. Los backups cifrados se almacenan de forma offsite en Backblaze B2,
+          hospedado en Estados Unidos — el contenido viaja cifrado con AES-256 antes de subirse, por lo que Backblaze
+          nunca tiene acceso al contenido en claro. El correo transaccional de la cuenta del profesional se envía a
+          través de Resend, también en Estados Unidos.
+        </p>
+        <p class="mt-3">
+          Esto implica una transferencia internacional de datos fuera de Chile. Adoptamos medidas de resguardo
+          contractual razonables con cada proveedor, acorde al estado actual de la normativa: la incorporación de los
+          mecanismos de transferencia internacional (cláusulas contractuales tipo) que cada proveedor ofrece como parte
+          de sus propios Términos de Servicio. El marco legal chileno para este tipo de transferencia está en desarrollo
+          — la Ley 21.719 lo regula explícitamente pero recién entra en vigencia el 1 de diciembre de 2026, y seguimos
+          activamente la evolución de este marco para ajustar nuestras prácticas en consecuencia.
+        </p>
+      </section>
+
+      <section>
+        <h2 class="font-display text-2xl text-slate-900 dark:text-cream-50">5. Cómo protegemos tus datos</h2>
+        <ul class="mt-3 list-disc space-y-1.5 pl-6 marker:text-sage-500">
+          <li>
+            <strong class="font-medium text-slate-900 dark:text-cream-50">MFA obligatorio</strong> (TOTP) para toda cuenta
+            de terapeuta.
+          </li>
+          <li>
+            <strong class="font-medium text-slate-900 dark:text-cream-50">Cifrado en tránsito</strong> (TLS) y <strong
+              class="font-medium text-slate-900 dark:text-cream-50">en reposo</strong
+            >: documentos clínicos con AES-256, credenciales de integraciones externas (ej. token de Google Calendar)
+            con AES-GCM.
+          </li>
+          <li>
+            <strong class="font-medium text-slate-900 dark:text-cream-50">Row Level Security (RLS)</strong> a nivel de base
+            de datos — un terapeuta nunca puede leer datos de pacientes que no son suyos, aplicado por la propia base de datos,
+            no solo por la aplicación.
+          </li>
+          <li>
+            <strong class="font-medium text-slate-900 dark:text-cream-50">Rate limiting</strong> y cabeceras de seguridad
+            HTTP endurecidas contra ataques comunes.
+          </li>
+          <li>
+            <strong class="font-medium text-slate-900 dark:text-cream-50">Bitácora de auditoría inmutable</strong> de todo
+            acceso al sistema.
+          </li>
+        </ul>
+      </section>
+
+      <section>
+        <h2 class="font-display text-2xl text-slate-900 dark:text-cream-50">6. Cuánto tiempo conservamos tus datos</h2>
+        <p class="mt-3">
+          Conforme el Art. 12 de la Ley 20.584, la ficha clínica se conserva por un mínimo de 15 años. Umbral implementa
+          esto con soft delete (nunca borrado físico inmediato) más un archivo de custodia legal cifrado, generado
+          mensualmente y separado de la operación diaria. Las correcciones a una consulta generan una versión nueva — el
+          registro original nunca se sobrescribe.
+        </p>
+      </section>
+
+      <section>
+        <h2 class="font-display text-2xl text-slate-900 dark:text-cream-50">7. Con quién compartimos datos</h2>
+        <p class="mt-3">
+          No compartimos datos de pacientes con terceros salvo los proveedores de infraestructura estrictamente
+          necesarios para operar el servicio (encargados de tratamiento):
+        </p>
+        <div class="mt-4 overflow-x-auto">
+          <table class="w-full border-collapse text-sm">
+            <thead>
+              <tr class="border-b border-sage-200 dark:border-slate-800">
+                <th class="py-2 pr-4 text-left font-sans font-medium text-slate-900 dark:text-cream-50">Proveedor</th>
+                <th class="py-2 pr-4 text-left font-sans font-medium text-slate-900 dark:text-cream-50">Rol</th>
+                <th class="py-2 text-left font-sans font-medium text-slate-900 dark:text-cream-50"
+                  >Datos involucrados</th
+                >
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-sage-200 dark:divide-slate-800">
+              <tr>
+                <td class="py-2 pr-4 align-top">Supabase</td>
+                <td class="py-2 pr-4 align-top">Base de datos y hosting</td>
+                <td class="py-2 align-top">Todos los datos operativos (los lee en claro, por necesidad operativa)</td>
+              </tr>
+              <tr>
+                <td class="py-2 pr-4 align-top">Backblaze B2</td>
+                <td class="py-2 pr-4 align-top">Backup offsite cifrado</td>
+                <td class="py-2 align-top"
+                  >Copia de respaldo — llega cifrada, Backblaze nunca ve el contenido en claro</td
+                >
+              </tr>
+              <tr>
+                <td class="py-2 pr-4 align-top">Resend</td>
+                <td class="py-2 pr-4 align-top">Envío de correo transaccional</td>
+                <td class="py-2 align-top">Solo nombre y correo del terapeuta — nunca datos de pacientes</td>
+              </tr>
+              <tr>
+                <td class="py-2 pr-4 align-top">Google Calendar (opcional)</td>
+                <td class="py-2 pr-4 align-top">Sincronización de horarios</td>
+                <td class="py-2 align-top">
+                  Ver <a
+                    href="/privacidad-google-calendar"
+                    class="text-sage-600 underline decoration-sage-400 underline-offset-4 hover:text-sage-700 dark:text-sage-400 dark:hover:text-sage-300"
+                    >política específica</a
+                  >
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="mt-4">
+          Ningún tercero no relacionado con la atención de salud tiene acceso a la ficha clínica de un paciente.
+        </p>
+      </section>
+
+      <section>
+        <h2 class="font-display text-2xl text-slate-900 dark:text-cream-50">8. Tus derechos</h2>
+        <p class="mt-3">
+          Como titular de tus datos podés solicitar acceso, rectificación, cancelación y oposición al tratamiento
+          (derechos ARCO), conforme la Ley 19.628 actualmente vigente. A partir de la entrada en vigencia de la Ley
+          21.719 (1 de diciembre de 2026), estos derechos se amplían e incluyen portabilidad. Para ejercerlos,
+          escribinos a
+          <a
+            href="#"
+            data-mailto-user="hola"
+            data-mailto-domain="umbral.cl"
+            class="text-sage-600 underline decoration-sage-400 underline-offset-4 hover:text-sage-700 dark:text-sage-400 dark:hover:text-sage-300"
+          ></a>.
+        </p>
+        <p class="mt-3">
+          Si sos paciente de un terapeuta que usa Umbral, tu punto de contacto para ejercer estos derechos es tu propio
+          terapeuta, responsable de tus datos frente a la ley.
+        </p>
+      </section>
+
+      <section>
+        <h2 class="font-display text-2xl text-slate-900 dark:text-cream-50">
+          9. Notificación de incidentes de seguridad
+        </h2>
+        <p class="mt-3">
+          Ante una vulneración de seguridad que afecte datos personales, notificaremos según lo exigido por la normativa
+          vigente — desde el 1 de diciembre de 2026, la Ley 21.719 exige notificar a la Agencia de Protección de Datos
+          Personales dentro de 72 horas desde tomar conocimiento del incidente — y, cuando corresponda, a los terapeutas
+          afectados.
+        </p>
+      </section>
+
+      <section>
+        <h2 class="font-display text-2xl text-slate-900 dark:text-cream-50">10. Certificación</h2>
+        <p class="mt-3">
+          Umbral está en proceso de alineación con los estándares del Sello RCE (Registro Clínico Electrónico) de CENS.
+          Esto es una declaración de intención y trabajo en curso, no una certificación obtenida.
+        </p>
+      </section>
+
+      <section>
+        <h2 class="font-display text-2xl text-slate-900 dark:text-cream-50">11. Menores de edad (NNA)</h2>
+        <p class="mt-3">
+          Cuando el paciente de un terapeuta es un niño, niña o adolescente, el consentimiento informado sigue el
+          proceso específico para NNA definido por el terapeuta tratante conforme a la normativa vigente.
+        </p>
+      </section>
+
+      <section>
+        <h2 class="font-display text-2xl text-slate-900 dark:text-cream-50">12. Cambios a esta política</h2>
+        <p class="mt-3">
+          Podemos actualizar esta política para reflejar cambios en el servicio o en la normativa aplicable. La fecha de
+          "Última actualización" al inicio de este documento indica la versión vigente.
+        </p>
+      </section>
+
+      <section>
+        <h2 class="font-display text-2xl text-slate-900 dark:text-cream-50">13. Contacto</h2>
+        <p class="mt-3">
+          <a
+            href="#"
+            data-mailto-user="hola"
+            data-mailto-domain="umbral.cl"
+            class="text-sage-600 underline decoration-sage-400 underline-offset-4 hover:text-sage-700 dark:text-sage-400 dark:hover:text-sage-300"
+          ></a>
+        </p>
+      </section>
+    </div>
+  </main>
+
+  <Footer />
+</Layout>

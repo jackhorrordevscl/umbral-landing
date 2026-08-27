@@ -49,15 +49,56 @@ describe("build output", () => {
     });
   });
 
+  describe("general privacy policy page", () => {
+    const html = () => readDist("privacidad-general/index.html");
+
+    it("exists and renders all 14 sections (0-13)", () => {
+      const content = html();
+      for (let section = 0; section <= 13; section++) {
+        expect(content).toMatch(new RegExp(`>\\s*${section}\\.`));
+      }
+    });
+
+    it("identifies the data controller by name and RUT", () => {
+      expect(html()).toContain("17.661.989-9");
+    });
+
+    it("never claims CENS certification is already obtained", () => {
+      const content = html();
+      expect(content).toContain("no una certificación obtenida");
+    });
+
+    it("never leaks the plain contact email into the HTML source", () => {
+      expect(html()).not.toContain("hola@umbral.cl");
+    });
+  });
+
+  describe("terms of service page", () => {
+    const html = () => readDist("terminos/index.html");
+
+    it("exists and renders all 12 sections", () => {
+      const content = html();
+      for (let section = 1; section <= 12; section++) {
+        expect(content).toMatch(new RegExp(`>\\s*${section}\\.`));
+      }
+    });
+
+    it("never leaks the plain contact email into the HTML source", () => {
+      expect(html()).not.toContain("hola@umbral.cl");
+    });
+  });
+
   describe("SEO/crawling files", () => {
     it("robots.txt points to the real production sitemap", () => {
       expect(readDist("robots.txt")).toContain(`Sitemap: ${SITE}/sitemap-index.xml`);
     });
 
-    it("sitemap lists both pages under the real production domain", () => {
+    it("sitemap lists all pages under the real production domain", () => {
       const content = readDist("sitemap-0.xml");
       expect(content).toContain(`<loc>${SITE}/</loc>`);
       expect(content).toContain(`<loc>${SITE}/privacidad-google-calendar/</loc>`);
+      expect(content).toContain(`<loc>${SITE}/privacidad-general/</loc>`);
+      expect(content).toContain(`<loc>${SITE}/terminos/</loc>`);
     });
   });
 });
