@@ -3,7 +3,7 @@ import tailwindcss from "@tailwindcss/vite";
 import sitemap from "@astrojs/sitemap";
 
 export default defineConfig({
-  site: "https://umbral.cl",
+  site: "https://umbral.groundzerodevs.com",
   integrations: [sitemap()],
   vite: {
     plugins: [tailwindcss()],

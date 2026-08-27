@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://umbral.cl/sitemap-index.xml
+Sitemap: https://umbral.groundzerodevs.com/sitemap-index.xml
