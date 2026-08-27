@@ -1,5 +1,6 @@
 # local tooling metadata (machine-specific paths)
 .atl/
+.codegraph/
 
 # build output
 dist/
