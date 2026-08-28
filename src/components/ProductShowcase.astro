@@ -1,11 +1,14 @@
 ---
 import { Image } from "astro:assets";
-import dashboard from "../assets/screenshots/1-dashboard.png";
-import pacientes from "../assets/screenshots/2-pacientes.png";
-import nuevaFicha from "../assets/screenshots/3-nueva-ficha-paciente.png";
-import consultas from "../assets/screenshots/4-consultas-sesiones.png";
-import subirArchivo from "../assets/screenshots/5-subir-archivo.png";
-import repositorio from "../assets/screenshots/6-repositorio-archivos.png";
+import dashboard from "../assets/screenshots/01-dashboard.png";
+import pacientes from "../assets/screenshots/02-pacientes-listado.png";
+import nuevaFicha from "../assets/screenshots/03-pacientes-nueva-ficha.png";
+import consultas from "../assets/screenshots/04-consultas-listado.png";
+import calendarioMes from "../assets/screenshots/05-calendario-mes.png";
+import calendarioDetalle from "../assets/screenshots/06-calendario-detalle-dia.png";
+import repositorio from "../assets/screenshots/07-repositorio.png";
+import subirArchivo from "../assets/screenshots/07b-repositorio-subir-archivo.png";
+import seguridad from "../assets/screenshots/08-seguridad.png";
 
 const screens = [
   {
@@ -20,12 +23,19 @@ const screens = [
     alt: "Registro de consultas con motivo, intervención y acuerdos por sesión",
     label: "Consultas y sesiones",
   },
-  { src: subirArchivo, alt: "Modal para subir un archivo al repositorio personal", label: "Subir archivo" },
+  { src: calendarioMes, alt: "Calendario mensual con sesiones agendadas", label: "Calendario" },
+  {
+    src: calendarioDetalle,
+    alt: "Detalle de una sesión agendada en el calendario, con opción de agendar",
+    label: "Detalle de sesión",
+  },
   {
     src: repositorio,
     alt: "Repositorio de archivos con plantillas, formularios y protocolos",
     label: "Repositorio de archivos",
   },
+  { src: subirArchivo, alt: "Modal para subir un archivo al repositorio personal", label: "Subir archivo" },
+  { src: seguridad, alt: "Configuración de seguridad con MFA y conexión a Google Calendar", label: "Seguridad" },
 ];
 ---
 
