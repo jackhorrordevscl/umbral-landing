@@ -116,7 +116,10 @@ const lastUpdated = "8 de octubre de 2026";
           hospedado en Estados Unidos — el contenido viaja cifrado con AES-256 antes de subirse, por lo que Backblaze
           nunca tiene acceso al contenido en claro. El servidor de la aplicación, por donde pasan los datos mientras se
           procesan, se aloja en Render, en la región de Oregón (Estados Unidos, costa oeste). El correo transaccional de
-          la cuenta del profesional se envía a través de Resend, también en Estados Unidos.
+          la cuenta del profesional se envía a través de Resend, también en Estados Unidos. Si el terapeuta activa el
+          cobro en línea, el pago se procesa en Flow, cuyo checkout opera en Estados Unidos aunque la entidad
+          contratante esté domiciliada en Chile. Si se activa el registro de errores técnicos, estos se envían a Sentry,
+          que los almacena en Estados Unidos.
         </p>
         <p class="mt-3">
           Esto implica una transferencia internacional de datos fuera de Chile. Adoptamos medidas de resguardo
