@@ -145,9 +145,10 @@ const lastUpdated = "8 de octubre de 2026";
             con AES-GCM.
           </li>
           <li>
-            <strong class="font-medium text-slate-900 dark:text-cream-50">Row Level Security (RLS)</strong> a nivel de base
-            de datos — un terapeuta nunca puede leer datos de pacientes que no son suyos, aplicado por la propia base de datos,
-            no solo por la aplicación.
+            <strong class="font-medium text-slate-900 dark:text-cream-50">Aislamiento entre profesionales</strong> aplicado
+            por la aplicación — cada consulta se limita al profesional autenticado, de modo que un terapeuta solo accede a
+            sus propios pacientes. La base de datos tiene además Row Level Security habilitado, que bloquea el acceso directo
+            por la API de datos del proveedor.
           </li>
           <li>
             <strong class="font-medium text-slate-900 dark:text-cream-50">Rate limiting</strong> y cabeceras de seguridad
@@ -164,9 +165,9 @@ const lastUpdated = "8 de octubre de 2026";
         <h2 class="font-display text-2xl text-slate-900 dark:text-cream-50">6. Cuánto tiempo conservamos tus datos</h2>
         <p class="mt-3">
           Conforme el Art. 12 de la Ley 20.584, la ficha clínica se conserva por un mínimo de 15 años. Umbral implementa
-          esto con soft delete (nunca borrado físico inmediato) más un archivo de custodia legal cifrado, generado
-          mensualmente y separado de la operación diaria. Las correcciones a una consulta generan una versión nueva — el
-          registro original nunca se sobrescribe.
+          esto con soft delete (la ficha no se borra físicamente) y respaldos diarios cifrados, almacenados fuera de la
+          plataforma principal. Las correcciones a una consulta generan una versión nueva — el registro original nunca
+          se sobrescribe.
         </p>
       </section>
 
