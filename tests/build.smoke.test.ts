@@ -88,11 +88,13 @@ describe("build output", () => {
       expect(html()).not.toContain("contacto@groundzerodevs.com");
     });
 
-    it("states the launch price exactly as decided: $6.990 monthly for 12 months", () => {
+    it("states the launch price exactly as decided: $6.990 monthly, VAT included, 12 months, valid 30 days", () => {
       const text = html()
         .replace(/<[^>]+>/g, " ")
         .replace(/\s+/g, " ");
       expect(text).toMatch(/precio de lanzamiento[^.]*\$\s?6\.990 mensuales[^.]*12 meses/i);
+      expect(text).toMatch(/\$\s?6\.990 mensuales,? IVA incluido/i);
+      expect(text).toMatch(/suscripci[oó]n es válida por 30 días/i);
       expect(text).not.toMatch(/sin cobro de suscripci[oó]n/i);
     });
   });
