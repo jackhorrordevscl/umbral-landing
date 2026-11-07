@@ -87,6 +87,14 @@ describe("build output", () => {
     it("never leaks the plain contact email into the HTML source", () => {
       expect(html()).not.toContain("contacto@groundzerodevs.com");
     });
+
+    it("states the launch price exactly as decided: $6.990 monthly for 12 months", () => {
+      const text = html()
+        .replace(/<[^>]+>/g, " ")
+        .replace(/\s+/g, " ");
+      expect(text).toMatch(/precio de lanzamiento[^.]*\$\s?6\.990 mensuales[^.]*12 meses/i);
+      expect(text).not.toMatch(/sin cobro de suscripci[oó]n/i);
+    });
   });
 
   describe("SEO/crawling files", () => {
@@ -123,7 +131,9 @@ describe("build output", () => {
       expect(text).not.toMatch(/gratis|gratuito|cupos limitados|terapeutas reales/i);
       expect(text).not.toMatch(/\bcertificad[oa]s?\b/i);
       expect(text).not.toMatch(/\bcumple con\b|\bconforme a la ley\b/i);
-      expect(text).not.toMatch(/\b6\.?990\b|\b12\.?990\b/);
+      // the only published price is the launch price, and only in the Terms (see below)
+      expect(text).not.toMatch(/\b12\.?990\b/);
+      if (page !== "terminos/index.html") expect(text).not.toMatch(/\b6\.?990\b/);
     });
 
     it.each(pages)("%s only mentions certification to deny it", (page) => {
