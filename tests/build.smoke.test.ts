@@ -48,6 +48,19 @@ describe("build output", () => {
     it("never leaks the plain contact email into the HTML source", () => {
       expect(html()).not.toContain("contacto@groundzerodevs.com");
     });
+
+    it("describes the credential storage the backend really does", () => {
+      const text = html()
+        .replace(/<[^>]+>/g, " ")
+        .replace(/\s+/g, " ");
+      // only the refresh token is persisted, with AES-256-GCM; the access token never is
+      expect(text).toContain("token de actualización");
+      expect(text).toContain("AES-256-GCM");
+      expect(text).toMatch(/token de acceso[^.]*no se guarda/i);
+      expect(text).not.toMatch(/AES-GCM(?!\w)/);
+      expect(text).not.toMatch(/ni transmite en texto plano/i);
+      expect(text).not.toMatch(/revoca el token de acceso/i);
+    });
   });
 
   describe("general privacy policy page", () => {
