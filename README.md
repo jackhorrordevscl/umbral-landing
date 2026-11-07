@@ -4,7 +4,7 @@ Landing page de Umbral, el sistema de fichas clínicas para terapeutas que atien
 
 ## Stack
 
-- [Astro](https://astro.build) 5
+- [Astro](https://astro.build) 7
 - [Tailwind CSS](https://tailwindcss.com) v4
 - TypeScript (`strict`, vía `astro/tsconfigs/strict`)
 
@@ -37,7 +37,7 @@ El sitio queda disponible en `http://localhost:4321`.
 
 ## CI
 
-Cada push/PR a `master` corre `format:check`, `lint`, `check`, `build` y `test` vía GitHub Actions (`.github/workflows/ci.yml`).
+Cada push/PR a `master` corre `format:check`, `lint`, `check`, `build` y `test` vía GitHub Actions (`.github/workflows/ci.yml`). Un job aparte (`audit`) corre `npm audit --omit=dev --audit-level=high` y falla si algo que llega a producción tiene un aviso alto o crítico.
 
 ## Deploy
 

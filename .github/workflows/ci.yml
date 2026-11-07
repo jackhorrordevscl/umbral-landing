@@ -24,3 +24,18 @@ jobs:
       - run: npm run check
       - run: npm run build
       - run: npm run test
+
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+
+      - run: npm ci
+
+      # what ships to production must stay free of high/critical advisories
+      - run: npm audit --omit=dev --audit-level=high
