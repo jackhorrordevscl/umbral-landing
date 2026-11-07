@@ -4,7 +4,7 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 /* self-hosted — avoids the render-blocking round-trip to fonts.googleapis.com
-   and only includes the weights actually used (400/500 sans, roman/italic serif) */
+   and only includes the weights actually used (400/500 sans, roman/italic serif, 400 mono) */
 @font-face {
   font-family: "DM Sans";
   font-style: normal;
@@ -38,6 +38,14 @@
 }
 
 @font-face {
+  font-family: "IBM Plex Mono";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("/fonts/ibm-plex-mono-400.woff2") format("woff2");
+}
+
+@font-face {
   font-family: "DM Serif Display";
   font-style: italic;
   font-weight: 400;
@@ -67,11 +75,22 @@
 
   --font-display: "DM Serif Display", ui-serif, Georgia, serif;
   --font-sans: "DM Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, "Cascadia Mono", Consolas, monospace;
+
+  /* the one warm note: used only for what was superseded in a record */
+  --color-ink-red: #9b3a22;
 }
 
 @layer base {
   html {
     scroll-behavior: smooth;
+    /* anchors land below the sticky header instead of under it */
+    scroll-padding-top: 5rem;
+    color-scheme: light;
+  }
+
+  html.dark {
+    color-scheme: dark;
   }
 
   body {
@@ -98,9 +117,18 @@
     color: var(--color-cream-50);
   }
 
+  /* long scope URLs in the legal pages must wrap instead of widening the page */
+  code {
+    overflow-wrap: anywhere;
+  }
+
   :focus-visible {
     outline: 2px solid var(--color-sage-500);
     outline-offset: 3px;
+  }
+
+  .dark :focus-visible {
+    outline-color: var(--color-sage-300);
   }
 
   @media (prefers-reduced-motion: reduce) {
@@ -113,103 +141,66 @@
     *::after {
       animation-duration: 0.01ms !important;
       animation-iteration-count: 1 !important;
+      scroll-behavior: auto !important;
       transition-duration: 0.01ms !important;
     }
   }
 }
 
 @layer components {
-  /* the exact diagonal used behind the logo on the app's own login screen */
-  .brand-gradient {
-    background: linear-gradient(135deg, #0f172a 0%, #1a2e1a 50%, #0f2318 100%);
+  /* the wordmark is cream on transparent, so it is drawn as a mask and takes
+     the text colour of the theme instead of sitting on a dark plate. Only the
+     top of the artwork is shown: the tagline underneath is unreadable at
+     header size. */
+  .logo-mark {
+    display: block;
+    width: 6.25rem;
+    aspect-ratio: 490 / 150;
+    background-color: currentColor;
+    -webkit-mask: url("/logo.svg") top center / 100% auto no-repeat;
+    mask: url("/logo.svg") top center / 100% auto no-repeat;
   }
 
-  /* faint grid, masked to fade toward the section edges — fills the empty
-     side margins of centered sections without competing with content */
-  .section-texture {
-    position: absolute;
-    inset: 0;
-    z-index: 0;
-    pointer-events: none;
-    background-image:
-      linear-gradient(var(--color-sage-200) 1px, transparent 1px),
-      linear-gradient(90deg, var(--color-sage-200) 1px, transparent 1px);
-    background-size: 56px 56px;
-    background-position: center;
-    opacity: 0.5;
-    mask-image: radial-gradient(ellipse 90% 95% at center, black 35%, transparent 95%);
+  /* section marker: a ledger-style index instead of a centred eyebrow */
+  .marker {
+    font-family: var(--font-mono);
+    font-size: 0.8125rem;
+    letter-spacing: 0.04em;
+    color: var(--color-sage-700);
   }
 
-  .dark .section-texture {
-    background-image:
-      linear-gradient(var(--color-slate-800) 1px, transparent 1px),
-      linear-gradient(90deg, var(--color-slate-800) 1px, transparent 1px);
+  .dark .marker {
+    color: var(--color-sage-300);
   }
 
-  /* section identity accent — vertical hairlines + one oversized, faint
-     display-face word — reserved for sections that should stand apart */
-  .section-decor::before,
-  .section-decor::after {
-    content: "";
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    width: 1px;
-    z-index: 0;
-    background: linear-gradient(
-      to bottom,
-      transparent,
-      var(--color-sage-200) 15%,
-      var(--color-sage-200) 85%,
-      transparent
-    );
+  .rule {
+    border-color: color-mix(in srgb, var(--color-slate-900) 18%, transparent);
   }
 
-  .section-decor::before {
-    left: 8%;
+  .dark .rule {
+    border-color: color-mix(in srgb, var(--color-cream-100) 16%, transparent);
   }
 
-  .section-decor::after {
-    right: 8%;
+  /* the record in the hero: ruled paper, no card chrome */
+  .paper {
+    background-color: var(--color-cream-50);
+    border: 1px solid color-mix(in srgb, var(--color-slate-900) 22%, transparent);
+    box-shadow: 6px 6px 0 color-mix(in srgb, var(--color-slate-900) 90%, transparent);
   }
 
-  .dark .section-decor::before,
-  .dark .section-decor::after {
-    background: linear-gradient(
-      to bottom,
-      transparent,
-      var(--color-slate-800) 15%,
-      var(--color-slate-800) 85%,
-      transparent
-    );
+  .dark .paper {
+    background-color: var(--color-slate-900);
+    border-color: color-mix(in srgb, var(--color-cream-100) 30%, transparent);
+    box-shadow: 6px 6px 0 var(--color-sage-700);
   }
 
-  .section-decor-blob {
-    position: absolute;
-    z-index: 0;
-    pointer-events: none;
-    border-radius: 9999px;
-    background: radial-gradient(circle, var(--color-sage-400) 0%, transparent 70%);
-    opacity: 0.12;
+  .superseded {
+    color: var(--color-ink-red);
+    text-decoration: line-through;
+    text-decoration-thickness: 1px;
   }
 
-  .section-decor-word {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    font-family: var(--font-display);
-    font-style: italic;
-    font-size: clamp(6rem, 14vw, 11rem);
-    line-height: 1;
-    color: var(--color-sage-500);
-    opacity: 0.08;
-    z-index: 0;
-    pointer-events: none;
-    user-select: none;
-    white-space: nowrap;
-  }
-
-  .dark .section-decor-word {
-    opacity: 0.06;
+  .dark .superseded {
+    color: #e08a70;
   }
 }

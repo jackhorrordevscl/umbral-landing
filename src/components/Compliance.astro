@@ -1,72 +1,51 @@
 ---
-const ledger = [
-  {
-    law: "Ley 20.584 · Art. 12",
-    title: "Custodia de 15 años",
-    body: "La ficha de un paciente nunca desaparece de golpe: no se borra físicamente y cuenta con respaldos diarios cifrados fuera de la plataforma principal, pensado para los 15 años de custodia que exige la ley.",
-  },
+// What Umbral does, law by law. Facts that already live in "Funcionalidades" are not repeated here.
+const laws = [
   {
     law: "Ley 20.584",
-    title: "Nada se reescribe",
-    body: "Si corriges una consulta, se guarda como una versión nueva. El registro original queda intacto, nunca se sobrescribe.",
+    scope: "Derechos y deberes de los pacientes · Art. 12",
+    body: "Conservamos cada ficha 15 años: no se borra físicamente y cuenta con respaldos diarios cifrados fuera de la plataforma principal.",
   },
   {
     law: "Ley 19.628",
-    title: "Secreto profesional",
+    scope: "Protección de la vida privada",
     body: "Cada profesional ve únicamente a sus propios pacientes. Los documentos clínicos y los textos de consultas e informes de alta se almacenan cifrados (AES-256-GCM).",
   },
   {
     law: "Ley 21.719",
-    title: "Consentimiento que no se borra",
-    body: "Cada consentimiento que un paciente otorga o revoca (para tratamiento, para telemedicina) queda anotado en un historial permanente — nunca se elimina.",
-  },
-  {
-    law: "Ley 21.719",
-    title: "Registro de accesos",
-    body: "Umbral mantiene un registro de auditoría que no se puede modificar ni borrar.",
-  },
-  {
-    law: "Ley 20.584 · Art. 12",
-    title: "Recuperación sin depender de soporte",
-    body: "Si olvidas tu contraseña o pierdes tu dispositivo de verificación, recuperas el acceso tú mismo con tus códigos de recuperación de un solo uso. Tu ficha nunca queda huérfana.",
+    scope: "Protección de datos personales · en vigencia desde el 1 de diciembre de 2026",
+    body: "Los consentimientos quedan en un historial permanente y el registro de auditoría no se puede modificar. Umbral se prepara para estar listo cuando la ley entre en vigencia.",
   },
 ];
 ---
 
-<section
-  id="cumplimiento"
-  class="relative overflow-hidden border-t border-sage-200 bg-cream-100 px-6 py-20 sm:px-10 dark:border-slate-800 dark:bg-slate-950"
->
-  <div class="section-texture" aria-hidden="true"></div>
-  <div class="relative z-10 mx-auto max-w-3xl text-center">
-    <p class="font-sans text-xs font-medium uppercase tracking-[0.3em] text-sage-600 dark:text-sage-400">
-      No es un checkbox de marketing
-    </p>
-    <h2 class="mt-4 font-display text-4xl leading-tight tracking-tight text-slate-900 sm:text-5xl dark:text-cream-50">
-      Construido sobre la ley,<br />no alrededor de ella.
-    </h2>
-    <p
-      class="mx-auto mt-6 max-w-xl text-balance font-sans text-base leading-relaxed text-slate-600 dark:text-slate-400"
+<section id="marco-legal" class="rule border-t bg-cream-100 px-6 py-20 sm:px-10 sm:py-28 dark:bg-slate-950">
+  <div class="mx-auto max-w-6xl">
+    <p class="marker">§ 04 · Marco legal</p>
+    <h2
+      class="mt-5 max-w-3xl font-display text-4xl leading-[1.08] tracking-tight text-slate-950 sm:text-5xl dark:text-cream-50"
     >
-      Umbral está diseñado para alinearse con la Ley 20.584 (Derechos y Deberes de los Pacientes) y la Ley 19.628
-      (Protección de la Vida Privada), y para estar listo cuando entre en vigencia la Ley 21.719 de Protección de Datos
-      Personales, el 1 de diciembre de 2026. No es una certificación ni una validación legal.
+      Pensado para alinearse con tres leyes chilenas.
+    </h2>
+
+    <ul class="rule mt-14 border-t">
+      {
+        laws.map((row) => (
+          <li class="rule grid gap-x-10 gap-y-3 border-b py-7 md:grid-cols-[20rem_1fr]">
+            <div>
+              <p class="font-mono text-lg text-sage-700 dark:text-sage-300">{row.law}</p>
+              <p class="mt-1 max-w-xs font-sans text-sm leading-relaxed text-slate-700 dark:text-slate-300">
+                {row.scope}
+              </p>
+            </div>
+            <p class="font-display text-xl leading-snug text-slate-950 dark:text-cream-50">{row.body}</p>
+          </li>
+        ))
+      }
+    </ul>
+
+    <p class="mt-8 max-w-2xl font-sans text-sm leading-relaxed text-slate-700 dark:text-slate-300">
+      Esto describe lo que Umbral hace, no certifica nada: no es una certificación ni una validación legal.
     </p>
   </div>
-
-  <dl
-    class="relative z-10 mx-auto mt-16 max-w-3xl divide-y divide-sage-200 border-y border-sage-200 dark:divide-slate-800 dark:border-slate-800"
-  >
-    {
-      ledger.map((row) => (
-        <div class="grid grid-cols-1 gap-x-8 gap-y-1 py-6 sm:grid-cols-[10rem_1fr] sm:items-baseline">
-          <dt class="shrink-0 font-mono text-base uppercase tracking-wider text-sage-600 sm:row-span-2 dark:text-sage-400">
-            {row.law}
-          </dt>
-          <dd class="font-display text-xl text-slate-900 dark:text-cream-50">{row.title}</dd>
-          <dd class="font-sans text-base leading-relaxed text-slate-600 dark:text-slate-400">{row.body}</dd>
-        </div>
-      ))
-    }
-  </dl>
 </section>

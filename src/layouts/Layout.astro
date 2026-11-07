@@ -8,8 +8,32 @@ interface Props {
 
 const {
   title = "Umbral — Fichas clínicas para terapeutas independientes",
-  description = "Umbral es la ficha clínica para terapeutas que atienden por su cuenta: agenda pública, cobro en línea, recordatorios, doble verificación y textos y documentos clínicos cifrados, diseñado para alinearse con la ley chilena. Acceso anticipado por invitación.",
+  description = "Umbral es la ficha clínica para terapeutas que atienden por su cuenta: agenda, cobro en línea y recordatorios. Acceso anticipado por invitación.",
 } = Astro.props;
+
+const pageUrl = new URL(Astro.url.pathname, Astro.site);
+const ogImage = new URL("/og-image.png", Astro.site);
+const ogAlt = "Umbral: ficha clínica para terapeutas que atienden por su cuenta";
+
+const structuredData = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": new URL("/#org", Astro.site).href,
+      name: "Ground Zero Devs",
+      url: "https://groundzerodevs.com",
+    },
+    {
+      "@type": "WebSite",
+      "@id": new URL("/#site", Astro.site).href,
+      name: "Umbral",
+      url: new URL("/", Astro.site).href,
+      inLanguage: "es-CL",
+      publisher: { "@id": new URL("/#org", Astro.site).href },
+    },
+  ],
+};
 ---
 
 <!doctype html>
@@ -19,23 +43,41 @@ const {
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="description" content={description} />
-    <link rel="canonical" href={new URL(Astro.url.pathname, Astro.site)} />
+    <meta name="theme-color" content="#faf8f0" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#0a0f1e" media="(prefers-color-scheme: dark)" />
+    <link rel="canonical" href={pageUrl} />
     <title>{title}</title>
+
+    <!-- the two faces above the fold are fetched with the HTML, not after the CSS -->
+    <link rel="preload" href="/fonts/dm-serif-display.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/dm-sans-400.woff2" as="font" type="font/woff2" crossorigin />
 
     <meta property="og:type" content="website" />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
-    <meta property="og:url" content={new URL(Astro.url.pathname, Astro.site)} />
-    <meta property="og:image" content={new URL("/og-image.png", Astro.site)} />
+    <meta property="og:url" content={pageUrl} />
+    <meta property="og:site_name" content="Umbral" />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content={ogAlt} />
     <meta property="og:locale" content="es_CL" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
-    <meta name="twitter:image" content={new URL("/og-image.png", Astro.site)} />
+    <meta name="twitter:image" content={ogImage} />
+    <meta name="twitter:image:alt" content={ogAlt} />
+    <script is:inline type="application/ld+json" set:html={JSON.stringify(structuredData)} />
 
     <script is:inline>
       // runs before first paint to avoid a light/dark flash
-      const stored = localStorage.getItem("umbral-theme");
+      let stored = null;
+      try {
+        // storage can throw (blocked cookies, sandboxed frames): fall back to the OS preference
+        stored = localStorage.getItem("umbral-theme");
+      } catch {
+        stored = null;
+      }
       const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
       if (stored === "dark" || (!stored && prefersDark)) {
         document.documentElement.classList.add("dark");
@@ -52,13 +94,14 @@ const {
     <slot />
 
     <script>
-      // builds mailto hrefs at runtime so the plain address never sits in the HTML source
+      // builds mailto hrefs at runtime so the plain address never sits in the HTML source.
+      // Links marked data-mailto-show also swap their spelled-out fallback for the real address.
       document.querySelectorAll("[data-mailto-user]").forEach((el) => {
         const user = el.getAttribute("data-mailto-user");
         const domain = el.getAttribute("data-mailto-domain");
         if (!user || !domain) return;
         el.setAttribute("href", `mailto:${user}@${domain}`);
-        if (!el.textContent?.trim()) el.textContent = `${user}@${domain}`;
+        if (el.hasAttribute("data-mailto-show")) el.textContent = `${user}@${domain}`;
       });
     </script>
   </body>

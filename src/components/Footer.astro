@@ -1,44 +1,55 @@
 ---
 const year = new Date().getFullYear();
+
+const legal = [
+  { href: "/privacidad-general/", label: "Política de privacidad" },
+  { href: "/terminos/", label: "Términos de servicio" },
+  { href: "/privacidad-google-calendar/", label: "Privacidad de Google Calendar" },
+];
 ---
 
-<footer class="border-t border-sage-200 bg-cream-200 px-6 py-10 sm:px-10 dark:border-slate-800 dark:bg-slate-950">
-  <div class="mx-auto flex max-w-5xl flex-col items-center justify-between gap-4 text-center sm:flex-row sm:text-left">
-    <a href="#top" class="flex items-center gap-2">
-      <span class="brand-gradient flex items-center rounded-lg px-3 py-1.5">
-        <img src="/logo.svg" alt="Umbral" width="490" height="247" class="h-6 w-auto" />
-      </span>
-    </a>
-    <p class="font-sans text-xs text-slate-600 dark:text-slate-400">
-      Umbral © {year}. Todos los derechos reservados.
-    </p>
-    <a
-      href="#cumplimiento"
-      class="font-mono text-sm uppercase tracking-[0.15em] text-slate-600 underline decoration-slate-400 underline-offset-4 transition-colors hover:text-slate-900 dark:text-slate-400 dark:decoration-slate-600 dark:hover:text-cream-100"
-    >
-      Ver cumplimiento legal
-    </a>
+<footer class="rule border-t bg-cream-200 px-6 py-12 sm:px-10 dark:bg-slate-950">
+  <div class="mx-auto grid max-w-6xl gap-10 lg:grid-cols-12 lg:gap-10">
+    <div class="lg:col-span-5">
+      <a href="/" class="inline-flex text-slate-900 dark:text-cream-50" aria-label="Umbral, inicio">
+        <span class="logo-mark" role="img" aria-hidden="true"></span>
+      </a>
+      <p class="mt-4 max-w-xs font-sans text-sm leading-relaxed text-slate-700 dark:text-slate-300">
+        La ficha clínica para terapeutas que atienden por su cuenta.
+      </p>
+    </div>
+
+    <nav aria-label="Legal y marco normativo" class="lg:col-span-7">
+      <ul
+        class="flex flex-col gap-1 font-sans text-sm text-slate-700 sm:flex-row sm:flex-wrap sm:gap-x-8 dark:text-slate-300"
+      >
+        <li>
+          <a
+            href="/#marco-legal"
+            class="inline-block py-2 underline decoration-slate-500 underline-offset-4 hover:text-slate-950 dark:hover:text-cream-50"
+            >Marco legal</a
+          >
+        </li>
+        {
+          legal.map((link) => (
+            <li>
+              <a
+                href={link.href}
+                class="inline-block py-2 underline decoration-slate-500 underline-offset-4 hover:text-slate-950 dark:hover:text-cream-50"
+              >
+                {link.label}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </nav>
   </div>
-  <p
-    class="mt-6 flex flex-wrap items-center justify-center gap-x-3 gap-y-1 text-center font-sans text-xs text-slate-600 dark:text-slate-400"
+
+  <div
+    class="rule mx-auto mt-10 flex max-w-6xl flex-col justify-between gap-2 border-t pt-6 font-sans text-xs text-slate-700 sm:flex-row dark:text-slate-300"
   >
-    <a
-      href="/privacidad-general"
-      class="underline decoration-slate-400 underline-offset-4 hover:text-slate-900 dark:decoration-slate-600 dark:hover:text-cream-100"
-      >Política de privacidad</a
-    >
-    <span aria-hidden="true">·</span>
-    <a
-      href="/terminos"
-      class="underline decoration-slate-400 underline-offset-4 hover:text-slate-900 dark:decoration-slate-600 dark:hover:text-cream-100"
-      >Términos de servicio</a
-    >
-    <span aria-hidden="true">·</span>
-    <a
-      href="/privacidad-google-calendar"
-      class="underline decoration-slate-400 underline-offset-4 hover:text-slate-900 dark:decoration-slate-600 dark:hover:text-cream-100"
-      >Privacidad — Google Calendar</a
-    >
-  </p>
-  <p class="mt-2 text-center font-sans text-xs text-slate-600 dark:text-slate-400">Desarrollado por Ground Zero Devs</p>
+    <p>Umbral © {year}. Todos los derechos reservados.</p>
+    <p>Desarrollado por Ground Zero Devs</p>
+  </div>
 </footer>
