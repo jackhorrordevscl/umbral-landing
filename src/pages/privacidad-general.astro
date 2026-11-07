@@ -2,7 +2,7 @@
 import Layout from "../layouts/Layout.astro";
 import Footer from "../components/Footer.astro";
 
-const lastUpdated = "8 de octubre de 2026";
+const lastUpdated = "7 de noviembre de 2026";
 ---
 
 <Layout
@@ -103,7 +103,7 @@ const lastUpdated = "8 de octubre de 2026";
         <p class="mt-3">
           El tratamiento de datos de cada paciente requiere el consentimiento informado del paciente, otorgado al
           terapeuta (fuera de la plataforma, como parte de su proceso clínico habitual). Dentro de Umbral, cada
-          finalidad de tratamiento (atención presencial, telemedicina) queda registrada en un ledger de consentimiento
+          finalidad de tratamiento (tratamiento y telemedicina) queda registrada en un ledger de consentimiento
           append-only: otorgar o revocar consentimiento queda escrito, nunca borrado.
         </p>
       </section>
@@ -115,7 +115,8 @@ const lastUpdated = "8 de octubre de 2026";
           Supabase, hospedada en São Paulo, Brasil. Los backups cifrados se almacenan de forma offsite en Backblaze B2,
           hospedado en Estados Unidos — el contenido viaja cifrado con AES-256 antes de subirse, por lo que Backblaze
           nunca tiene acceso al contenido en claro. El servidor de la aplicación, por donde pasan los datos mientras se
-          procesan, se aloja en Render, en la región de Oregón (Estados Unidos, costa oeste). El correo transaccional de
+          procesan, se aloja en Render, en la región de Oregón (Estados Unidos, costa oeste); el tráfico de la API pasa
+          por Cloudflare antes de llegar a Render, y la interfaz web se sirve desde Vercel. El correo transaccional de
           la cuenta del profesional se envía a través de Resend, también en Estados Unidos. Si el terapeuta activa el
           cobro en línea, el pago se procesa en Flow, cuyo checkout opera en Estados Unidos aunque la entidad
           contratante esté domiciliada en Chile. Si se activa el registro de errores técnicos, estos se envían a Sentry,
@@ -141,8 +142,10 @@ const lastUpdated = "8 de octubre de 2026";
           <li>
             <strong class="font-medium text-slate-900 dark:text-cream-50">Cifrado en tránsito</strong> (TLS) y <strong
               class="font-medium text-slate-900 dark:text-cream-50">en reposo</strong
-            >: documentos clínicos con AES-256, credenciales de integraciones externas (ej. token de Google Calendar)
-            con AES-GCM.
+            >: los documentos subidos y los textos clínicos libres (notas de consulta e informe de alta), junto con las
+            credenciales de integraciones externas (token de Google Calendar, credenciales de Flow) y el secreto del
+            segundo factor, se almacenan cifrados con AES-256-GCM. El nombre, el RUT y los datos de contacto del
+            paciente se guardan sin ese cifrado de aplicación.
           </li>
           <li>
             <strong class="font-medium text-slate-900 dark:text-cream-50">Aislamiento entre profesionales</strong> aplicado
@@ -192,7 +195,10 @@ const lastUpdated = "8 de octubre de 2026";
               <tr>
                 <td class="py-2 pr-4 align-top">Supabase</td>
                 <td class="py-2 pr-4 align-top">Base de datos y hosting</td>
-                <td class="py-2 align-top">Todos los datos operativos (los lee en claro, por necesidad operativa)</td>
+                <td class="py-2 align-top">
+                  Todos los datos operativos. Los textos clínicos y los documentos llegan cifrados por la aplicación; el
+                  resto, como nombre, RUT y contacto, no
+                </td>
               </tr>
               <tr>
                 <td class="py-2 pr-4 align-top">Backblaze B2</td>
@@ -204,12 +210,33 @@ const lastUpdated = "8 de octubre de 2026";
               <tr>
                 <td class="py-2 pr-4 align-top">Resend</td>
                 <td class="py-2 pr-4 align-top">Envío de correo transaccional</td>
-                <td class="py-2 align-top">Solo nombre y correo del terapeuta — nunca datos de pacientes</td>
+                <td class="py-2 align-top">
+                  Nombre y correo del terapeuta. Si corresponde, también nombre y correo del paciente o de su
+                  representante legal, y montos y fechas de sesiones, para los cobros y los avisos de cancelación. Los
+                  correos no incluyen contenido de la ficha clínica
+                </td>
               </tr>
               <tr>
                 <td class="py-2 pr-4 align-top">Render</td>
                 <td class="py-2 pr-4 align-top">Alojamiento del servidor de la aplicación</td>
                 <td class="py-2 align-top">Procesa los datos que pasan por el servidor de la aplicación</td>
+              </tr>
+              <tr>
+                <td class="py-2 pr-4 align-top">Cloudflare</td>
+                <td class="py-2 pr-4 align-top">Red delante del servidor de la aplicación</td>
+                <td class="py-2 align-top">Por ahí pasa el tráfico de la API antes de llegar a Render</td>
+              </tr>
+              <tr>
+                <td class="py-2 pr-4 align-top">Vercel</td>
+                <td class="py-2 pr-4 align-top">Alojamiento de la interfaz web</td>
+                <td class="py-2 align-top">Sirve la aplicación web a tu navegador</td>
+              </tr>
+              <tr>
+                <td class="py-2 pr-4 align-top">Google Fonts</td>
+                <td class="py-2 pr-4 align-top">Tipografías de la aplicación</td>
+                <td class="py-2 align-top">
+                  Tu navegador descarga las tipografías desde servidores de Google al cargar la aplicación
+                </td>
               </tr>
               <tr>
                 <td class="py-2 pr-4 align-top">Flow (opcional)</td>
@@ -295,6 +322,11 @@ const lastUpdated = "8 de octubre de 2026";
           Umbral permite al terapeuta registrar a los representantes legales del paciente menor de edad y su
           consentimiento. Esos datos se tratan con las mismas reglas de esta política y forman parte de la ficha del
           paciente: el responsable de ellos frente a la ley es el terapeuta.
+        </p>
+        <p class="mt-3">
+          Se pueden registrar hasta dos representantes legales por paciente y el asentimiento del niño, niña o
+          adolescente, que nunca reemplaza el consentimiento del representante. Los cobros y avisos de un paciente menor
+          de edad se dirigen a sus representantes, no a su correo.
         </p>
       </section>
 
