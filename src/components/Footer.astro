@@ -49,7 +49,12 @@ const legal = [
   <div
     class="rule mx-auto mt-10 flex max-w-6xl flex-col justify-between gap-2 border-t pt-6 font-sans text-xs text-slate-700 sm:flex-row dark:text-slate-300"
   >
-    <p>Umbral © {year}. Todos los derechos reservados.</p>
+    <p>Umbral © <span id="footer-year">{year}</span>. Todos los derechos reservados.</p>
     <p>Desarrollado por Ground Zero Devs</p>
   </div>
 </footer>
+
+<script is:inline>
+  // the build year goes stale until the next deploy; the visitor's clock does not
+  document.getElementById("footer-year").textContent = String(new Date().getFullYear());
+</script>

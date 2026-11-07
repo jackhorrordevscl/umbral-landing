@@ -8,7 +8,8 @@ import sitemap from "@astrojs/sitemap";
 
 // Inline scripts are allowed by hash instead of `unsafe-inline`: after the build, every
 // page gets a <meta> CSP listing the sha256 of the inline scripts it actually contains.
-// (frame-ancestors cannot be set from a meta tag; vercel.json sends it as a header.)
+// Styles are only allowed from our own files. (frame-ancestors cannot be set from a meta
+// tag; vercel.json sends it as a header.)
 function cspHashes() {
   const inlineScript = /<script(?![^>]*\bsrc=)(?![^>]*type="application\/ld\+json")[^>]*>([\s\S]*?)<\/script>/g;
 
@@ -33,7 +34,7 @@ function cspHashes() {
           const policy = [
             "default-src 'self'",
             `script-src 'self' ${[...new Set(hashes)].join(" ")}`.trim(),
-            "style-src 'self' 'unsafe-inline'",
+            "style-src 'self'",
             "img-src 'self' data:",
             "font-src 'self'",
             "connect-src 'self'",
@@ -56,6 +57,8 @@ function cspHashes() {
 export default defineConfig({
   site: "https://umbral.groundzerodevs.com",
   trailingSlash: "always",
+  // styles stay in external files so the CSP can drop unsafe-inline for style-src
+  build: { inlineStylesheets: "never" },
   integrations: [sitemap(), cspHashes()],
   vite: {
     plugins: [tailwindcss()],
