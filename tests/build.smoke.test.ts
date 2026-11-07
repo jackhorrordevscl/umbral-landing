@@ -1,4 +1,5 @@
-import { existsSync, readFileSync } from "node:fs";
+import { createHash } from "node:crypto";
+import { existsSync, readdirSync, readFileSync } from "node:fs";
 import { resolve } from "node:path";
 import { describe, expect, it } from "vitest";
 
@@ -18,7 +19,7 @@ describe("build output", () => {
     it("renders the skip link target and every nav anchor section", () => {
       const content = html();
       expect(content).toContain('id="main-content"');
-      for (const id of ["capturas", "funcionalidades", "cumplimiento", "acceso"]) {
+      for (const id of ["capturas", "funcionalidades", "marco-legal", "acceso"]) {
         expect(content).toContain(`id="${id}"`);
       }
     });
@@ -99,6 +100,151 @@ describe("build output", () => {
       expect(content).toContain(`<loc>${SITE}/privacidad-google-calendar/</loc>`);
       expect(content).toContain(`<loc>${SITE}/privacidad-general/</loc>`);
       expect(content).toContain(`<loc>${SITE}/terminos/</loc>`);
+    });
+  });
+
+  describe("copy rules", () => {
+    const pages = [
+      "index.html",
+      "privacidad-general/index.html",
+      "privacidad-google-calendar/index.html",
+      "terminos/index.html",
+      "404.html",
+    ];
+    // visible text only: scripts, styles and tags are dropped
+    const textOf = (path: string) =>
+      readDist(path)
+        .replace(/<(script|style|noscript)[\s\S]*?<\/\1>/g, " ")
+        .replace(/<[^>]+>/g, " ")
+        .replace(/&nbsp;|\s+/g, " ");
+
+    it.each(pages)("%s makes none of the claims we cannot back up", (page) => {
+      const text = textOf(page);
+      expect(text).not.toMatch(/gratis|gratuito|cupos limitados|terapeutas reales/i);
+      expect(text).not.toMatch(/\bcertificad[oa]s?\b/i);
+      expect(text).not.toMatch(/\bcumple con\b|\bconforme a la ley\b/i);
+      expect(text).not.toMatch(/\b6\.?990\b|\b12\.?990\b/);
+    });
+
+    it.each(pages)("%s only mentions certification to deny it", (page) => {
+      for (const match of textOf(page).matchAll(/certificación/gi)) {
+        const before = textOf(page)
+          .slice(Math.max(0, match.index - 12), match.index)
+          .toLowerCase();
+        expect(before).toMatch(/no es una $|no una $/);
+      }
+    });
+
+    it("every access button reads 'Solicita tu acceso'", () => {
+      const content = readDist("index.html");
+      expect(content).not.toContain("Solicitar acceso");
+      expect(content.match(/>\s*Solicita tu acceso\s*</g)?.length).toBeGreaterThanOrEqual(4);
+    });
+
+    it("never says 'Cumplimiento legal' as a section label", () => {
+      expect(textOf("index.html")).not.toMatch(/Cumplimiento legal/i);
+    });
+  });
+
+  describe("links", () => {
+    const pages = [
+      "index.html",
+      "privacidad-general/index.html",
+      "privacidad-google-calendar/index.html",
+      "terminos/index.html",
+      "404.html",
+    ];
+    const ids = (html: string) => new Set([...html.matchAll(/\sid="([^"]+)"/g)].map((m) => m[1]));
+    const home = () => readDist("index.html");
+
+    it.each(pages)("%s: every in-page and home anchor points at an element that exists", (page) => {
+      const html = readDist(page);
+      const here = ids(html);
+      const homeIds = ids(home());
+      for (const [, hash] of html.matchAll(/href="#([^"]+)"/g)) {
+        if (hash === "") continue; // mailto placeholders, filled at runtime
+        expect(here.has(hash), `${page} -> #${hash}`).toBe(true);
+      }
+      for (const [, hash] of html.matchAll(/href="\/#([^"]+)"/g)) {
+        expect(homeIds.has(hash), `${page} -> /#${hash}`).toBe(true);
+      }
+    });
+
+    it("legal pages never link to anchors that only exist on the home page", () => {
+      for (const page of pages.slice(1, 4)) {
+        const html = readDist(page);
+        expect(html, page).not.toMatch(/href="#(top|cumplimiento|capturas|funcionalidades|marco-legal|acceso)"/);
+      }
+    });
+
+    it("legal pages give a readable contact fallback without exposing the address", () => {
+      for (const page of pages.slice(1, 4)) {
+        const html = readDist(page);
+        expect(html, page).toContain("contacto (arroba) groundzerodevs (punto) com");
+        expect(html, page).not.toMatch(/data-mailto-user="contacto"[^>]*>\s*<\/a>/);
+      }
+    });
+  });
+
+  describe("accessibility structure", () => {
+    it("the screenshot viewer is a keyboard-operable tablist, not a scrollable region", () => {
+      const html = readDist("index.html");
+      expect(html).toContain('role="tablist"');
+      expect(html).not.toContain('id="showcase-track"');
+      expect(html.match(/role="tab"/g)?.length).toBe(7);
+      expect(html.match(/role="tabpanel"/g)?.length).toBe(7);
+    });
+
+    it("both navigation landmarks are named", () => {
+      const html = readDist("index.html");
+      expect(html.match(/<nav[^>]*aria-label="Principal"/g)?.length).toBe(2);
+    });
+  });
+
+  describe("security", () => {
+    const pages = [
+      "index.html",
+      "privacidad-general/index.html",
+      "privacidad-google-calendar/index.html",
+      "terminos/index.html",
+      "404.html",
+    ];
+
+    it.each(pages)("%s carries a CSP that allows exactly its inline scripts by hash", (page) => {
+      const html = readDist(page);
+      const policy = html.match(/<meta http-equiv="Content-Security-Policy" content="([^"]+)"/)?.[1] ?? "";
+      expect(policy).toContain("default-src 'self'");
+      expect(policy).not.toMatch(/script-src[^;]*'unsafe-inline'/);
+      const inline = [...html.matchAll(/<script(?![^>]*\bsrc=)(?![^>]*ld\+json)[^>]*>([\s\S]*?)<\/script>/g)].filter(
+        (m) => m[1].trim() !== "",
+      );
+      for (const [, body] of inline) {
+        expect(policy).toContain(`'sha256-${createHash("sha256").update(body).digest("base64")}'`);
+      }
+    });
+
+    it("vercel.json sends the hardening headers and a trailing-slash policy", () => {
+      const config = JSON.parse(readFileSync(resolve(__dirname, "..", "vercel.json"), "utf-8"));
+      const all = config.headers.find((h: { source: string }) => h.source === "/(.*)").headers as { key: string }[];
+      const keys = all.map((h) => h.key);
+      for (const key of [
+        "X-Content-Type-Options",
+        "X-Frame-Options",
+        "Referrer-Policy",
+        "Permissions-Policy",
+        "Content-Security-Policy",
+      ]) {
+        expect(keys).toContain(key);
+      }
+      expect(config.trailingSlash).toBe(true);
+    });
+
+    it("preloads the two above-the-fold fonts that exist on disk", () => {
+      const html = readDist("index.html");
+      for (const font of ["dm-serif-display.woff2", "dm-sans-400.woff2"]) {
+        expect(html).toContain(`href="/fonts/${font}"`);
+        expect(readdirSync(dist("fonts"))).toContain(font);
+      }
     });
   });
 });

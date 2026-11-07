@@ -1,5 +1,6 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 
 const lastUpdated = "7 de noviembre de 2026";
@@ -9,20 +10,10 @@ const lastUpdated = "7 de noviembre de 2026";
   title="Política de Privacidad | Umbral"
   description="Cómo Umbral trata los datos de terapeutas y pacientes: qué recopilamos, dónde se almacenan, cómo los protegemos, cuánto tiempo los conservamos y tus derechos."
 >
-  <header
-    class="border-b border-sage-200 bg-cream-100/90 px-6 py-4 backdrop-blur sm:px-10 dark:border-slate-800 dark:bg-slate-950/90"
-  >
-    <a href="/" class="flex items-center gap-2">
-      <span class="brand-gradient flex items-center rounded-lg px-3 py-1.5">
-        <img src="/logo.svg" alt="Umbral" width="490" height="247" class="h-6 w-auto" />
-      </span>
-    </a>
-  </header>
+  <Header />
 
   <main id="main-content" class="mx-auto max-w-3xl px-6 py-16 sm:px-10">
-    <p class="font-sans text-xs font-medium uppercase tracking-[0.3em] text-sage-600 dark:text-sage-400">
-      Política de privacidad
-    </p>
+    <p class="marker">Política de privacidad</p>
     <h1 class="mt-4 font-display text-4xl leading-tight tracking-tight text-slate-900 sm:text-5xl dark:text-cream-50">
       Cómo tratamos tus datos
     </h1>
@@ -34,7 +25,7 @@ const lastUpdated = "7 de noviembre de 2026";
       Esta política aplica al uso de Umbral, el sistema de fichas clínicas para terapeutas que atienden por su cuenta.
       Si usas la integración con Google Calendar, revisa también la
       <a
-        href="/privacidad-google-calendar"
+        href="/privacidad-google-calendar/"
         class="text-sage-600 underline decoration-sage-400 underline-offset-4 hover:text-sage-700 dark:text-sage-400 dark:hover:text-sage-300"
         >política específica de esa integración</a
       >.
@@ -52,8 +43,10 @@ const lastUpdated = "7 de noviembre de 2026";
             href="#"
             data-mailto-user="contacto"
             data-mailto-domain="groundzerodevs.com"
+            data-mailto-show
             class="text-sage-600 underline decoration-sage-400 underline-offset-4 hover:text-sage-700 dark:text-sage-400 dark:hover:text-sage-300"
-          ></a>.
+            >contacto (arroba) groundzerodevs (punto) com</a
+          >.
         </p>
         <p class="mt-3">
           Ground Zero Devs, a través de Umbral, actúa como <strong class="font-medium text-slate-900 dark:text-cream-50"
@@ -78,8 +71,8 @@ const lastUpdated = "7 de noviembre de 2026";
             identificación (nombre, RUT, datos de contacto), contacto de emergencia, médico o psiquiatra tratante si corresponde,
             y la ficha clínica propiamente tal (motivo de consulta, evolución de sesiones, documentos adjuntos) — todos clasificados
             como
-            <strong class="font-medium text-slate-900 dark:text-cream-50">dato sensible</strong> conforme la Ley 19.628 (y
-            su régimen reforzado bajo la Ley 21.719 desde su entrada en vigencia).
+            <strong class="font-medium text-slate-900 dark:text-cream-50">dato sensible</strong> según la Ley 19.628 (y su
+            régimen reforzado bajo la Ley 21.719 desde su entrada en vigencia).
           </li>
           <li>
             <strong class="font-medium text-slate-900 dark:text-cream-50">Metadatos técnicos de uso:</strong>
@@ -167,7 +160,7 @@ const lastUpdated = "7 de noviembre de 2026";
       <section>
         <h2 class="font-display text-2xl text-slate-900 dark:text-cream-50">6. Cuánto tiempo conservamos tus datos</h2>
         <p class="mt-3">
-          Conforme el Art. 12 de la Ley 20.584, la ficha clínica se conserva por un mínimo de 15 años. Umbral implementa
+          Según el Art. 12 de la Ley 20.584, la ficha clínica se conserva por un mínimo de 15 años. Umbral implementa
           esto con soft delete (la ficha no se borra físicamente) y respaldos diarios cifrados, almacenados fuera de la
           plataforma principal. Las correcciones a una consulta generan una versión nueva — el registro original nunca
           se sobrescribe.
@@ -258,7 +251,7 @@ const lastUpdated = "7 de noviembre de 2026";
                 <td class="py-2 pr-4 align-top">Sincronización de horarios</td>
                 <td class="py-2 align-top">
                   Ver <a
-                    href="/privacidad-google-calendar"
+                    href="/privacidad-google-calendar/"
                     class="text-sage-600 underline decoration-sage-400 underline-offset-4 hover:text-sage-700 dark:text-sage-400 dark:hover:text-sage-300"
                     >política específica</a
                   >
@@ -276,15 +269,17 @@ const lastUpdated = "7 de noviembre de 2026";
         <h2 class="font-display text-2xl text-slate-900 dark:text-cream-50">8. Tus derechos</h2>
         <p class="mt-3">
           Como titular de tus datos puedes solicitar acceso, rectificación, cancelación (supresión, según la Ley 21.719)
-          y oposición al tratamiento (derechos ARCO), conforme la Ley 19.628 actualmente vigente. A partir de la entrada
-          en vigencia de la Ley 21.719 (1 de diciembre de 2026), estos derechos se amplían e incluyen portabilidad. Para
+          y oposición al tratamiento (derechos ARCO), según la Ley 19.628 actualmente vigente. A partir de la entrada en
+          vigencia de la Ley 21.719 (1 de diciembre de 2026), estos derechos se amplían e incluyen portabilidad. Para
           ejercerlos, escríbenos a
           <a
             href="#"
             data-mailto-user="contacto"
             data-mailto-domain="groundzerodevs.com"
+            data-mailto-show
             class="text-sage-600 underline decoration-sage-400 underline-offset-4 hover:text-sage-700 dark:text-sage-400 dark:hover:text-sage-300"
-          ></a>.
+            >contacto (arroba) groundzerodevs (punto) com</a
+          >.
         </p>
         <p class="mt-3">
           Si eres paciente de un terapeuta que usa Umbral, tu punto de contacto para ejercer estos derechos es tu propio
@@ -298,14 +293,12 @@ const lastUpdated = "7 de noviembre de 2026";
         </h2>
         <p class="mt-3">
           Ante una vulneración de seguridad que afecte datos personales, notificaremos según lo exigido por la normativa
-          vigente — desde el 1 de diciembre de 2026, la Ley 21.719 exige notificar a la Agencia de Protección de Datos
-          Personales dentro de 72 horas desde tomar conocimiento del incidente — y, cuando corresponda, a los terapeutas
-          afectados.
+          vigente y, cuando corresponda, a los terapeutas afectados.
         </p>
       </section>
 
       <section>
-        <h2 class="font-display text-2xl text-slate-900 dark:text-cream-50">10. Certificación</h2>
+        <h2 class="font-display text-2xl text-slate-900 dark:text-cream-50">10. Sello RCE: trabajo en curso</h2>
         <p class="mt-3">
           Umbral está en proceso de alineación con los estándares del Sello RCE (Registro Clínico Electrónico) de CENS.
           Esto es una declaración de intención y trabajo en curso, no una certificación obtenida.
@@ -316,7 +309,7 @@ const lastUpdated = "7 de noviembre de 2026";
         <h2 class="font-display text-2xl text-slate-900 dark:text-cream-50">11. Menores de edad (NNA)</h2>
         <p class="mt-3">
           Cuando el paciente de un terapeuta es un niño, niña o adolescente, el consentimiento informado sigue el
-          proceso específico para NNA definido por el terapeuta tratante conforme a la normativa vigente.
+          proceso específico para NNA definido por el terapeuta tratante según la normativa vigente.
         </p>
         <p class="mt-3">
           Umbral permite al terapeuta registrar a los representantes legales del paciente menor de edad y su
@@ -345,8 +338,10 @@ const lastUpdated = "7 de noviembre de 2026";
             href="#"
             data-mailto-user="contacto"
             data-mailto-domain="groundzerodevs.com"
+            data-mailto-show
             class="text-sage-600 underline decoration-sage-400 underline-offset-4 hover:text-sage-700 dark:text-sage-400 dark:hover:text-sage-300"
-          ></a>
+            >contacto (arroba) groundzerodevs (punto) com</a
+          >
         </p>
       </section>
     </div>
