@@ -4,11 +4,13 @@ import "../styles/global.css";
 interface Props {
   title?: string;
   description?: string;
+  noindex?: boolean;
 }
 
 const {
   title = "Umbral — Fichas clínicas para terapeutas independientes",
   description = "Umbral es la ficha clínica para terapeutas que atienden por su cuenta: agenda, cobro en línea y recordatorios. Acceso anticipado por invitación.",
+  noindex = false,
 } = Astro.props;
 
 const pageUrl = new URL(Astro.url.pathname, Astro.site);
@@ -45,7 +47,7 @@ const structuredData = {
     <meta name="description" content={description} />
     <meta name="theme-color" content="#faf8f0" media="(prefers-color-scheme: light)" />
     <meta name="theme-color" content="#0a0f1e" media="(prefers-color-scheme: dark)" />
-    <link rel="canonical" href={pageUrl} />
+    {noindex ? <meta name="robots" content="noindex" /> : <link rel="canonical" href={pageUrl} />}
     <title>{title}</title>
 
     <!-- the two faces above the fold are fetched with the HTML, not after the CSS -->
@@ -55,7 +57,7 @@ const structuredData = {
     <meta property="og:type" content="website" />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
-    <meta property="og:url" content={pageUrl} />
+    {!noindex && <meta property="og:url" content={pageUrl} />}
     <meta property="og:site_name" content="Umbral" />
     <meta property="og:image" content={ogImage} />
     <meta property="og:image:width" content="1200" />
