@@ -30,7 +30,7 @@ describe("build output", () => {
     });
 
     it("never leaks the plain contact email into the HTML source", () => {
-      expect(html()).not.toContain("hola@umbral.cl");
+      expect(html()).not.toContain("contacto@groundzerodevs.com");
     });
   });
 
@@ -45,7 +45,7 @@ describe("build output", () => {
     });
 
     it("never leaks the plain contact email into the HTML source", () => {
-      expect(html()).not.toContain("hola@umbral.cl");
+      expect(html()).not.toContain("contacto@groundzerodevs.com");
     });
   });
 
@@ -69,7 +69,7 @@ describe("build output", () => {
     });
 
     it("never leaks the plain contact email into the HTML source", () => {
-      expect(html()).not.toContain("hola@umbral.cl");
+      expect(html()).not.toContain("contacto@groundzerodevs.com");
     });
   });
 
@@ -84,7 +84,7 @@ describe("build output", () => {
     });
 
     it("never leaks the plain contact email into the HTML source", () => {
-      expect(html()).not.toContain("hola@umbral.cl");
+      expect(html()).not.toContain("contacto@groundzerodevs.com");
     });
   });
 

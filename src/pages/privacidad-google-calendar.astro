@@ -2,7 +2,7 @@
 import Layout from "../layouts/Layout.astro";
 import Footer from "../components/Footer.astro";
 
-const lastUpdated = "15 de octubre de 2026";
+const lastUpdated = "7 de noviembre de 2026";
 ---
 
 <Layout
@@ -64,15 +64,16 @@ const lastUpdated = "15 de octubre de 2026";
             o un código corto del paciente (nunca el nombre completo, RUT, ni el tipo de sesión clínica).
           </li>
           <li>
-            <strong class="font-medium text-slate-900 dark:text-cream-50">Descripción:</strong> un enlace directo a la consulta
-            dentro de Umbral.
+            <strong class="font-medium text-slate-900 dark:text-cream-50">Descripción:</strong> un texto genérico que remite
+            a tu cuenta de Umbral, sin enlaces ni identificadores.
           </li>
           <li>
             <strong class="font-medium text-slate-900 dark:text-cream-50">Fecha, hora y duración</strong> de la sesión.
           </li>
         </ul>
         <p class="mt-3">
-          Ningún dato clínico, diagnóstico ni contenido sensible del paciente se envía a Google en ningún caso.
+          Ningún dato clínico, diagnóstico ni contenido sensible del paciente se envía a Google en ningún caso. El
+          identificador interno del grupo de consultas se guarda únicamente en una propiedad privada del evento.
         </p>
       </section>
 
@@ -86,13 +87,13 @@ const lastUpdated = "15 de octubre de 2026";
           fichas clínicas.
         </p>
         <p class="mt-3">
-          Además, Umbral lee los horarios ocupados del calendario conectado, para los próximos 60 días y con una
-          frecuencia aproximada de 30 minutos, con el único fin de no ofrecer a tus pacientes esos horarios en tu agenda
-          pública. De cada evento se solicitan únicamente su fecha y hora de inicio y de término, su estado y si bloquea
-          tiempo, mediante una máscara de campos. Umbral nunca solicita ni almacena títulos, descripciones, invitados ni
-          ubicaciones de tus eventos. Se ignoran los eventos cancelados, los de todo el día, los marcados como
-          disponibles y los creados por Umbral. De esta lectura solo se guarda el intervalo (inicio y término); no se
-          muestra a nadie ni se incorpora a la ficha clínica.
+          Además, cuando esta opción está habilitada, Umbral lee los horarios ocupados del calendario conectado, para
+          los próximos 60 días y con una frecuencia aproximada de 30 minutos, con el único fin de no ofrecer a tus
+          pacientes esos horarios en tu agenda pública. De cada evento se solicitan únicamente su fecha y hora de inicio
+          y de término, su estado y si bloquea tiempo, mediante una máscara de campos. Umbral nunca solicita ni almacena
+          títulos, descripciones, invitados ni ubicaciones de tus eventos. Se ignoran los eventos cancelados, los de
+          todo el día, los marcados como disponibles y los creados por Umbral. De esta lectura solo se guarda el
+          intervalo (inicio y término); no se muestra a nadie ni se incorpora a la ficha clínica.
         </p>
       </section>
 
@@ -109,7 +110,7 @@ const lastUpdated = "15 de octubre de 2026";
       <section>
         <h2 class="font-display text-2xl text-slate-900 dark:text-cream-50">5. Desconexión y eliminación de datos</h2>
         <p class="mt-3">
-          Puedes desconectar tu Google Calendar en cualquier momento desde Ajustes de Umbral. Al hacerlo:
+          Puedes desconectar tu Google Calendar en cualquier momento desde la sección Seguridad de Umbral. Al hacerlo:
         </p>
         <ul class="mt-3 list-disc space-y-1.5 pl-6 marker:text-sage-500">
           <li>Umbral revoca el token de acceso directamente con Google.</li>
