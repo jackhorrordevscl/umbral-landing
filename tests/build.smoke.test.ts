@@ -88,13 +88,15 @@ describe("build output", () => {
       expect(html()).not.toContain("contacto@groundzerodevs.com");
     });
 
-    it("states the launch price exactly as decided: $6.990 monthly, VAT included, 12 months, valid 30 days", () => {
+    it("states the launch price exactly as decided: $6.990 monthly, VAT included, 12 months, valid 30 days, then $11.990 monthly", () => {
       const text = html()
         .replace(/<[^>]+>/g, " ")
         .replace(/\s+/g, " ");
       expect(text).toMatch(/precio de lanzamiento[^.]*\$\s?6\.990 mensuales[^.]*12 meses/i);
       expect(text).toMatch(/\$\s?6\.990 mensuales,? IVA incluido/i);
       expect(text).toMatch(/suscripci[oó]n es válida por 30 días/i);
+      expect(text).toMatch(/12 meses contados desde el primer pago/i);
+      expect(text).toMatch(/Después, el precio es de \$\s?11\.990 mensuales,? IVA incluido/i);
       expect(text).not.toMatch(/sin cobro de suscripci[oó]n/i);
     });
   });
@@ -135,7 +137,7 @@ describe("build output", () => {
       expect(text).not.toMatch(/\bcumple con\b|\bconforme a la ley\b/i);
       // the only published price is the launch price, and only in the Terms (see below)
       expect(text).not.toMatch(/\b12\.?990\b/);
-      if (page !== "terminos/index.html") expect(text).not.toMatch(/\b6\.?990\b/);
+      if (page !== "terminos/index.html") expect(text).not.toMatch(/\b6\.?990\b|\b11\.?990\b/);
     });
 
     it.each(pages)("%s only mentions certification to deny it", (page) => {
