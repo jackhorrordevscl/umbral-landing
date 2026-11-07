@@ -2,40 +2,44 @@
 import { Image } from "astro:assets";
 import dashboard from "../assets/screenshots/01-dashboard.png";
 import pacientes from "../assets/screenshots/02-pacientes-listado.png";
-import nuevaFicha from "../assets/screenshots/03-pacientes-nueva-ficha.png";
-import consultas from "../assets/screenshots/04-consultas-listado.png";
+import consultasHistorial from "../assets/screenshots/03-consultas-historial.png";
+import consultasNueva from "../assets/screenshots/04-consultas-nueva.png";
 import calendarioMes from "../assets/screenshots/05-calendario-mes.png";
-import calendarioDetalle from "../assets/screenshots/06-calendario-detalle-dia.png";
-import repositorio from "../assets/screenshots/07-repositorio.png";
-import subirArchivo from "../assets/screenshots/07b-repositorio-subir-archivo.png";
-import seguridad from "../assets/screenshots/08-seguridad.png";
+import pagos from "../assets/screenshots/06-pagos.png";
+import seguridad from "../assets/screenshots/07-seguridad.png";
 
 const screens = [
   {
     src: dashboard,
-    alt: "Dashboard de Umbral con pacientes activos, consultas registradas y consentimientos firmados",
+    alt: "Dashboard de Umbral con pacientes activos, consultas registradas, consentimientos firmados y próximas sesiones",
     label: "Dashboard",
   },
-  { src: pacientes, alt: "Listado de pacientes con RUT, contacto y estado de consentimiento", label: "Pacientes" },
-  { src: nuevaFicha, alt: "Formulario de nueva ficha de paciente", label: "Nueva ficha" },
   {
-    src: consultas,
-    alt: "Registro de consultas con motivo, intervención y acuerdos por sesión",
-    label: "Consultas y sesiones",
-  },
-  { src: calendarioMes, alt: "Calendario mensual con sesiones agendadas", label: "Calendario" },
-  {
-    src: calendarioDetalle,
-    alt: "Detalle de una sesión agendada en el calendario, con opción de agendar",
-    label: "Detalle de sesión",
+    src: pacientes,
+    alt: "Listado de pacientes con búsqueda por nombre o RUT, contacto y estado de consentimiento",
+    label: "Pacientes",
   },
   {
-    src: repositorio,
-    alt: "Repositorio de archivos con plantillas, formularios y protocolos",
-    label: "Repositorio de archivos",
+    src: consultasHistorial,
+    alt: "Historial de consultas de un paciente con motivo, intervención y acuerdos de cada sesión",
+    label: "Historial de consultas",
   },
-  { src: subirArchivo, alt: "Modal para subir un archivo al repositorio personal", label: "Subir archivo" },
-  { src: seguridad, alt: "Configuración de seguridad con MFA y conexión a Google Calendar", label: "Seguridad" },
+  {
+    src: consultasNueva,
+    alt: "Formulario para registrar una sesión, con editor de texto enriquecido para motivo, intervención y acuerdos",
+    label: "Registrar una sesión",
+  },
+  { src: calendarioMes, alt: "Calendario mensual con las sesiones agendadas de cada día", label: "Calendario" },
+  {
+    src: pagos,
+    alt: "Pantalla de pagos para conectar tu cuenta de Flow y cobrar las sesiones en línea",
+    label: "Pagos con Flow",
+  },
+  {
+    src: seguridad,
+    alt: "Configuración de seguridad con autenticación de dos factores activa y conexión opcional a Google Calendar",
+    label: "Seguridad",
+  },
 ];
 ---
 

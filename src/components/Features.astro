@@ -17,12 +17,12 @@ const features = [
   },
   {
     title: "Documentos protegidos",
-    body: "Sube PDF e imágenes de cada paciente (hasta 25 MB) y quedan cifrados: aunque alguien accediera al servidor, no podría leerlos sin la llave.",
+    body: "Sube PDF, Word, Excel, ZIP e imágenes de cada paciente (hasta 25 MB) y se cifran antes de almacenarse. Los textos clínicos de tus consultas e informes de alta también se guardan cifrados.",
     icon: "M6 10V7a6 6 0 0 1 12 0v3 M5 10h14v10H5z",
   },
   {
     title: "Registro de quién hizo qué",
-    body: "Cada acceso a Umbral queda anotado — quién entró, qué vio, cuándo — en un registro que ni tú ni nadie puede editar o borrar después.",
+    body: "Umbral mantiene un registro de auditoría que no se puede modificar ni borrar.",
     icon: "M8 4h8l4 4v12H4V4z M8 4v4H4 M9 13h6 M9 17h6",
   },
   {
@@ -37,13 +37,28 @@ const features = [
   },
   {
     title: "Recordatorios para que no se te escape ninguna cita",
-    body: "Aviso por correo y notificación dentro de Umbral, 24 y 2 horas antes de cada sesión.",
+    body: "Aviso por correo y notificación dentro de Umbral, 24 y 2 horas antes de cada sesión, con un centro de notificaciones para todos los avisos de tu práctica.",
     icon: "M12 3a5 5 0 0 0-5 5v3l-2 3h14l-2-3V8a5 5 0 0 0-5-5Z M10 19a2 2 0 0 0 4 0",
   },
   {
-    title: "Centro de notificaciones",
-    body: "Todos los avisos de tu práctica en un solo lugar dentro de Umbral, sin depender únicamente del correo.",
-    icon: "M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18Z M12 8v4 M12 15.5h.01",
+    title: "Agenda pública con tu propio enlace",
+    body: "Tus pacientes ven tus horarios libres y reservan sin crear cuenta, según tu horario semanal, tus bloqueos y los feriados de Chile. Con 24 horas de anticipación mínima y hasta 60 días hacia adelante.",
+    icon: "M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1 M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1-1",
+  },
+  {
+    title: "Cobro en línea con tu cuenta Flow",
+    body: "Conecta tu propia cuenta Flow y cada sesión puede generar un enlace de pago enviado por email. El pago va directo a tu cuenta: Umbral no custodia el dinero.",
+    icon: "M3 7h18v12H3z M3 11h18 M7 15h3",
+  },
+  {
+    title: "Pacientes niños, niñas y adolescentes",
+    body: "Registra hasta 2 representantes legales, el consentimiento que otorgan y el asentimiento del niño, niña o adolescente. Los cobros y avisos se dirigen a sus representantes.",
+    icon: "M9 11a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z M3 20a6 6 0 0 1 12 0 M17 12a2.5 2.5 0 1 0 0-5 M17 20a5 5 0 0 0-2-4",
+  },
+  {
+    title: "Informe de alta con firma simple",
+    body: "Cierra el tratamiento con un informe en PDF que lleva tu firma simple y un hash SHA-256 para verificar que no fue alterado. Es una firma simple, no una firma electrónica avanzada.",
+    icon: "M6 3h8l4 4v14H6V3z M14 3v4h4 M9 17c1.5-2 2.5 0 4-1.5",
   },
 ];
 ---
