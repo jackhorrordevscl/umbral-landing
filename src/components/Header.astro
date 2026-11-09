@@ -1,35 +1,50 @@
 ---
 import ThemeToggle from "./ThemeToggle.astro";
+
+// Shared by the home page and the legal pages: on the home page anchors stay
+// in-page, everywhere else they point back at the home page.
+const onHome = Astro.url.pathname === "/";
+const base = onHome ? "" : "/";
+const home = onHome ? "#top" : "/";
+
+const links = [
+  { href: `${base}#capturas`, label: "Capturas" },
+  { href: `${base}#funcionalidades`, label: "Funcionalidades" },
+  { href: `${base}#marco-legal`, label: "Marco legal" },
+];
+
+const ctaHref = `${base}#acceso`;
+const linkClass = "transition-colors hover:text-slate-900 dark:hover:text-cream-100";
+const mobileLinkClass =
+  "rounded-lg px-2 py-3 transition-colors hover:bg-sage-50 hover:text-slate-900 dark:hover:bg-slate-900 dark:hover:text-cream-100";
 ---
 
-<header
-  class="sticky inset-x-0 top-0 z-20 border-b border-sage-200 bg-cream-100/90 backdrop-blur dark:border-slate-800 dark:bg-slate-950/90"
->
-  <div class="flex items-center justify-between px-6 py-4 sm:px-10">
-    <a href="#top" class="flex items-center gap-2">
-      <span class="brand-gradient flex items-center rounded-lg px-3 py-1.5">
-        <img src="/logo.svg" alt="Umbral" width="490" height="247" class="h-6 w-auto" />
-      </span>
+<header class="rule sticky inset-x-0 top-0 z-20 border-b bg-cream-100/90 backdrop-blur dark:bg-slate-950/90">
+  <div class="mx-auto flex max-w-6xl items-center justify-between px-6 py-3 sm:px-10">
+    <a href={home} class="flex items-center text-slate-900 dark:text-cream-50" aria-label="Umbral, inicio">
+      <span class="logo-mark" role="img" aria-hidden="true"></span>
     </a>
 
-    <nav class="hidden items-center gap-8 font-sans text-sm text-slate-600 md:flex dark:text-slate-400">
-      <a href="#capturas" class="transition-colors hover:text-slate-900 dark:hover:text-cream-100">Capturas</a>
-      <a href="#funcionalidades" class="transition-colors hover:text-slate-900 dark:hover:text-cream-100"
-        >Funcionalidades</a
-      >
-      <a href="#cumplimiento" class="transition-colors hover:text-slate-900 dark:hover:text-cream-100"
-        >Cumplimiento legal</a
-      >
-      <a href="#acceso" class="transition-colors hover:text-slate-900 dark:hover:text-cream-100">Acceso anticipado</a>
+    <nav
+      aria-label="Principal"
+      class="hidden items-center gap-8 font-sans text-sm text-slate-700 md:flex dark:text-slate-300"
+    >
+      {
+        links.map((link) => (
+          <a href={link.href} class={linkClass}>
+            {link.label}
+          </a>
+        ))
+      }
     </nav>
 
     <div class="flex items-center gap-3">
       <ThemeToggle />
       <a
-        href="#acceso"
-        class="hidden rounded-lg bg-sage-600 px-4 py-2 font-sans text-sm font-medium text-white transition-colors duration-200 hover:bg-sage-700 sm:inline-block"
+        href={ctaHref}
+        class="hidden rounded-lg bg-sage-600 px-4 py-2.5 font-sans text-sm font-medium text-white transition-colors duration-200 hover:bg-sage-700 sm:inline-block"
       >
-        Solicitar acceso
+        Solicita tu acceso
       </a>
       <button
         id="mobile-nav-toggle"
@@ -37,7 +52,7 @@ import ThemeToggle from "./ThemeToggle.astro";
         aria-label="Abrir menú"
         aria-expanded="false"
         aria-controls="mobile-nav"
-        class="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg border border-slate-200 text-slate-600 transition-colors hover:border-sage-400 hover:text-slate-900 md:hidden dark:border-slate-700 dark:text-slate-400 dark:hover:border-sage-500 dark:hover:text-cream-100"
+        class="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg border border-slate-300 text-slate-700 transition-colors hover:border-sage-500 hover:text-slate-900 md:hidden dark:border-slate-600 dark:text-slate-300 dark:hover:border-sage-400 dark:hover:text-cream-100"
       >
         <svg
           class="h-4 w-4"
@@ -71,33 +86,21 @@ import ThemeToggle from "./ThemeToggle.astro";
 
   <nav
     id="mobile-nav"
-    class="hidden flex flex-col gap-1 border-t border-sage-200 bg-cream-100 px-6 py-4 font-sans text-sm text-slate-600 md:hidden dark:border-slate-800 dark:bg-slate-950 dark:text-slate-400"
+    aria-label="Principal"
+    class="rule hidden flex-col gap-1 border-t bg-cream-100 px-6 py-4 font-sans text-sm text-slate-700 md:hidden! dark:bg-slate-950 dark:text-slate-300"
   >
+    {
+      links.map((link) => (
+        <a href={link.href} class={mobileLinkClass}>
+          {link.label}
+        </a>
+      ))
+    }
     <a
-      href="#capturas"
-      class="rounded-lg px-2 py-2.5 transition-colors hover:bg-sage-50 hover:text-slate-900 dark:hover:bg-slate-900 dark:hover:text-cream-100"
-      >Capturas</a
+      href={ctaHref}
+      class="mt-2 rounded-lg bg-sage-600 px-4 py-3 text-center font-medium text-white transition-colors duration-200 hover:bg-sage-700"
     >
-    <a
-      href="#funcionalidades"
-      class="rounded-lg px-2 py-2.5 transition-colors hover:bg-sage-50 hover:text-slate-900 dark:hover:bg-slate-900 dark:hover:text-cream-100"
-      >Funcionalidades</a
-    >
-    <a
-      href="#cumplimiento"
-      class="rounded-lg px-2 py-2.5 transition-colors hover:bg-sage-50 hover:text-slate-900 dark:hover:bg-slate-900 dark:hover:text-cream-100"
-      >Cumplimiento legal</a
-    >
-    <a
-      href="#acceso"
-      class="rounded-lg px-2 py-2.5 transition-colors hover:bg-sage-50 hover:text-slate-900 dark:hover:bg-slate-900 dark:hover:text-cream-100"
-      >Acceso anticipado</a
-    >
-    <a
-      href="#acceso"
-      class="mt-2 rounded-lg bg-sage-600 px-4 py-2.5 text-center font-medium text-white transition-colors duration-200 hover:bg-sage-700"
-    >
-      Solicitar acceso
+      Solicita tu acceso
     </a>
   </nav>
 </header>
@@ -108,26 +111,27 @@ import ThemeToggle from "./ThemeToggle.astro";
   const iconOpen = document.getElementById("mobile-nav-icon-open");
   const iconClose = document.getElementById("mobile-nav-icon-close");
 
-  const closeMobileNav = () => {
-    mobileNav.classList.add("hidden");
-    iconOpen.classList.remove("hidden");
-    iconClose.classList.add("hidden");
-    navToggle.setAttribute("aria-expanded", "false");
-    navToggle.setAttribute("aria-label", "Abrir menú");
+  const setNav = (open) => {
+    mobileNav.classList.toggle("hidden", !open);
+    mobileNav.classList.toggle("flex", open);
+    iconOpen.classList.toggle("hidden", open);
+    iconClose.classList.toggle("hidden", !open);
+    navToggle.setAttribute("aria-expanded", String(open));
+    navToggle.setAttribute("aria-label", open ? "Cerrar menú" : "Abrir menú");
   };
 
-  navToggle.addEventListener("click", () => {
-    const isOpen = !mobileNav.classList.contains("hidden");
-    if (isOpen) {
-      closeMobileNav();
-    } else {
-      mobileNav.classList.remove("hidden");
-      iconOpen.classList.add("hidden");
-      iconClose.classList.remove("hidden");
-      navToggle.setAttribute("aria-expanded", "true");
-      navToggle.setAttribute("aria-label", "Cerrar menú");
+  navToggle.addEventListener("click", () => setNav(mobileNav.classList.contains("hidden")));
+  mobileNav.querySelectorAll("a").forEach((link) => link.addEventListener("click", () => setNav(false)));
+
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape" && !mobileNav.classList.contains("hidden")) {
+      setNav(false);
+      navToggle.focus();
     }
   });
 
-  mobileNav.querySelectorAll("a").forEach((link) => link.addEventListener("click", closeMobileNav));
+  // leaving the mobile breakpoint with the menu open must not leave a stale aria-expanded
+  window.matchMedia("(min-width: 768px)").addEventListener("change", (event) => {
+    if (event.matches) setNav(false);
+  });
 </script>

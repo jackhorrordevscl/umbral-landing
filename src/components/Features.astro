@@ -1,102 +1,109 @@
 ---
-const features = [
+// Grouped the way the section headline promises: clinical, legal, administrative.
+const groups = [
   {
-    title: "Doble verificación al entrar",
-    body: "Además de tu contraseña, un código temporal en tu teléfono confirma que eres tú. Se activa solo en tu primer ingreso — nadie puede desactivarlo, ni tú.",
-    icon: "M12 2 4 5v6c0 5 3.4 8.7 8 9.9 4.6-1.2 8-4.9 8-9.9V5l-8-3Z",
+    name: "Lo clínico",
+    lead: "La ficha y su historia, tal como las dejaste.",
+    items: [
+      {
+        title: "Nada se pierde al corregir",
+        body: "Si te equivocas o necesitas ajustar una consulta, se guarda como una versión nueva. La original queda intacta y disponible, nunca se sobrescribe.",
+      },
+      {
+        title: "Tu ficha, en PDF, cuando la necesites",
+        body: "Exporta la ficha clínica completa de un paciente en PDF cuando quieras, sin pedírsela a nadie.",
+      },
+      {
+        title: "Pacientes niños, niñas y adolescentes",
+        body: "Registra hasta 2 representantes legales, el consentimiento que otorgan y el asentimiento del niño, niña o adolescente. Los cobros y avisos se dirigen a sus representantes.",
+      },
+      {
+        title: "Informe de alta con firma simple",
+        body: "Cierra el tratamiento con un informe en PDF que lleva tu firma simple y un hash SHA-256 para verificar que no fue alterado. Es una firma simple, no una firma electrónica avanzada.",
+      },
+    ],
   },
   {
-    title: "Consentimiento que queda escrito",
-    body: "Cada vez que un paciente autoriza o retira su consentimiento (para tratamiento, para telemedicina), Umbral lo anota y lo conserva. Ese historial nunca se borra, ni por error.",
-    icon: "M9 12.5 11 14.5 15 9.5 M4 6h16v13a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V6Z",
+    name: "Lo legal y la seguridad",
+    lead: "Lo que debe quedar registrado, y quién puede entrar.",
+    items: [
+      {
+        title: "Doble verificación al entrar",
+        body: "Además de tu contraseña, un código temporal en tu teléfono confirma que eres tú. Es obligatorio para toda cuenta.",
+      },
+      {
+        title: "Recuperación sin depender de soporte",
+        body: "Si olvidas tu contraseña o pierdes tu dispositivo de verificación, recuperas el acceso tú mismo con tus códigos de recuperación de un solo uso.",
+      },
+      {
+        title: "Consentimiento que queda escrito",
+        body: "Cada vez que un paciente autoriza o retira su consentimiento (para tratamiento, para telemedicina), Umbral lo anota y lo conserva. Ese historial nunca se borra, ni por error.",
+      },
+      {
+        title: "Documentos protegidos",
+        body: "Sube PDF, Word, Excel, ZIP e imágenes de cada paciente (hasta 25 MB) y se cifran antes de almacenarse. Los textos clínicos de tus consultas e informes de alta también se guardan cifrados.",
+      },
+      {
+        title: "Registro de quién hizo qué",
+        body: "Umbral mantiene un registro de auditoría que no se puede modificar ni borrar.",
+      },
+    ],
   },
   {
-    title: "Nada se pierde al corregir",
-    body: "Si te equivocas o necesitas ajustar una consulta, se guarda como una versión nueva. La original queda intacta y disponible, nunca se sobrescribe.",
-    icon: "M12 7v5l3 3 M12 21a9 9 0 1 1 8.6-6.2",
-  },
-  {
-    title: "Documentos protegidos",
-    body: "Sube PDF, Word, Excel, ZIP e imágenes de cada paciente (hasta 25 MB) y se cifran antes de almacenarse. Los textos clínicos de tus consultas e informes de alta también se guardan cifrados.",
-    icon: "M6 10V7a6 6 0 0 1 12 0v3 M5 10h14v10H5z",
-  },
-  {
-    title: "Registro de quién hizo qué",
-    body: "Umbral mantiene un registro de auditoría que no se puede modificar ni borrar.",
-    icon: "M8 4h8l4 4v12H4V4z M8 4v4H4 M9 13h6 M9 17h6",
-  },
-  {
-    title: "Tu ficha, en PDF, cuando la necesites",
-    body: "Exporta la ficha clínica completa de un paciente cuando quieras. Guardamos la información el tiempo que exige la Ley 20.584: 15 años.",
-    icon: "M6 3h8l4 4v14H6V3z M14 3v4h4 M9 15v-4 M11 15v-2 M13 15v-5",
-  },
-  {
-    title: "Se agenda solo en tu Google Calendar",
-    body: "Conecta tu cuenta y cada sesión aparece sola en tu calendario, con las iniciales del paciente y una descripción genérica — nunca su nombre completo, RUT ni datos clínicos. Las sesiones solo van de Umbral hacia tu calendario, nunca al revés.",
-    icon: "M4 5h16v15H4z M4 9h16 M8 3v4 M16 3v4 M8 13h2 M8 17h2",
-  },
-  {
-    title: "Recordatorios para que no se te escape ninguna cita",
-    body: "Aviso por correo y notificación dentro de Umbral, 24 y 2 horas antes de cada sesión, con un centro de notificaciones para todos los avisos de tu práctica.",
-    icon: "M12 3a5 5 0 0 0-5 5v3l-2 3h14l-2-3V8a5 5 0 0 0-5-5Z M10 19a2 2 0 0 0 4 0",
-  },
-  {
-    title: "Agenda pública con tu propio enlace",
-    body: "Tus pacientes ven tus horarios libres y reservan sin crear cuenta, según tu horario semanal, tus bloqueos y los feriados de Chile. Con 24 horas de anticipación mínima y hasta 60 días hacia adelante.",
-    icon: "M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1 M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1-1",
-  },
-  {
-    title: "Cobro en línea con tu cuenta Flow",
-    body: "Conecta tu propia cuenta Flow y cada sesión puede generar un enlace de pago enviado por email. El pago va directo a tu cuenta: Umbral no custodia el dinero.",
-    icon: "M3 7h18v12H3z M3 11h18 M7 15h3",
-  },
-  {
-    title: "Pacientes niños, niñas y adolescentes",
-    body: "Registra hasta 2 representantes legales, el consentimiento que otorgan y el asentimiento del niño, niña o adolescente. Los cobros y avisos se dirigen a sus representantes.",
-    icon: "M9 11a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z M3 20a6 6 0 0 1 12 0 M17 12a2.5 2.5 0 1 0 0-5 M17 20a5 5 0 0 0-2-4",
-  },
-  {
-    title: "Informe de alta con firma simple",
-    body: "Cierra el tratamiento con un informe en PDF que lleva tu firma simple y un hash SHA-256 para verificar que no fue alterado. Es una firma simple, no una firma electrónica avanzada.",
-    icon: "M6 3h8l4 4v14H6V3z M14 3v4h4 M9 17c1.5-2 2.5 0 4-1.5",
+    name: "Lo administrativo",
+    lead: "La agenda, los avisos y el cobro, sin planillas.",
+    items: [
+      {
+        title: "Agenda pública con tu propio enlace",
+        body: "Tus pacientes ven tus horarios libres y reservan sin crear cuenta, según tu horario semanal, tus bloqueos y los feriados de Chile. Con 24 horas de anticipación mínima y hasta 60 días hacia adelante.",
+      },
+      {
+        title: "Avisos 24 y 2 horas antes de cada sesión",
+        body: "Un aviso por correo y una notificación dentro de Umbral antes de cada sesión, con un centro de notificaciones para todos los avisos de tu práctica.",
+      },
+      {
+        title: "Se agenda solo en tu Google Calendar",
+        body: "Conecta tu cuenta y cada sesión aparece sola en tu calendario, con las iniciales del paciente y una descripción genérica, nunca su nombre completo, RUT ni datos clínicos. Las sesiones solo van de Umbral hacia tu calendario, nunca al revés.",
+      },
+      {
+        title: "Cobro en línea con tu cuenta Flow",
+        body: "Conecta tu propia cuenta Flow y cada sesión puede generar un enlace de pago enviado por email. El pago va directo a tu cuenta: Umbral no custodia el dinero.",
+      },
+    ],
   },
 ];
 ---
 
-<section
-  id="funcionalidades"
-  class="relative overflow-hidden border-t border-sage-200 bg-cream-200 px-6 py-20 sm:px-10 dark:border-slate-800 dark:bg-slate-900"
->
-  <div class="section-texture" aria-hidden="true"></div>
-  <div class="relative z-10 mx-auto max-w-3xl text-center">
-    <p class="font-sans text-xs font-medium uppercase tracking-[0.3em] text-sage-600 dark:text-sage-400">
-      Todo lo que ya no tienes que resolver por tu cuenta
-    </p>
-    <h2 class="mt-4 font-display text-4xl leading-tight tracking-tight text-slate-900 sm:text-5xl dark:text-cream-50">
+<section id="funcionalidades" class="rule border-t bg-cream-200 px-6 py-20 sm:px-10 sm:py-28 dark:bg-slate-950">
+  <div class="mx-auto max-w-6xl">
+    <p class="marker">§ 03 · Funcionalidades</p>
+    <h2
+      class="mt-5 max-w-3xl font-display text-4xl leading-[1.08] tracking-tight text-slate-950 sm:text-5xl dark:text-cream-50"
+    >
       Lo clínico, lo legal y lo administrativo, en un solo lugar.
     </h2>
-  </div>
 
-  <div class="relative z-10 mx-auto mt-16 grid max-w-5xl gap-6 sm:grid-cols-2 lg:grid-cols-3">
-    {
-      features.map((feature) => (
-        <div class="rounded-xl border border-slate-100 bg-white p-7 shadow-sm transition-all duration-200 hover:-translate-y-1 hover:border-sage-300 hover:shadow-md dark:border-slate-700 dark:bg-slate-800 dark:shadow-none dark:hover:border-sage-600 dark:hover:shadow-lg">
-          <svg
-            class="h-8 w-8 text-sage-600 dark:text-sage-400"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="1.6"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            aria-hidden="true"
-          >
-            <path d={feature.icon} />
-          </svg>
-          <h3 class="mt-4 font-display text-lg text-slate-900 dark:text-cream-50">{feature.title}</h3>
-          <p class="mt-2 font-sans text-sm leading-relaxed text-slate-600 dark:text-slate-400">{feature.body}</p>
-        </div>
-      ))
-    }
+    <div class="mt-16 space-y-16">
+      {
+        groups.map((group) => (
+          <div class="grid gap-8 lg:grid-cols-12 lg:gap-10">
+            <div class="lg:col-span-4">
+              <h3 class="font-display text-2xl text-slate-950 dark:text-cream-50">{group.name}</h3>
+              <p class="mt-2 max-w-xs font-sans text-sm leading-relaxed text-slate-700 dark:text-slate-300">
+                {group.lead}
+              </p>
+            </div>
+            <dl class="grid gap-x-10 sm:grid-cols-2 lg:col-span-8">
+              {group.items.map((item) => (
+                <div class="rule border-t py-6">
+                  <dt class="font-display text-lg leading-snug text-slate-950 dark:text-cream-50">{item.title}</dt>
+                  <dd class="mt-2 font-sans text-sm leading-relaxed text-slate-700 dark:text-slate-300">{item.body}</dd>
+                </div>
+              ))}
+            </dl>
+          </div>
+        ))
+      }
+    </div>
   </div>
 </section>

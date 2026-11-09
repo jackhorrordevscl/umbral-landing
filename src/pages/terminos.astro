@@ -1,5 +1,6 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 
 const lastUpdated = "7 de noviembre de 2026";
@@ -9,20 +10,10 @@ const lastUpdated = "7 de noviembre de 2026";
   title="Términos de Servicio | Umbral"
   description="Condiciones de uso de Umbral: qué es el servicio, responsabilidades del terapeuta, cuentas, precio, terminación y ley aplicable."
 >
-  <header
-    class="border-b border-sage-200 bg-cream-100/90 px-6 py-4 backdrop-blur sm:px-10 dark:border-slate-800 dark:bg-slate-950/90"
-  >
-    <a href="/" class="flex items-center gap-2">
-      <span class="brand-gradient flex items-center rounded-lg px-3 py-1.5">
-        <img src="/logo.svg" alt="Umbral" width="490" height="247" class="h-6 w-auto" />
-      </span>
-    </a>
-  </header>
+  <Header />
 
   <main id="main-content" class="mx-auto max-w-3xl px-6 py-16 sm:px-10">
-    <p class="font-sans text-xs font-medium uppercase tracking-[0.3em] text-sage-600 dark:text-sage-400">
-      Términos de servicio
-    </p>
+    <p class="marker">Términos de servicio</p>
     <h1 class="mt-4 font-display text-4xl leading-tight tracking-tight text-slate-900 sm:text-5xl dark:text-cream-50">
       Condiciones de uso
     </h1>
@@ -72,9 +63,9 @@ const lastUpdated = "7 de noviembre de 2026";
         </h2>
         <p class="mt-3">
           Los datos que ingresas son tuyos (o de tu paciente, según corresponda) — Umbral no reclama propiedad sobre
-          ellos y actúa como encargado del tratamiento conforme se describe en la
+          ellos y actúa como encargado del tratamiento como se describe en la
           <a
-            href="/privacidad-general"
+            href="/privacidad-general/"
             class="text-sage-600 underline decoration-sage-400 underline-offset-4 hover:text-sage-700 dark:text-sage-400 dark:hover:text-sage-300"
             >Política de Privacidad</a
           >. Eres responsable de contar con el consentimiento informado correspondiente de cada paciente antes de
@@ -104,8 +95,10 @@ const lastUpdated = "7 de noviembre de 2026";
             href="#"
             data-mailto-user="contacto"
             data-mailto-domain="groundzerodevs.com"
+            data-mailto-show
             class="text-sage-600 underline decoration-sage-400 underline-offset-4 hover:text-sage-700 dark:text-sage-400 dark:hover:text-sage-300"
-          ></a>. El cierre de la cuenta no elimina los datos: conforme el Art. 12 de la Ley 20.584, la ficha clínica se
+            >contacto (arroba) groundzerodevs (punto) com</a
+          >. El cierre de la cuenta no elimina los datos: según el Art. 12 de la Ley 20.584, la ficha clínica se
           conserva igualmente por 15 años desde el cierre, aunque dejes de usar el servicio.
         </p>
       </section>
@@ -118,8 +111,10 @@ const lastUpdated = "7 de noviembre de 2026";
             href="#"
             data-mailto-user="contacto"
             data-mailto-domain="groundzerodevs.com"
+            data-mailto-show
             class="text-sage-600 underline decoration-sage-400 underline-offset-4 hover:text-sage-700 dark:text-sage-400 dark:hover:text-sage-300"
-          ></a> si tienes preguntas al respecto.
+            >contacto (arroba) groundzerodevs (punto) com</a
+          > si tienes preguntas al respecto.
         </p>
       </section>
 
@@ -140,8 +135,10 @@ const lastUpdated = "7 de noviembre de 2026";
             href="#"
             data-mailto-user="contacto"
             data-mailto-domain="groundzerodevs.com"
+            data-mailto-show
             class="text-sage-600 underline decoration-sage-400 underline-offset-4 hover:text-sage-700 dark:text-sage-400 dark:hover:text-sage-300"
-          ></a>
+            >contacto (arroba) groundzerodevs (punto) com</a
+          >
         </p>
       </section>
     </div>

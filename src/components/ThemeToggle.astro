@@ -6,7 +6,7 @@
   id="theme-toggle"
   type="button"
   aria-label="Cambiar a modo oscuro"
-  class="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg border border-slate-200 text-slate-600 transition-colors hover:border-sage-400 hover:text-slate-900 dark:border-slate-700 dark:text-slate-400 dark:hover:border-sage-500 dark:hover:text-cream-100"
+  class="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg border border-slate-300 text-slate-700 transition-colors hover:border-sage-500 hover:text-slate-900 dark:border-slate-600 dark:text-slate-300 dark:hover:border-sage-400 dark:hover:text-cream-100"
 >
   <svg
     class="h-4 w-4 dark:hidden"
@@ -44,7 +44,11 @@
   syncLabel();
   toggle.addEventListener("click", () => {
     const isDark = document.documentElement.classList.toggle("dark");
-    localStorage.setItem("umbral-theme", isDark ? "dark" : "light");
     syncLabel();
+    try {
+      localStorage.setItem("umbral-theme", isDark ? "dark" : "light");
+    } catch {
+      // storage blocked: the theme still switches for this visit
+    }
   });
 </script>

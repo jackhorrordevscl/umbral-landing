@@ -10,7 +10,7 @@ Landing page de Umbral, el sistema de fichas clínicas para terapeutas que atien
 
 ## Requisitos
 
-- Node.js 18+
+- Node.js 24 (ver `engines` en `package.json`)
 - npm
 
 ## Desarrollo

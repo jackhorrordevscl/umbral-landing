@@ -2,51 +2,50 @@
 const points = [
   {
     label: "Sin jefes ni administradores",
-    body: "Quien se registra es quien usa el sistema. No hay ningún rol por encima del tuyo que pueda entrar a mirar tus pacientes.",
+    body: "Quien se registra es quien usa el sistema. Dentro de la aplicación no existe ningún rol por encima del tuyo que pueda entrar a mirar tus pacientes.",
   },
   {
     label: "Tus fichas son solo tuyas",
-    body: "Solo tú accedes y administras a tus pacientes. Ningún otro terapeuta que use Umbral puede ver tu información, ni tú la de ellos.",
+    body: "Dentro de la aplicación, solo tú accedes y administras a tus pacientes. Ningún otro terapeuta que use Umbral puede ver tu información, ni tú la de ellos.",
   },
   {
     label: "Tú manejas tu cuenta",
-    body: "Editas tus propios datos directamente, sin pasar por soporte ni por un panel de terceros — porque aquí no hay terceros de por medio.",
+    body: "Editas tus propios datos directamente, sin pasar por soporte ni por un panel de administración sobre tu cuenta.",
   },
 ];
 ---
 
-<section
-  class="section-decor relative overflow-hidden border-t border-sage-200 bg-cream-100 px-6 py-20 sm:px-10 dark:border-slate-800 dark:bg-slate-950"
->
-  <div class="section-texture" aria-hidden="true"></div>
-  <span class="section-decor-blob -left-24 -top-32 h-80 w-80" aria-hidden="true"></span>
-  <span class="section-decor-blob -bottom-40 -right-32 h-96 w-96" aria-hidden="true"></span>
-  <span class="section-decor-word -left-8" aria-hidden="true">umbral</span>
-  <span class="section-decor-word -right-8" aria-hidden="true">umbral</span>
+<section class="rule border-t bg-cream-100 px-6 py-20 sm:px-10 sm:py-28 dark:bg-slate-950">
+  <div class="mx-auto grid max-w-6xl gap-12 lg:grid-cols-12 lg:gap-10">
+    <div class="lg:col-span-5">
+      <div class="lg:sticky lg:top-28">
+        <p class="marker">§ 01 · Para quién</p>
+        <h2
+          class="mt-5 font-display text-4xl leading-[1.08] tracking-tight text-slate-950 sm:text-5xl dark:text-cream-50"
+        >
+          Hecho para quien atiende por su cuenta.
+        </h2>
+        <p class="mt-6 max-w-md font-sans text-base leading-relaxed text-slate-700 dark:text-slate-300">
+          Umbral está pensado desde cero para el psicólogo o la psicóloga que atiende por su cuenta: una cuenta, una
+          ficha, un límite claro entre lo tuyo y lo de nadie más. Sin roles ni permisos que tengas que administrar.
+        </p>
+      </div>
+    </div>
 
-  <div class="relative z-10 mx-auto max-w-3xl text-center">
-    <p class="font-sans text-xs font-medium uppercase tracking-[0.3em] text-sage-600 dark:text-sage-400">
-      Para quién es Umbral
-    </p>
-    <h2 class="mt-4 font-display text-4xl leading-tight tracking-tight text-slate-900 sm:text-5xl dark:text-cream-50">
-      No es para una clínica.<br />Es para ti.
-    </h2>
-    <p
-      class="mx-auto mt-6 max-w-xl text-balance font-sans text-base leading-relaxed text-slate-600 dark:text-slate-400"
-    >
-      Umbral está pensado desde cero para el psicólogo o la psicóloga que atiende por su cuenta: una cuenta, una ficha,
-      un límite claro entre lo tuyo y lo de nadie más. Sin roles ni permisos que tengas que administrar.
-    </p>
-  </div>
-
-  <div class="relative z-10 mx-auto mt-16 grid max-w-5xl gap-6 sm:grid-cols-3">
-    {
-      points.map((point) => (
-        <div class="rounded-xl border border-slate-100 bg-white p-8 shadow-sm transition-all duration-200 hover:-translate-y-1 hover:border-sage-300 hover:shadow-md dark:border-slate-800 dark:bg-slate-900 dark:shadow-none dark:hover:border-sage-600 dark:hover:shadow-lg">
-          <h3 class="font-display text-xl text-slate-900 dark:text-cream-50">{point.label}</h3>
-          <p class="mt-3 font-sans text-sm leading-relaxed text-slate-600 dark:text-slate-400">{point.body}</p>
-        </div>
-      ))
-    }
+    <ol class="rule border-t lg:col-span-7">
+      {
+        points.map((point, i) => (
+          <li class="rule grid gap-x-8 gap-y-2 border-b py-8 sm:grid-cols-[4rem_1fr]">
+            <span class="font-mono text-sm text-sage-700 dark:text-sage-300">{String(i + 1).padStart(2, "0")}</span>
+            <div>
+              <h3 class="font-display text-2xl leading-snug text-slate-950 dark:text-cream-50">{point.label}</h3>
+              <p class="mt-3 max-w-lg font-sans text-base leading-relaxed text-slate-700 dark:text-slate-300">
+                {point.body}
+              </p>
+            </div>
+          </li>
+        ))
+      }
+    </ol>
   </div>
 </section>

@@ -1,46 +1,93 @@
 ---
-
+// Sample record shown beside the headline. Every value is fictional and labelled as such.
 ---
 
-<section id="top" class="relative flex flex-col overflow-hidden bg-cream-100 pt-20 dark:bg-slate-950 sm:pt-28">
-  <div class="section-texture" aria-hidden="true"></div>
-  <div class="relative z-10 mx-auto flex w-full max-w-5xl flex-col items-center px-6 text-center">
-    <p class="mb-6 font-sans text-xs font-medium uppercase tracking-[0.3em] text-sage-600 dark:text-sage-400">
-      Ficha clínica para terapeutas que atienden por su cuenta
-    </p>
+<section id="top" class="relative overflow-hidden bg-cream-100 pb-20 pt-16 sm:pb-28 sm:pt-24 dark:bg-slate-950">
+  <div class="mx-auto grid max-w-6xl items-center gap-14 px-6 sm:px-10 lg:grid-cols-12 lg:gap-10">
+    <div class="lg:col-span-7">
+      <p class="marker">Ficha clínica para terapeutas que atienden por su cuenta</p>
 
-    <h1
-      class="font-display text-[clamp(2.5rem,7vw,5.5rem)] leading-[1.05] tracking-tight text-slate-900 dark:text-cream-50"
-    >
-      <span class="block">Tu consulta</span>
-      <span class="block italic text-sage-600 dark:text-sage-400">merece algo mejor que una planilla.</span>
-    </h1>
-
-    <p class="mt-8 max-w-xl text-balance font-sans text-lg leading-relaxed text-slate-600 dark:text-slate-400">
-      Umbral es la ficha clínica pensada para el terapeuta que trabaja solo: sin equipo, sin secretaria, sin un jefe de
-      sistemas mirando por encima de tu hombro. Ficha, consultas, agenda, cobro en línea y recordatorios en un solo
-      lugar, con los textos y documentos clínicos cifrados. Cada profesional ve únicamente a sus propios pacientes.
-    </p>
-
-    <div class="mt-10 flex flex-col items-center gap-4 sm:flex-row">
-      <a
-        href="#acceso"
-        class="rounded-lg bg-sage-600 px-6 py-3 font-sans text-sm font-medium text-white transition-colors duration-200 hover:bg-sage-700"
+      <h1
+        class="mt-6 font-display text-[clamp(2.75rem,7.2vw,5.5rem)] leading-[1.02] tracking-tight text-slate-950 dark:text-cream-50"
       >
-        Solicita tu acceso
-      </a>
-      <a
-        href="#funcionalidades"
-        class="font-sans text-sm font-medium text-slate-600 underline decoration-slate-400 underline-offset-4 transition-colors hover:text-slate-900 dark:text-slate-400 dark:decoration-slate-600 dark:hover:text-cream-100"
-      >
-        Ver qué incluye ↓
-      </a>
+        Tu consulta merece algo mejor que una <span class="superseded">planilla</span>.
+      </h1>
+
+      <p class="mt-8 max-w-xl font-sans text-lg leading-relaxed text-slate-700 dark:text-slate-300">
+        Umbral es la ficha clínica pensada para el terapeuta que trabaja solo: sin equipo, sin secretaria, sin un jefe
+        de sistemas mirando por encima de tu hombro. Ficha, consultas, agenda, cobro en línea y recordatorios en un solo
+        lugar, con los textos y documentos clínicos cifrados. Cada profesional ve únicamente a sus propios pacientes.
+      </p>
+
+      <div class="mt-10 flex flex-col items-start gap-x-8 gap-y-4 sm:flex-row sm:items-center">
+        <a
+          href="#acceso"
+          class="rounded-lg bg-sage-600 px-6 py-3.5 font-sans text-sm font-medium text-white transition-colors duration-200 hover:bg-sage-700"
+        >
+          Solicita tu acceso
+        </a>
+        <a
+          href="#funcionalidades"
+          class="font-sans text-sm font-medium text-slate-700 underline decoration-slate-500 underline-offset-4 transition-colors hover:text-slate-950 dark:text-slate-300 dark:decoration-slate-500 dark:hover:text-cream-50"
+        >
+          Ver qué incluye
+        </a>
+      </div>
+
+      <p class="mt-12 max-w-md font-mono text-[0.8125rem] leading-relaxed text-slate-600 dark:text-slate-400">
+        Diseñado para alinearse con las leyes chilenas 20.584 · 19.628 · 21.719
+      </p>
+    </div>
+
+    <div class="lg:col-span-5">
+      <figure aria-labelledby="ficha-caption" class="mx-auto max-w-md lg:mr-0">
+        <div class="paper p-6 font-mono text-[0.8125rem] leading-relaxed text-slate-800 dark:text-slate-200">
+          <div class="flex items-baseline justify-between gap-4 border-b rule pb-3">
+            <span class="font-medium text-slate-950 dark:text-cream-50">Ficha · P. R.</span>
+            <span class="text-slate-600 dark:text-slate-400">Consulta n.º 14</span>
+          </div>
+
+          <dl class="mt-4 space-y-4">
+            <div>
+              <dt class="text-slate-600 dark:text-slate-400">Motivo · v2, vigente</dt>
+              <dd class="mt-1 text-slate-950 dark:text-cream-50">Dificultad para dormir desde el cambio de turno.</dd>
+            </div>
+
+            <div>
+              <dt class="text-slate-600 dark:text-slate-400">Historial de versiones</dt>
+              <dd class="mt-1">
+                <details class="group">
+                  <summary
+                    class="cursor-pointer list-none text-slate-950 underline decoration-slate-500 underline-offset-4 marker:hidden hover:text-sage-700 dark:text-cream-50 dark:hover:text-sage-300 [&::-webkit-details-marker]:hidden"
+                  >
+                    <span class="group-open:hidden">v1 · original conservada · ver</span>
+                    <span class="hidden group-open:inline">v1 · original conservada · ocultar</span>
+                  </summary>
+                  <p class="mt-2 border-l-2 border-ink-red pl-3 dark:border-[#e08a70]">
+                    <span class="superseded">Dificultad para dormir.</span>
+                    <span class="mt-1 block text-slate-600 dark:text-slate-400">
+                      Sigue ahí, intacta. Corregir no sobrescribe.
+                    </span>
+                  </p>
+                </details>
+              </dd>
+            </div>
+
+            <div>
+              <dt class="text-slate-600 dark:text-slate-400">Consentimiento</dt>
+              <dd class="mt-1 text-slate-950 dark:text-cream-50">Tratamiento · otorgado 2 oct 2026</dd>
+            </div>
+
+            <div>
+              <dt class="text-slate-600 dark:text-slate-400">Registro</dt>
+              <dd class="mt-1 text-slate-950 dark:text-cream-50">7 nov · 12:41 · tú · editó la consulta</dd>
+            </div>
+          </dl>
+        </div>
+        <figcaption id="ficha-caption" class="mt-5 font-sans text-sm text-slate-600 dark:text-slate-400">
+          Así se guarda una corrección en Umbral. Datos de ejemplo.
+        </figcaption>
+      </figure>
     </div>
   </div>
-
-  <p
-    class="relative z-10 mt-16 border-t border-sage-200 px-6 pt-5 pb-8 text-center font-mono text-sm uppercase tracking-[0.15em] text-slate-600 dark:border-slate-800 dark:text-slate-400 sm:mt-20"
-  >
-    Diseñado para alinearse con las leyes chilenas 20.584 · 19.628 · 21.719
-  </p>
 </section>
