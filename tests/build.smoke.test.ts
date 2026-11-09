@@ -245,6 +245,35 @@ describe("build output", () => {
       }
     });
 
+    it.each(pages)("%s ships no inline styles, so style-src needs no unsafe-inline", (page) => {
+      const html = readDist(page);
+      const policy = html.match(/<meta http-equiv="Content-Security-Policy" content="([^"]+)"/)?.[1] ?? "";
+      expect(policy).toMatch(/style-src 'self'(;|$)/);
+      expect(policy).not.toContain("'unsafe-inline'");
+      expect(html).not.toMatch(/<style[\s>]/);
+      expect(html).not.toMatch(/\sstyle="/);
+    });
+
+    it("declares metric-matched fallbacks for both webfonts so the swap does not shift layout", () => {
+      const css = readdirSync(dist("_astro"))
+        .filter((f) => f.endsWith(".css"))
+        .map((f) => readFileSync(dist(`_astro/${f}`), "utf-8"))
+        .join("");
+      expect(css).toMatch(/font-family:\s*"?DM Serif Fallback"?[^}]*size-adjust/);
+      expect(css).toMatch(/font-family:\s*"?DM Sans Fallback"?[^}]*size-adjust/);
+    });
+
+    it("links an apple-touch-icon that exists on disk", () => {
+      expect(readDist("index.html")).toContain('rel="apple-touch-icon" href="/apple-touch-icon.png"');
+      expect(existsSync(dist("apple-touch-icon.png"))).toBe(true);
+    });
+
+    it("keeps the footer year current in the browser, with the build year as fallback", () => {
+      const html = readDist("index.html");
+      expect(html).toMatch(/<span id="footer-year">\d{4}<\/span>/);
+      expect(html).toContain("footer-year");
+    });
+
     it("vercel.json sends the hardening headers and a trailing-slash policy", () => {
       const config = JSON.parse(readFileSync(resolve(__dirname, "..", "vercel.json"), "utf-8"));
       const all = config.headers.find((h: { source: string }) => h.source === "/(.*)").headers as { key: string }[];
