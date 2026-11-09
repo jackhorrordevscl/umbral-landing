@@ -93,8 +93,9 @@ const lastUpdated = "7 de noviembre de 2026";
           4. Almacenamiento y seguridad de las credenciales
         </h2>
         <p class="mt-3">
-          El token de acceso a tu cuenta de Google se almacena cifrado (AES-GCM) en la base de datos de Umbral. Ningún
-          token se almacena ni transmite en texto plano.
+          De tu cuenta de Google, Umbral guarda únicamente el token de actualización, cifrado con AES-256-GCM y una
+          clave exclusiva para este fin, en la base de datos de Umbral. El token de acceso, que dura poco, no se guarda:
+          se obtiene de Google cuando hace falta y viaja a Google por una conexión cifrada (TLS).
         </p>
       </section>
 
@@ -104,7 +105,7 @@ const lastUpdated = "7 de noviembre de 2026";
           Puedes desconectar tu Google Calendar en cualquier momento desde la sección Seguridad de Umbral. Al hacerlo:
         </p>
         <ul class="mt-3 list-disc space-y-1.5 pl-6 marker:text-sage-500">
-          <li>Umbral revoca el token de acceso directamente con Google.</li>
+          <li>Umbral revoca el token directamente con Google.</li>
           <li>El token almacenado se elimina de forma inmediata de la base de datos de Umbral.</li>
           <li>Los intervalos de horarios ocupados almacenados se eliminan.</li>
         </ul>
