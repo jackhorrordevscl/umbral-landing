@@ -90,11 +90,12 @@ describe("build output", () => {
   describe("terms of service page", () => {
     const html = () => readDist("terminos/index.html");
 
-    it("exists and renders all 12 sections", () => {
+    it("renders exactly 11 consecutively numbered sections and no unfinished clause", () => {
       const content = html();
-      for (let section = 1; section <= 12; section++) {
-        expect(content).toMatch(new RegExp(`>\\s*${section}\\.`));
-      }
+      const numbers = [...content.matchAll(/<h2[^>]*>\s*(\d+)\./g)].map((m) => Number(m[1]));
+      expect(numbers).toEqual([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]);
+      expect(content).not.toMatch(/en revisión legal/i);
+      expect(content).not.toMatch(/Limitación de responsabilidad/i);
     });
 
     it("never leaks the plain contact email into the HTML source", () => {
