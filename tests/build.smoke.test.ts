@@ -101,6 +101,17 @@ describe("build output", () => {
       expect(html()).not.toContain("contacto@groundzerodevs.com");
     });
 
+    it("ties acceptance to the invitation and names both channels for changes", () => {
+      const text = html()
+        .replace(/<[^>]+>/g, " ")
+        .replace(/\s+/g, " ");
+      // sign-up is by invitation, so acceptance cannot hang on "creating an account" alone
+      expect(text).not.toMatch(/Al crear una cuenta en Umbral aceptas/i);
+      expect(text).toMatch(/Al crear tu cuenta con una invitación aceptas estos términos/i);
+      // changes are announced in the app and by email, not by an unspecified means
+      expect(text).toMatch(/te avisaremos de los cambios relevantes dentro de Umbral y por correo/i);
+    });
+
     it("states the launch price exactly as decided: $6.990 monthly, VAT included, 12 months, valid 30 days, then $11.990 monthly", () => {
       const text = html()
         .replace(/<[^>]+>/g, " ")
