@@ -14,14 +14,16 @@ const links = [
 ];
 
 const ctaHref = `${base}#acceso`;
-const linkClass = "transition-colors hover:text-slate-900 dark:hover:text-cream-100";
+const linkClass = "inline-flex items-center py-3 transition-colors hover:text-slate-900 dark:hover:text-cream-100";
 const mobileLinkClass =
   "rounded-lg px-2 py-3 transition-colors hover:bg-sage-50 hover:text-slate-900 dark:hover:bg-slate-900 dark:hover:text-cream-100";
 ---
 
-<header class="rule sticky inset-x-0 top-0 z-20 border-b bg-cream-100/90 backdrop-blur dark:bg-slate-950/90">
-  <div class="mx-auto flex max-w-6xl items-center justify-between px-6 py-3 sm:px-10">
-    <a href={home} class="flex items-center text-slate-900 dark:text-cream-50" aria-label="Umbral, inicio">
+<header
+  class="rule sticky inset-x-0 top-0 z-20 border-b bg-cream-100/90 px-6 backdrop-blur sm:px-10 dark:bg-slate-950/90"
+>
+  <div class="mx-auto flex max-w-6xl items-center justify-between py-2">
+    <a href={home} class="-ml-1 flex items-center py-2 text-slate-900 dark:text-cream-50" aria-label="Umbral, inicio">
       <span class="logo-mark" role="img" aria-hidden="true"></span>
     </a>
 
@@ -42,7 +44,7 @@ const mobileLinkClass =
       <ThemeToggle />
       <a
         href={ctaHref}
-        class="hidden rounded-lg bg-sage-600 px-4 py-2.5 font-sans text-sm font-medium text-white transition-colors duration-200 hover:bg-sage-700 sm:inline-block"
+        class="hidden rounded-lg bg-sage-600 px-4 py-3 font-sans text-sm font-medium text-white transition-colors duration-200 hover:bg-sage-700 sm:inline-block"
       >
         Solicita tu acceso
       </a>
@@ -87,7 +89,7 @@ const mobileLinkClass =
   <nav
     id="mobile-nav"
     aria-label="Principal"
-    class="rule hidden flex-col gap-1 border-t bg-cream-100 px-6 py-4 font-sans text-sm text-slate-700 md:hidden! dark:bg-slate-950 dark:text-slate-300"
+    class="rule -mx-6 hidden flex-col gap-1 border-t bg-cream-100 px-6 py-4 sm:-mx-10 sm:px-10 font-sans text-sm text-slate-700 md:hidden! dark:bg-slate-950 dark:text-slate-300"
   >
     {
       links.map((link) => (
