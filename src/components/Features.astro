@@ -1,4 +1,7 @@
 ---
+import { Image } from "astro:assets";
+import agendaPublica from "../assets/screenshots/08-agenda-publica.png";
+
 // Grouped the way the section headline promises: clinical, legal, administrative.
 const groups = [
   {
@@ -53,8 +56,9 @@ const groups = [
     name: "Lo administrativo",
     lead: "La agenda, los avisos y el cobro, sin planillas.",
     frame: {
+      src: agendaPublica,
+      alt: "Agenda pública de una terapeuta: su perfil con foto y presentación, un calendario mensual con los días disponibles y los horarios libres del día elegido",
       label: "Agenda pública: lo que ve tu paciente. Datos de ejemplo.",
-      size: "2560 × 1600 px · 8:5",
     },
     items: [
       {
@@ -110,12 +114,15 @@ const groups = [
               </dl>
               {group.frame && (
                 <figure class="mt-10">
-                  <div
-                    aria-hidden="true"
-                    class="paper flex aspect-[8/5] flex-col items-center justify-center gap-2 border-dashed text-center font-sans text-sm text-slate-600 dark:text-slate-400"
-                  >
-                    <span class="font-mono text-[0.8125rem] uppercase tracking-wide">Captura pendiente</span>
-                    <span>{group.frame.size}</span>
+                  <div class="paper overflow-hidden p-0">
+                    <Image
+                      src={group.frame.src}
+                      alt={group.frame.alt}
+                      widths={[800, 1200, 1600]}
+                      sizes="(min-width: 1024px) 60vw, 100vw"
+                      loading="lazy"
+                      class="block w-full"
+                    />
                   </div>
                   <figcaption class="mt-4 font-sans text-sm text-slate-700 dark:text-slate-300">
                     {group.frame.label}
