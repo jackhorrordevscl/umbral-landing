@@ -157,10 +157,16 @@ describe("build output", () => {
   });
 
   describe("default theme", () => {
-    it("starts light: the OS dark preference does not switch the theme on its own", () => {
+    it("follows the OS preference until the visitor picks a theme with the toggle", () => {
       const html = readDist("index.html");
-      expect(html).not.toContain("(prefers-color-scheme: dark)");
       expect(html).toContain('localStorage.getItem("umbral-theme")');
+      expect(html).toMatch(/!stored\s*&&\s*prefersDark/);
+    });
+
+    it("matches the browser chrome colour to the OS theme", () => {
+      const html = readDist("index.html");
+      expect(html).toMatch(/<meta name="theme-color" content="#faf8f0" media="\(prefers-color-scheme: light\)"/);
+      expect(html).toMatch(/<meta name="theme-color" content="#0a0f1e" media="\(prefers-color-scheme: dark\)"/);
     });
   });
 
