@@ -1,10 +1,14 @@
 ---
-import { WHATSAPP_DISPLAY, whatsappHref } from "../support";
+import { WHATSAPP_DISPLAY, formspreeEndpoint, whatsappHref } from "../support";
+
+const label = "block font-sans text-sm font-medium text-slate-900 dark:text-cream-50";
+const field =
+  "mt-1.5 block w-full rounded-lg border border-slate-300 bg-white px-3 py-3 font-sans text-base text-slate-900 placeholder:text-slate-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sage-600 dark:border-slate-600 dark:bg-slate-950 dark:text-cream-50";
 ---
 
 <section id="acceso" class="bg-sage-700 px-6 py-20 text-cream-50 sm:px-10 sm:py-28 dark:bg-sage-700">
-  <div class="mx-auto max-w-6xl">
-    <div>
+  <div class="mx-auto grid max-w-6xl gap-12 lg:grid-cols-12 lg:items-start lg:gap-10">
+    <div class="lg:col-span-7">
       <p class="font-mono text-[0.8125rem] tracking-[0.04em] text-sage-100">§ 05 · Acceso</p>
       <h2 class="mt-5 font-display text-4xl leading-[1.05] tracking-tight sm:text-6xl">
         Acceso anticipado, por invitación.
@@ -17,17 +21,8 @@ import { WHATSAPP_DISPLAY, whatsappHref } from "../support";
         Precio de lanzamiento: $6.990 cada 30 días, IVA incluido, durante 12 meses desde el primer pago. Después,
         $11.990 cada 30 días, IVA incluido.
       </p>
-
-      <a
-        href="#"
-        data-mailto-user="contacto"
-        data-mailto-domain="groundzerodevs.com"
-        class="mt-10 inline-block rounded-lg bg-cream-50 px-7 py-3.5 focus-visible:outline-cream-50 font-sans text-sm font-medium text-slate-950 transition-colors duration-200 hover:bg-white"
-      >
-        Solicita tu acceso
-      </a>
       <p class="mt-6 max-w-xl font-sans text-base leading-relaxed text-sage-50">
-        ¿Prefieres hablar con una persona? Soporte directo por WhatsApp al
+        ¿Prefieres hablar con una persona? Soporte directo por WhatsApp al{" "}
         <a
           href={whatsappHref}
           target="_blank"
@@ -36,11 +31,102 @@ import { WHATSAPP_DISPLAY, whatsappHref } from "../support";
           >{WHATSAPP_DISPLAY}</a
         >.
       </p>
-      <noscript>
-        <p class="mt-4 font-sans text-sm text-sage-50">
-          El botón necesita JavaScript. Escríbenos a contacto (arroba) groundzerodevs (punto) com.
+    </div>
+
+    <div class="lg:col-span-5">
+      <form
+        id="contact-form"
+        action={formspreeEndpoint}
+        method="post"
+        class="paper p-6 text-slate-900 sm:p-8 dark:text-cream-50"
+      >
+        <h3 class="font-display text-2xl text-slate-950 dark:text-cream-50">Solicita tu acceso</h3>
+        <p class="mt-2 font-sans text-sm text-slate-700 dark:text-slate-300">
+          Déjanos tus datos y te respondemos al correo que indiques.
         </p>
-      </noscript>
+
+        <input type="hidden" name="_subject" value="Solicitud de acceso a Umbral" />
+        <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" aria-hidden="true" class="hidden" />
+
+        <div class="mt-6">
+          <label for="contact-nombre" class={label}>Nombre</label>
+          <input id="contact-nombre" name="nombre" type="text" autocomplete="name" required class={field} />
+        </div>
+
+        <div class="mt-4">
+          <label for="contact-email" class={label}>Correo electrónico</label>
+          <input id="contact-email" name="email" type="email" autocomplete="email" required class={field} />
+        </div>
+
+        <div class="mt-4">
+          <label for="contact-mensaje" class={label}>Mensaje (opcional)</label>
+          <textarea id="contact-mensaje" name="mensaje" rows="3" class={field}></textarea>
+        </div>
+
+        <div class="mt-5 flex items-start gap-3">
+          <input
+            id="contact-consentimiento"
+            name="consentimiento"
+            type="checkbox"
+            value="acepto"
+            required
+            class="mt-1 size-5 shrink-0 accent-sage-600"
+          />
+          <label
+            for="contact-consentimiento"
+            class="font-sans text-sm leading-relaxed text-slate-700 dark:text-slate-300"
+          >
+            Acepto que Umbral use estos datos solo para responder mi solicitud, según la{" "}
+            <a
+              href="/privacidad-general/"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="text-sage-700 underline decoration-sage-400 underline-offset-4 hover:text-sage-800 dark:text-sage-300 dark:hover:text-sage-200"
+              >política de privacidad</a
+            >.
+          </label>
+        </div>
+
+        <button
+          type="submit"
+          class="mt-6 w-full rounded-lg bg-sage-600 px-6 py-3.5 font-sans text-sm font-medium text-white transition-colors duration-200 hover:bg-sage-700 disabled:opacity-60"
+        >
+          Enviar solicitud
+        </button>
+        <p id="contact-status" role="status" class="mt-4 min-h-5 font-sans text-sm text-slate-800 dark:text-cream-100">
+        </p>
+      </form>
     </div>
   </div>
 </section>
+
+<script>
+  // Works without JavaScript (plain POST to Formspree). With it, the answer shows here instead of on their page.
+  const form = document.getElementById("contact-form");
+  const status = document.getElementById("contact-status");
+
+  if (form instanceof HTMLFormElement && status) {
+    form.addEventListener("submit", async (event) => {
+      event.preventDefault();
+      const button = form.querySelector<HTMLButtonElement>("button[type=submit]");
+      if (button) button.disabled = true;
+      form.setAttribute("aria-busy", "true");
+      status.textContent = "Enviando…";
+      try {
+        const response = await fetch(form.action, {
+          method: "POST",
+          body: new FormData(form),
+          headers: { Accept: "application/json" },
+        });
+        if (!response.ok) throw new Error(String(response.status));
+        form.reset();
+        status.textContent = "Recibimos tu solicitud. Te responderemos al correo que indicaste.";
+      } catch {
+        status.textContent = "No pudimos enviar tu solicitud. Inténtalo de nuevo o escríbenos por WhatsApp.";
+      } finally {
+        form.removeAttribute("aria-busy");
+        if (button) button.disabled = false;
+      }
+    });
+  }
+</script>

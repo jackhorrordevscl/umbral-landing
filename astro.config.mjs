@@ -37,10 +37,10 @@ function cspHashes() {
             "style-src 'self'",
             "img-src 'self' data:",
             "font-src 'self'",
-            "connect-src 'self'",
+            "connect-src 'self' https://formspree.io",
             "object-src 'none'",
             "base-uri 'self'",
-            "form-action 'none'",
+            "form-action 'self' https://formspree.io",
             "frame-src 'none'",
           ].join("; ");
           const meta = `<meta http-equiv="Content-Security-Policy" content="${policy}">`;
