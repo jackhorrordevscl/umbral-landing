@@ -3,7 +3,7 @@
 /* class-based dark mode so the toggle can override the OS preference */
 @custom-variant dark (&:where(.dark, .dark *));
 
-/* self-hosted — avoids the render-blocking round-trip to fonts.googleapis.com
+/* self-hosted: avoids the render-blocking round-trip to fonts.googleapis.com
    and only includes the weights actually used (400/500 sans, roman/italic serif, 400 mono) */
 @font-face {
   font-family: "DM Sans";
@@ -67,7 +67,7 @@
   size-adjust: 103.8%;
 }
 
-/* Real Umbral brand tokens — lifted from umbral-personal/frontend/tailwind.config.js */
+/* Real Umbral brand tokens, lifted from umbral-personal/frontend/tailwind.config.js */
 @theme {
   --color-slate-950: #0a0f1e;
   --color-slate-900: #0f172a;
