@@ -58,7 +58,10 @@ const groups = [
     frame: {
       src: agendaPublica,
       alt: "Agenda pública de una terapeuta: su perfil con foto y presentación, un calendario mensual con los días disponibles y los horarios libres del día elegido",
-      label: "Agenda pública: lo que ve tu paciente. Datos de ejemplo.",
+      tab: "Agenda pública",
+      kicker: "Lo que ve tu paciente",
+      label:
+        "Tu perfil, tus días disponibles y los horarios libres, sin que el paciente cree una cuenta. Datos de ejemplo.",
     },
     items: [
       {
@@ -112,24 +115,45 @@ const groups = [
                   </div>
                 ))}
               </dl>
-              {group.frame && (
-                <figure class="mt-10">
-                  <div class="paper overflow-hidden p-0">
+            </div>
+            {group.frame && (
+              <figure class="min-w-0 lg:col-span-12">
+                <div class="paper overflow-hidden p-0">
+                  <div
+                    aria-hidden="true"
+                    class="flex items-center gap-4 border-b border-slate-900/15 bg-cream-100 px-4 py-3 dark:border-slate-900/15 dark:bg-cream-200"
+                  >
+                    <span class="flex gap-1.5">
+                      <span class="size-2.5 rounded-full bg-slate-900/20" />
+                      <span class="size-2.5 rounded-full bg-slate-900/20" />
+                      <span class="size-2.5 rounded-full bg-slate-900/20" />
+                    </span>
+                    <span class="rounded-full bg-cream-50 px-4 py-1 font-sans text-xs text-slate-600">
+                      {group.frame.tab}
+                    </span>
+                  </div>
+                  <div
+                    tabindex="0"
+                    role="group"
+                    aria-label="Captura de la agenda pública, desplazable en pantallas angostas"
+                    class="overflow-x-auto"
+                  >
                     <Image
                       src={group.frame.src}
                       alt={group.frame.alt}
-                      widths={[800, 1200, 1600]}
-                      sizes="(min-width: 1024px) 60vw, 100vw"
+                      widths={[800, 1200, 1600, 2000]}
+                      sizes="(min-width: 1152px) 1104px, (min-width: 640px) 100vw, 720px"
                       loading="lazy"
-                      class="block w-full"
+                      class="block w-full min-w-[720px]"
                     />
                   </div>
-                  <figcaption class="mt-4 font-sans text-sm text-slate-700 dark:text-slate-300">
-                    {group.frame.label}
-                  </figcaption>
-                </figure>
-              )}
-            </div>
+                </div>
+                <figcaption class="mt-6 flex flex-wrap items-baseline gap-x-4 gap-y-1 font-sans text-sm text-slate-700 dark:text-slate-300">
+                  <span class="marker">{group.frame.kicker}</span>
+                  <span>{group.frame.label}</span>
+                </figcaption>
+              </figure>
+            )}
           </div>
         ))
       }
