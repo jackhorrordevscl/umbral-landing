@@ -52,6 +52,10 @@ const groups = [
   {
     name: "Lo administrativo",
     lead: "La agenda, los avisos y el cobro, sin planillas.",
+    frame: {
+      label: "Agenda pública: lo que ve tu paciente. Datos de ejemplo.",
+      size: "2560 × 1600 px · 8:5",
+    },
     items: [
       {
         title: "Agenda pública con tu propio enlace",
@@ -93,14 +97,32 @@ const groups = [
                 {group.lead}
               </p>
             </div>
-            <dl class="grid gap-x-10 sm:grid-cols-2 lg:col-span-8">
-              {group.items.map((item) => (
-                <div class="rule border-t py-6">
-                  <dt class="font-display text-lg leading-snug text-slate-950 dark:text-cream-50">{item.title}</dt>
-                  <dd class="mt-2 font-sans text-sm leading-relaxed text-slate-700 dark:text-slate-300">{item.body}</dd>
-                </div>
-              ))}
-            </dl>
+            <div class="min-w-0 lg:col-span-8">
+              <dl class="grid gap-x-10 sm:grid-cols-2">
+                {group.items.map((item) => (
+                  <div class="rule border-t py-6">
+                    <dt class="font-display text-lg leading-snug text-slate-950 dark:text-cream-50">{item.title}</dt>
+                    <dd class="mt-2 font-sans text-sm leading-relaxed text-slate-700 dark:text-slate-300">
+                      {item.body}
+                    </dd>
+                  </div>
+                ))}
+              </dl>
+              {group.frame && (
+                <figure class="mt-10">
+                  <div
+                    aria-hidden="true"
+                    class="paper flex aspect-[8/5] flex-col items-center justify-center gap-2 border-dashed text-center font-sans text-sm text-slate-600 dark:text-slate-400"
+                  >
+                    <span class="font-mono text-[0.8125rem] uppercase tracking-wide">Captura pendiente</span>
+                    <span>{group.frame.size}</span>
+                  </div>
+                  <figcaption class="mt-4 font-sans text-sm text-slate-700 dark:text-slate-300">
+                    {group.frame.label}
+                  </figcaption>
+                </figure>
+              )}
+            </div>
           </div>
         ))
       }
