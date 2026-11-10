@@ -1,12 +1,21 @@
 ---
 import { Image } from "astro:assets";
 import agendaPublica from "../assets/screenshots/09-agenda-reserva.png";
+import consultasHistorial from "../assets/screenshots/03-consultas-historial.png";
+import seguridad from "../assets/screenshots/07-seguridad.png";
 
 // Grouped the way the section headline promises: clinical, legal, administrative.
 const groups = [
   {
     name: "Lo clínico",
     lead: "La ficha y su historia, tal como las dejaste.",
+    frame: {
+      src: consultasHistorial,
+      alt: "Historial de consultas de una paciente: una consulta corregida con su etiqueta de corrección y, debajo, el historial con la versión original intacta",
+      tab: "Historial de consultas",
+      kicker: "Cada consulta, con su historia",
+      label: "Una consulta corregida conserva su versión original, a la vista. Datos de ejemplo.",
+    },
     items: [
       {
         title: "Nada se pierde al corregir",
@@ -29,6 +38,13 @@ const groups = [
   {
     name: "Lo legal y la seguridad",
     lead: "Lo que debe quedar registrado, y quién puede entrar.",
+    frame: {
+      src: seguridad,
+      alt: "Configuración de seguridad con la autenticación de dos factores activa y la conexión a Google Calendar",
+      tab: "Seguridad",
+      kicker: "Quién puede entrar",
+      label: "Doble verificación activa en la cuenta y la conexión opcional a Google Calendar. Datos de ejemplo.",
+    },
     items: [
       {
         title: "Doble verificación al entrar",

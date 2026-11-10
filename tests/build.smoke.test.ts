@@ -230,10 +230,10 @@ describe("build output", () => {
       const html = readDist("index.html");
       expect(html).toContain('role="tablist"');
       expect(html).not.toContain('id="showcase-track"');
-      expect(html.match(/role="tab"/g)?.length).toBe(7);
+      expect(html.match(/role="tab"/g)?.length).toBe(4);
       // tab semantics for the panels are applied by the script, so no-JS readers get plain figures
       expect(html).not.toContain('role="tabpanel"');
-      expect(html.match(/class="shot-panel"/g)?.length).toBe(7);
+      expect(html.match(/class="shot-panel"/g)?.length).toBe(4);
     });
 
     it("the 404 page is noindex and declares no canonical", () => {
