@@ -1,5 +1,6 @@
 ---
 import "../styles/global.css";
+import WhatsAppButton from "../components/WhatsAppButton.astro";
 
 interface Props {
   title?: string;
@@ -46,8 +47,7 @@ const structuredData = {
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <meta name="description" content={description} />
-    <meta name="theme-color" content="#faf8f0" media="(prefers-color-scheme: light)" />
-    <meta name="theme-color" content="#0a0f1e" media="(prefers-color-scheme: dark)" />
+    <meta name="theme-color" content="#faf8f0" />
     {noindex ? <meta name="robots" content="noindex" /> : <link rel="canonical" href={pageUrl} />}
     <title>{title}</title>
 
@@ -73,16 +73,16 @@ const structuredData = {
     <script is:inline type="application/ld+json" set:html={JSON.stringify(structuredData)} />
 
     <script is:inline>
-      // runs before first paint to avoid a light/dark flash
+      // runs before first paint to avoid a light/dark flash. The site is light by default:
+      // dark only when the visitor chose it with the toggle, never from the OS preference.
       let stored = null;
       try {
-        // storage can throw (blocked cookies, sandboxed frames): fall back to the OS preference
+        // storage can throw (blocked cookies, sandboxed frames): stay on the light default
         stored = localStorage.getItem("umbral-theme");
       } catch {
         stored = null;
       }
-      const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-      if (stored === "dark" || (!stored && prefersDark)) {
+      if (stored === "dark") {
         document.documentElement.classList.add("dark");
       }
     </script>
@@ -95,6 +95,7 @@ const structuredData = {
       Saltar al contenido
     </a>
     <slot />
+    <WhatsAppButton />
 
     <script>
       // builds mailto hrefs at runtime so the plain address never sits in the HTML source.

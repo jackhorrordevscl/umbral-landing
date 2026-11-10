@@ -46,6 +46,45 @@ describe("build output", () => {
     });
   });
 
+  describe("direct support over WhatsApp", () => {
+    const pages = [
+      "index.html",
+      "terminos/index.html",
+      "privacidad-general/index.html",
+      "privacidad-google-calendar/index.html",
+    ];
+    const WA = "https://wa.me/56956039666";
+
+    it.each(pages)("%s has the floating WhatsApp button, opening safely in a new tab", (page) => {
+      const html = readDist(page);
+      const links = [...html.matchAll(/<a[^>]*href="https:\/\/wa\.me\/56956039666[^"]*"[^>]*>/g)].map((m) => m[0]);
+      expect(links.length, `no WhatsApp link in ${page}`).toBeGreaterThan(0);
+      expect(html).toContain(WA);
+      for (const link of links) {
+        expect(link).toContain('target="_blank"');
+        expect(link).toMatch(/rel="[^"]*noopener[^"]*noreferrer[^"]*"/);
+      }
+      expect(
+        links.some((link) => /class="[^"]*\bfixed\b/.test(link) && /aria-label="[^"]*WhatsApp[^"]*"/.test(link)),
+      ).toBe(true);
+    });
+
+    it("shows the support number in readable form on the home page", () => {
+      const text = readDist("index.html")
+        .replace(/<[^>]+>/g, " ")
+        .replace(/\s+/g, " ");
+      expect(text).toContain("+56 9 5603 9666");
+    });
+  });
+
+  describe("default theme", () => {
+    it("starts light: the OS dark preference does not switch the theme on its own", () => {
+      const html = readDist("index.html");
+      expect(html).not.toContain("(prefers-color-scheme: dark)");
+      expect(html).toContain('localStorage.getItem("umbral-theme")');
+    });
+  });
+
   describe("google calendar privacy policy page", () => {
     const html = () => readDist("privacidad-google-calendar/index.html");
 

@@ -1,5 +1,5 @@
 ---
-
+import { WHATSAPP_DISPLAY, whatsappHref } from "../support";
 ---
 
 <section id="acceso" class="bg-sage-700 px-6 py-20 text-cream-50 sm:px-10 sm:py-28 dark:bg-sage-700">
@@ -26,6 +26,16 @@
       >
         Solicita tu acceso
       </a>
+      <p class="mt-6 max-w-xl font-sans text-base leading-relaxed text-sage-50">
+        ¿Prefieres hablar con una persona? Soporte directo por WhatsApp al
+        <a
+          href={whatsappHref}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline-block py-3 font-medium text-cream-50 underline decoration-sage-100 underline-offset-4 hover:text-white"
+          >{WHATSAPP_DISPLAY}</a
+        >.
+      </p>
       <noscript>
         <p class="mt-4 font-sans text-sm text-sage-50">
           El botón necesita JavaScript. Escríbenos a contacto (arroba) groundzerodevs (punto) com.
