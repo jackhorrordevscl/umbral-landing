@@ -1,6 +1,6 @@
 // Contact form. The id comes from the Formspree dashboard (formspree.io/forms); it is public by design.
 // Replies go to the address configured there. The build tests refuse the placeholder.
-export const FORMSPREE_FORM_ID = "REPLACE_ME";
+export const FORMSPREE_FORM_ID = "xljbrgkb";
 export const formspreeEndpoint = `https://formspree.io/f/${FORMSPREE_FORM_ID}`;
 
 // Direct support channel. One source for the floating button, the footer and the access section.
