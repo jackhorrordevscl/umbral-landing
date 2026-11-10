@@ -24,15 +24,15 @@ El sitio queda disponible en `http://localhost:4321`.
 
 ## Scripts
 
-| Comando                | Qué hace                                                         |
-| ---------------------- | ---------------------------------------------------------------- |
-| `npm run dev`          | Servidor de desarrollo con hot reload                            |
-| `npm run build`        | Build de producción en `dist/`                                   |
-| `npm run preview`      | Sirve el build de `dist/` localmente                             |
-| `npm run check`        | Corre `astro check` (typecheck en modo strict)                   |
-| `npm run lint`         | Corre ESLint sobre el proyecto                                   |
-| `npm run format`       | Formatea el proyecto con Prettier                                |
-| `npm run format:check` | Verifica formato sin escribir cambios (usado en CI)              |
+| Comando                | Qué hace                                                        |
+| ---------------------- | --------------------------------------------------------------- |
+| `npm run dev`          | Servidor de desarrollo con hot reload                           |
+| `npm run build`        | Build de producción en `dist/`                                  |
+| `npm run preview`      | Sirve el build de `dist/` localmente                            |
+| `npm run check`        | Corre `astro check` (typecheck en modo strict)                  |
+| `npm run lint`         | Corre ESLint sobre el proyecto                                  |
+| `npm run format`       | Formatea el proyecto con Prettier                               |
+| `npm run format:check` | Verifica formato sin escribir cambios (usado en CI)             |
 | `npm run test`         | Corre los smoke tests de Vitest. Requiere `npm run build` antes |
 
 ## CI
