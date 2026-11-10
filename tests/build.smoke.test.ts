@@ -46,6 +46,108 @@ describe("build output", () => {
     });
   });
 
+  describe("direct support over WhatsApp", () => {
+    const pages = [
+      "index.html",
+      "terminos/index.html",
+      "privacidad-general/index.html",
+      "privacidad-google-calendar/index.html",
+    ];
+    const WA = "https://wa.me/56956039666";
+
+    it.each(pages)("%s has the floating WhatsApp button, opening safely in a new tab", (page) => {
+      const html = readDist(page);
+      const links = [...html.matchAll(/<a[^>]*href="https:\/\/wa\.me\/56956039666[^"]*"[^>]*>/g)].map((m) => m[0]);
+      expect(links.length, `no WhatsApp link in ${page}`).toBeGreaterThan(0);
+      expect(html).toContain(WA);
+      for (const link of links) {
+        expect(link).toContain('target="_blank"');
+        expect(link).toMatch(/rel="[^"]*noopener[^"]*noreferrer[^"]*"/);
+      }
+      expect(
+        links.some((link) => /class="[^"]*\bfixed\b/.test(link) && /aria-label="[^"]*WhatsApp[^"]*"/.test(link)),
+      ).toBe(true);
+    });
+
+    it("shows the support number in readable form on the home page", () => {
+      const text = readDist("index.html")
+        .replace(/<[^>]+>/g, " ")
+        .replace(/\s+/g, " ");
+      expect(text).toContain("+56 9 5603 9666");
+    });
+  });
+
+  describe("contact form", () => {
+    const html = () => readDist("index.html");
+    const form = () => html().match(/<form[^>]*id="contact-form"[^>]*>[\s\S]*?<\/form>/)?.[0] ?? "";
+
+    it("posts to a real Formspree form, not the placeholder id", () => {
+      expect(form()).not.toBe("");
+      expect(form()).toMatch(/action="https:\/\/formspree\.io\/f\/[a-z0-9]{8,}"/);
+      expect(form()).toContain('method="post"');
+    });
+
+    it("asks only for name, email, an optional message and an explicit consent", () => {
+      const names = [...form().matchAll(/<(?:input|textarea)[^>]*\sname="([^"]+)"/g)].map((m) => m[1]);
+      expect(names.sort()).toEqual(["_gotcha", "_subject", "consentimiento", "email", "mensaje", "nombre"].sort());
+      for (const required of ["nombre", "email", "consentimiento"]) {
+        const field = form().match(new RegExp(`<(?:input|textarea)[^>]*\\sname="${required}"[^>]*>`))?.[0] ?? "";
+        expect(field, `${required} must be required`).toMatch(/\srequired(?=[\s>=])/);
+      }
+    });
+
+    it("labels every visible field and hides the honeypot from people and screen readers", () => {
+      for (const id of ["contact-nombre", "contact-email", "contact-mensaje", "contact-consentimiento"]) {
+        expect(form()).toContain(`id="${id}"`);
+        expect(form()).toContain(`for="${id}"`);
+      }
+      const honeypot = form().match(/<input[^>]*name="_gotcha"[^>]*>/)?.[0] ?? "";
+      expect(honeypot).toContain('tabindex="-1"');
+      expect(honeypot).toContain('aria-hidden="true"');
+    });
+
+    it("links the consent to the privacy policy and announces the result politely", () => {
+      expect(form()).toContain('href="/privacidad-general/"');
+      expect(html()).toMatch(/id="contact-status"[^>]*role="status"|role="status"[^>]*id="contact-status"/);
+    });
+
+    it("lets the CSP talk to Formspree for the form and nothing else", () => {
+      const policy = html().match(/<meta http-equiv="Content-Security-Policy" content="([^"]+)"/)?.[1] ?? "";
+      expect(policy).toContain("form-action 'self' https://formspree.io;");
+      expect(policy).toContain("connect-src 'self' https://formspree.io;");
+    });
+
+    it("never glues a word to the link that follows it (the build drops spaces at line breaks)", () => {
+      const pages = [
+        "index.html",
+        "terminos/index.html",
+        "privacidad-general/index.html",
+        "privacidad-google-calendar/index.html",
+      ];
+      for (const page of pages) {
+        const glued = [...readDist(page).matchAll(/[\p{L}:.,]<a\s[^>]*>/gu)].map((m) => m[0]);
+        expect(glued, `${page} has words glued to a link`).toEqual([]);
+      }
+    });
+
+    it("names Formspree and WhatsApp among the providers in the privacy policy", () => {
+      const text = readDist("privacidad-general/index.html")
+        .replace(/<[^>]+>/g, " ")
+        .replace(/\s+/g, " ");
+      expect(text).toMatch(/Formspree/);
+      expect(text).toMatch(/WhatsApp/);
+      expect(text).toMatch(/solo para responder tu solicitud/i);
+    });
+  });
+
+  describe("default theme", () => {
+    it("starts light: the OS dark preference does not switch the theme on its own", () => {
+      const html = readDist("index.html");
+      expect(html).not.toContain("(prefers-color-scheme: dark)");
+      expect(html).toContain('localStorage.getItem("umbral-theme")');
+    });
+  });
+
   describe("google calendar privacy policy page", () => {
     const html = () => readDist("privacidad-google-calendar/index.html");
 
