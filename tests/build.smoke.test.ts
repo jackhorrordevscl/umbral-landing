@@ -77,6 +77,22 @@ describe("build output", () => {
     });
   });
 
+  describe("feature captures", () => {
+    const figures = () => [...readDist("index.html").matchAll(/<figure[\s\S]*?<\/figure>/g)].map((m) => m[0]);
+
+    it("introduces each capture with its kicker above the frame, so it does not read as part of the text above", () => {
+      // the Features frames sit in a 12-column grid; the carousel in ProductShowcase has no kicker
+      const features = figures().filter((f) => f.includes("data-scroller") && f.includes("lg:col-span-12"));
+      expect(features.length).toBeGreaterThanOrEqual(4);
+      for (const figure of features) {
+        const kicker = figure.search(/<[^>]*class="[^"]*marker[^"]*"[^>]*>/);
+        const frame = figure.indexOf('class="paper');
+        expect(kicker, "kicker present").toBeGreaterThanOrEqual(0);
+        expect(kicker, "kicker before the frame").toBeLessThan(frame);
+      }
+    });
+  });
+
   describe("contact form", () => {
     const html = () => readDist("index.html");
     const form = () => html().match(/<form[^>]*id="contact-form"[^>]*>[\s\S]*?<\/form>/)?.[0] ?? "";
