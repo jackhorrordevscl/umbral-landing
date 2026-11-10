@@ -14,6 +14,7 @@ const groups = [
       {
         src: consultasHistorial,
         alt: "Historial de consultas de una paciente: una consulta corregida con su etiqueta de corrección y, debajo, el historial con la versión original intacta",
+        start: 0.47,
         tab: "Historial de consultas",
         kicker: "Cada consulta, con su historia",
         label: "Una consulta corregida conserva su versión original, a la vista. Datos de ejemplo.",
@@ -45,6 +46,7 @@ const groups = [
       {
         src: seguridad,
         alt: "Configuración de seguridad con la autenticación de dos factores activa y la conexión a Google Calendar",
+        start: 0.21,
         tab: "Seguridad",
         kicker: "Quién puede entrar",
         label: "Doble verificación activa en la cuenta y la conexión opcional a Google Calendar. Datos de ejemplo.",
@@ -80,6 +82,7 @@ const groups = [
       {
         src: agendaPublica,
         alt: "Agenda pública de una terapeuta con su perfil, un calendario con los días disponibles, el horario elegido y el formulario con los datos del paciente para confirmar la reserva",
+        start: 0.31,
         tab: "Agenda pública",
         kicker: "Lo que ve tu paciente",
         label: "Tu paciente elige un horario libre y reserva con sus datos, sin crear una cuenta. Datos de ejemplo.",
@@ -165,19 +168,25 @@ const groups = [
                       </span>
                     </div>
                   )}
-                  <div
-                    tabindex="0"
-                    role="group"
-                    aria-label={`Captura: ${frame.tab}. Se desplaza en pantallas angostas`}
-                    class="overflow-x-auto"
-                  >
-                    <Image
-                      src={frame.src}
-                      alt={frame.alt}
-                      widths={[800, 1200, 1600, 2000]}
-                      sizes="(min-width: 1152px) 1104px, (min-width: 640px) 100vw, 720px"
-                      loading="lazy"
-                      class="block w-full min-w-[720px]"
+                  <div data-scroller data-start={frame.start ?? 0} class="group relative">
+                    <div
+                      tabindex="0"
+                      role="group"
+                      aria-label={`Captura: ${frame.tab}. Se desplaza en pantallas angostas`}
+                      class="overflow-x-auto"
+                    >
+                      <Image
+                        src={frame.src}
+                        alt={frame.alt}
+                        widths={[800, 1200, 1600, 2000]}
+                        sizes="(min-width: 1152px) 1104px, (min-width: 640px) 100vw, 720px"
+                        loading="lazy"
+                        class="block w-full min-w-[720px]"
+                      />
+                    </div>
+                    <div
+                      aria-hidden="true"
+                      class="pointer-events-none absolute inset-y-0 right-0 w-14 bg-linear-to-l from-slate-900/20 to-transparent opacity-0 transition-opacity duration-200 group-data-[more=true]:opacity-100"
                     />
                   </div>
                 </div>
@@ -193,3 +202,24 @@ const groups = [
     </div>
   </div>
 </section>
+
+<script is:inline>
+  // On narrow screens the frames scroll sideways: start on the content the caption talks about
+  // (not the app's sidebar) and show a fade on the right edge while there is more to see.
+  document.querySelectorAll("[data-scroller]").forEach((box) => {
+    const area = box.firstElementChild;
+    const sync = () => {
+      const max = area.scrollWidth - area.clientWidth;
+      box.dataset.more = String(max > 2 && area.scrollLeft < max - 2);
+    };
+    const place = () => {
+      const max = area.scrollWidth - area.clientWidth;
+      if (max > 120) area.scrollLeft = Math.min(max, Number(box.dataset.start) * area.scrollWidth);
+      sync();
+    };
+    area.addEventListener("scroll", sync, { passive: true });
+    window.addEventListener("resize", sync);
+    place();
+    window.addEventListener("load", place);
+  });
+</script>
