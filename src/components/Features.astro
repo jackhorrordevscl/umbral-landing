@@ -206,20 +206,24 @@ const groups = [
 <script is:inline>
   // On narrow screens the frames scroll sideways: start on the content the caption talks about
   // (not the app's sidebar) and show a fade on the right edge while there is more to see.
-  document.querySelectorAll("[data-scroller]").forEach((box) => {
-    const area = box.firstElementChild;
-    const sync = () => {
-      const max = area.scrollWidth - area.clientWidth;
-      box.dataset.more = String(max > 2 && area.scrollLeft < max - 2);
-    };
-    const place = () => {
-      const max = area.scrollWidth - area.clientWidth;
-      if (max > 120) area.scrollLeft = Math.min(max, Number(box.dataset.start) * area.scrollWidth);
-      sync();
-    };
-    area.addEventListener("scroll", sync, { passive: true });
-    window.addEventListener("resize", sync);
-    place();
-    window.addEventListener("load", place);
+  // It also serves the carousel in ProductShowcase: a hidden tab panel is placed the first time it gets a size.
+  document.addEventListener("DOMContentLoaded", () => {
+    document.querySelectorAll("[data-scroller]").forEach((box) => {
+      const area = box.firstElementChild;
+      let placed = false;
+      const sync = () => {
+        const max = area.scrollWidth - area.clientWidth;
+        box.dataset.more = String(max > 2 && area.scrollLeft < max - 2);
+      };
+      const place = () => {
+        if (!area.clientWidth) return;
+        const max = area.scrollWidth - area.clientWidth;
+        if (!placed && max > 120) area.scrollLeft = Math.min(max, Number(box.dataset.start) * area.scrollWidth);
+        placed = true;
+        sync();
+      };
+      area.addEventListener("scroll", sync, { passive: true });
+      new ResizeObserver(place).observe(area);
+    });
   });
 </script>
