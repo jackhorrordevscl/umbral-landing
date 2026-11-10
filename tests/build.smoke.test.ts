@@ -35,6 +35,17 @@ describe("build output", () => {
     });
   });
 
+  describe("home page price", () => {
+    it("states the launch price and the later price, matching the Terms", () => {
+      const text = readDist("index.html")
+        .replace(/<[^>]+>/g, " ")
+        .replace(/\s+/g, " ");
+      expect(text).toMatch(/\$\s?6\.990 cada 30 días, IVA incluido, durante 12 meses desde el primer pago/i);
+      expect(text).toMatch(/Después, \$\s?11\.990 cada 30 días, IVA incluido/i);
+      expect(text).not.toMatch(/\b12\.?990\b/);
+    });
+  });
+
   describe("google calendar privacy policy page", () => {
     const html = () => readDist("privacidad-google-calendar/index.html");
 
@@ -160,9 +171,9 @@ describe("build output", () => {
       expect(text).not.toMatch(/gratis|gratuito|cupos limitados|terapeutas reales/i);
       expect(text).not.toMatch(/\bcertificad[oa]s?\b/i);
       expect(text).not.toMatch(/\bcumple con\b|\bconforme a la ley\b/i);
-      // the only published price is the launch price, and only in the Terms (see below)
+      // the only published prices are the launch price and the later price, in the Terms and the home page
       expect(text).not.toMatch(/\b12\.?990\b/);
-      if (page !== "terminos/index.html") expect(text).not.toMatch(/\b6\.?990\b|\b11\.?990\b/);
+      if (page !== "terminos/index.html" && page !== "index.html") expect(text).not.toMatch(/\b6\.?990\b|\b11\.?990\b/);
     });
 
     it.each(pages)("%s only mentions certification to deny it", (page) => {
@@ -230,10 +241,10 @@ describe("build output", () => {
       const html = readDist("index.html");
       expect(html).toContain('role="tablist"');
       expect(html).not.toContain('id="showcase-track"');
-      expect(html.match(/role="tab"/g)?.length).toBe(7);
+      expect(html.match(/role="tab"/g)?.length).toBe(4);
       // tab semantics for the panels are applied by the script, so no-JS readers get plain figures
       expect(html).not.toContain('role="tabpanel"');
-      expect(html.match(/class="shot-panel"/g)?.length).toBe(7);
+      expect(html.match(/class="shot-panel"/g)?.length).toBe(4);
     });
 
     it("the 404 page is noindex and declares no canonical", () => {
